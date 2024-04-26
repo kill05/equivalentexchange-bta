@@ -30,4 +30,9 @@ public class ExampleMod implements ModInitializer, GameStartEntrypoint, RecipeEn
 	public void onRecipesReady() {
 
 	}
+
+	@Override
+	public void initNamespaces() {
+
+	}
 }
