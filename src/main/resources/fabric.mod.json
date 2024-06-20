@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "projectbta",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+  "name": "Project Bta",
+  "description": "A port of projectE for BTA.",
   "authors": [
-    "Turnip Labs"
+    "kill05"
   ],
   "contact": {
     "homepage": "",
@@ -19,26 +19,27 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-			"turniplabs.examplemod.ExampleMod"
+			"com.github.kill05.projectbta.ProjectBTA"
     ],
 		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"com.github.kill05.projectbta.ProjectBTA"
 		],
 		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"com.github.kill05.projectbta.ProjectBTA"
 		],
 		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
+			"com.github.kill05.projectbta.ProjectBTA"
 		]
 	},
   "mixins": [
-      "examplemod.mixins.json"
+		"projectbta.mixins.json"
   ],
 
   "depends": {
-		"minecraft": "~7.1",
-    "fabricloader": ">=0.15.5"
-  },
+		"minecraft": "~7.2-beta",
+    "fabricloader": ">=0.15.5",
+		"halplibe": ">=4.1.2"
+	},
   "suggests": {
   }
 }
