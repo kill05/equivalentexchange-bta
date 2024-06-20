@@ -2,6 +2,7 @@ package com.github.kill05.projectbta;
 
 import com.github.kill05.projectbta.block.transtable.TransmutationTableBlock;
 import com.github.kill05.projectbta.config.ProjectConfig;
+import com.github.kill05.projectbta.registry.EmcRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.tag.BlockTags;
@@ -51,12 +52,12 @@ public class ProjectBTA implements ModInitializer, GameStartEntrypoint, RecipeEn
 
 	@Override
 	public void afterGameStart() {
-
+		EmcRegistry.getInstance().initValues();
 	}
 
 	@Override
 	public void initNamespaces() {
-		EmcRegistry.getInstance().onRegistriesReady();
+
 	}
 
 	@Override

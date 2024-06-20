@@ -3,7 +3,6 @@ package com.github.kill05.projectbta.block.transtable;
 import com.github.kill05.projectbta.ProjectBTA;
 import com.github.kill05.projectbta.block.transtable.inventory.TransmutationTableContainer;
 import com.github.kill05.projectbta.block.transtable.inventory.TransmutationTableGui;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.core.block.Block;
@@ -29,6 +28,14 @@ public class TransmutationTableBlock extends Block {
 		public @NotNull Container createContainer(@NotNull RegisteredGui gui, @NotNull EntityPlayerMP player) {
 			return new TransmutationTableContainer(player);
 		}
+
+		@Override
+		public void onButtonClick(@NotNull RegisteredGui gui, @NotNull EntityPlayer player, @NotNull EntityPlayer clicker, int buttonId) {
+			if(player != clicker) return;
+			if(!(player.craftingInventory instanceof TransmutationTableContainer container)) return;
+
+			container.setPage(container.getPage() + (buttonId == 0 ? -1 : 1));
+		}
 	});
 
 	public TransmutationTableBlock(int id) {
@@ -38,8 +45,7 @@ public class TransmutationTableBlock extends Block {
 	@Override
 	public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player) {
 		if(player.isSneaking()) return false;
-		//GUI.open(player);
-		Minecraft.getMinecraft(this).displayGuiScreen(new TransmutationTableGui(player));
+		GUI.open(player);
 		return true;
 	}
 }

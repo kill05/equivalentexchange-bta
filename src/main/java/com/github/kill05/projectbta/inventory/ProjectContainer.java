@@ -19,19 +19,19 @@ public abstract class ProjectContainer extends Container {
 
 	// Call this after creating all the gui slots, else hotkey inventory actions get messed up
 	public void addPlayerInventory(EntityPlayer player) {
-		addPlayerInventory(player, 140);
+		addPlayerInventory(player, 0, 140);
 	}
 
-	public void addPlayerInventory(EntityPlayer player, int offset) {
+	public void addPlayerInventory(EntityPlayer player, int offsetX, int offsetY) {
 		IInventory playerInv = player.inventory;
 		for (int slotY = 0; slotY < 3; ++slotY) {
 			for (int slotX = 0; slotX < 9; ++slotX) {
-				this.addSlot(new Slot(playerInv, slotY * 9 + slotX + 9, alignX(slotX), alignY(slotY) + offset));
+				this.addSlot(new Slot(playerInv, slotY * 9 + slotX + 9, alignX(slotX) + offsetX, alignY(slotY) + offsetY));
 			}
 		}
 
 		for (int slotX = 0; slotX < 9; ++slotX) {
-			this.addSlot(new Slot(playerInv, slotX, alignX(slotX), alignY(3f) + 4 + offset));
+			this.addSlot(new Slot(playerInv, slotX, alignX(slotX) + offsetX, alignY(3f) + 4 + offsetY));
 		}
 	}
 

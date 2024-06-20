@@ -1,10 +1,12 @@
 package com.github.kill05.projectbta.mixins;
 
 import com.github.kill05.projectbta.ProjectBTA;
+import com.github.kill05.projectbta.utils.NumberUtils;
 import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.slot.Slot;
+import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,6 +32,13 @@ public abstract class GuiTooltipMixin {
 	public void injectGetTooltipText(ItemStack itemStack, boolean showDescription, Slot slot, CallbackInfoReturnable<String> cir, I18n trans, StringBuilder text) {
 		Long emc = ProjectBTA.getEmcValue(itemStack);
 		if(emc == null) return;
-		text.append("\n§4EMC:§r ").append(emc);
+
+		boolean shiftPressed = Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54);
+		int stackSize = itemStack.stackSize;
+
+		text.append("\n§4EMC:§r ").append(NumberUtils.formatNumber(emc));
+		if(shiftPressed && stackSize > 1) {
+			text.append("\n§4Stack EMC:§r ").append(NumberUtils.formatNumber(emc * stackSize));
+		}
 	}
 }

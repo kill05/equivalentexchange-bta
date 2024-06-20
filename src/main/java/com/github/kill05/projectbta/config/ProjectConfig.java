@@ -1,6 +1,6 @@
 package com.github.kill05.projectbta.config;
 
-import com.github.kill05.projectbta.EmcRegistry;
+import com.github.kill05.projectbta.registry.EmcRegistry;
 import com.github.kill05.projectbta.ProjectBTA;
 import turniplabs.halplibe.util.TomlConfigHandler;
 import turniplabs.halplibe.util.toml.Toml;
