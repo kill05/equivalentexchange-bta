@@ -18,6 +18,7 @@ public class PhilosopherStoneItem extends Item {
 	public PhilosopherStoneItem(int id) {
 		super("philosopher_stone", id);
 		setMaxStackSize(1);
+		setContainerItem(this);
 	}
 
 	@Override

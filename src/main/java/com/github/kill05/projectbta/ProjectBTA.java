@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.ItemBuilder;
 import turniplabs.halplibe.helper.RecipeBuilder;
+import turniplabs.halplibe.helper.SoundHelper;
 import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShaped;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
@@ -59,7 +60,9 @@ public class ProjectBTA implements ModInitializer, GameStartEntrypoint, RecipeEn
 
 	@Override
 	public void beforeGameStart() {
-
+		SoundHelper.addSound(MOD_ID, "transmute.wav");
+		//SoundHelper.addSound(MOD_ID, "charge.wav");
+		//SoundHelper.addSound(MOD_ID, "uncharge.wav");
 	}
 
 	@Override
