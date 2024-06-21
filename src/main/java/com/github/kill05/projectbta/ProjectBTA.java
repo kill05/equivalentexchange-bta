@@ -15,9 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.ItemBuilder;
-import turniplabs.halplibe.helper.RecipeBuilder;
 import turniplabs.halplibe.helper.SoundHelper;
-import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShaped;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
@@ -28,9 +26,15 @@ public class ProjectBTA implements ModInitializer, GameStartEntrypoint, RecipeEn
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 
-	public static final Item PHILOSOPHER_STONE = new ItemBuilder(MOD_ID)
-		.setIcon(MOD_ID + ":item/philosopher_stone")
-		.build(new PhilosopherStoneItem(ProjectConfig.ITEM_ID++));
+	public static final Item ALCHEMICAL_COAL = simpleItem("alchemical_coal", "fuels/alchemical_coal");
+	public static final Item MOBIUS_FUEL = simpleItem("mobius_fuel", "fuels/mobius");
+	public static final Item AETERNALIS_FUEL = simpleItem("aeternalis_fuel", "fuels/aeternalis");
+
+	public static final Item DARK_MATTER = simpleItem("dark_matter", "matter/dark");
+	public static final Item RED_MATTER = simpleItem("red_matter", "matter/red");
+
+	public static final Item PHILOSOPHER_STONE = simpleItem("philosopher_stone", new PhilosopherStoneItem(ProjectConfig.ITEM_ID++));
+
 
 	public static final Block TRANSMUTATION_TABLE = new BlockBuilder(MOD_ID)
 		.setTopTexture(MOD_ID + ":block/transmutation_table/top")
@@ -41,6 +45,17 @@ public class ProjectBTA implements ModInitializer, GameStartEntrypoint, RecipeEn
 		.setBlockSound(BlockSounds.STONE)
 		.setTags(BlockTags.MINEABLE_BY_PICKAXE)
 		.build(new TransmutationTableBlock(ProjectConfig.BLOCK_ID++));
+
+
+	private static Item simpleItem(String name, String texture) {
+		return simpleItem(texture, new Item(name, ProjectConfig.ITEM_ID++));
+	}
+
+	private static <T extends Item> T simpleItem(String texture, T item) {
+		return new ItemBuilder(MOD_ID)
+			.setIcon(MOD_ID + ":item/" + texture)
+			.build(item);
+	}
 
 
 	public static Long getEmcValue(ItemStack itemStack) {
@@ -77,18 +92,10 @@ public class ProjectBTA implements ModInitializer, GameStartEntrypoint, RecipeEn
 
 	@Override
 	public void onRecipesReady() {
-		RecipeBuilderShaped philosopherRecipe = RecipeBuilder.Shaped(MOD_ID, "rgr", "gdg", "rgr");
-
-		philosopherRecipe.addInput('r', Item.dustRedstone)
-			.addInput('g', Item.dustGlowstone)
-			.addInput('d', Item.diamond)
-			.create("philosopher_stone_0", PHILOSOPHER_STONE.getDefaultStack());
-
-		philosopherRecipe.addInput('r', Item.dustGlowstone)
-			.addInput('g', Item.dustRedstone)
-			.addInput('d', Item.diamond)
-			.create("philosopher_stone_1", PHILOSOPHER_STONE.getDefaultStack());
+		ProjectRecipes.registerRecipes();
 	}
+
+
 
 
 }
