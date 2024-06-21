@@ -1,13 +1,15 @@
 package com.github.kill05.projectbta.blocks.transtable.inventory;
 
-import com.github.kill05.projectbta.emc.ProjectPlayer;
+import com.github.kill05.projectbta.ProjectBTA;
 import com.github.kill05.projectbta.blocks.transtable.inventory.slot.BurnSlot;
 import com.github.kill05.projectbta.blocks.transtable.inventory.slot.TransmuteSlot;
 import com.github.kill05.projectbta.blocks.transtable.inventory.slot.UnlearnSlot;
+import com.github.kill05.projectbta.emc.ProjectPlayer;
 import com.github.kill05.projectbta.inventory.ProjectContainer;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.InventoryBasic;
 import net.minecraft.core.player.inventory.slot.Slot;
 
 import java.util.Collections;
@@ -42,6 +44,7 @@ public class TransmutationTableContainer extends ProjectContainer {
 	};
 
 	private final EntityPlayer player;
+	private final InventoryBasic inventory = new InventoryBasic(null, 13);
 	private final BurnSlot burnSlot;
 	private int page;
 
@@ -54,7 +57,7 @@ public class TransmutationTableContainer extends ProjectContainer {
 			addSlot(new TransmuteSlot(this, i, coords[0], coords[1]));
 		}
 
-		addSlot(new UnlearnSlot(this, 89, 97));
+		addSlot(new UnlearnSlot(this, inventory.getSizeInventory() - 1, 89, 97));
 		burnSlot = new BurnSlot(this, 107, 97);
 		addSlot(burnSlot);
 
@@ -82,19 +85,20 @@ public class TransmutationTableContainer extends ProjectContainer {
 
 			if (held.canStackWith(slot.getStack())) {
 				ItemStack removeStack = slot.transmuteStack(1, true);
-				if(removeStack != null) held.stackSize += removeStack.stackSize;
+				if (removeStack != null) held.stackSize += removeStack.stackSize;
 				return null;
 			}
 		}
 
-		if(action == InventoryAction.MOVE_STACK || action == InventoryAction.MOVE_SINGLE_ITEM) {
-			List<Integer> targetSlots = getTargetSlots(action, slot, args.length > 1 ? args[1] : 0, player);
-			if(targetSlots == null || targetSlots.size() == 0) return null;
+		int target = args.length > 1 ? args[1] : 0;
+		if (action == InventoryAction.MOVE_STACK || action == InventoryAction.MOVE_SINGLE_ITEM) {
+			List<Integer> targetSlots = getTargetSlots(action, slot, target, player);
+			if (targetSlots == null || targetSlots.size() == 0) return null;
 
 			ItemStack stackInSlot = slot.getInventory().getStackInSlot(0);
 			int maxAmount = stackInSlot != null ? stackInSlot.getMaxStackSize() : 1;
 			ItemStack item = slot.transmuteStack(action == InventoryAction.MOVE_STACK ? maxAmount : 1, false);
-			if(item == null) return null;
+			if (item == null) return null;
 
 			int transmuteAmount = item.stackSize;
 			this.mergeItems(item, targetSlots);
@@ -102,17 +106,40 @@ public class TransmutationTableContainer extends ProjectContainer {
 			return null;
 		}
 
+		boolean moveSimilar = action == InventoryAction.MOVE_SIMILAR;
+		if (moveSimilar || action == InventoryAction.MOVE_ALL) {
+			ItemStack compareStack = slot.getStack();
+			Long compareValue = null;
+			if (moveSimilar) {
+				if (compareStack == null || ((compareValue = ProjectBTA.getEmcValue(compareStack)) == null)) return null;
+			}
+
+			for (int moveSlot : getMoveSlots(action, slot, target, player)) {
+				Slot moveFromSlot = getSlot(moveSlot);
+				ItemStack stack = moveFromSlot.getStack();
+				if (stack == null) continue;
+				if (moveSimilar && !compareStack.canStackWith(stack)) continue;
+
+				Long emcValue = compareValue != null ? compareValue : ProjectBTA.getEmcValue(stack);
+				if(emcValue == null) continue;
+
+				burnSlot.putStack(stack);
+				moveFromSlot.putStack(null);
+			}
+
+		}
+
 		return super.clickInventorySlot(action, args, player);
 	}
 
 	@Override
 	public List<Integer> getMoveSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
-		return null;
+		return getSlots(burnSlot.id + 1, 36, true);
 	}
 
 	@Override
 	public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
-		if(slot.id > burnSlot.id) {
+		if (slot.id > burnSlot.id) {
 			return Collections.singletonList(burnSlot.id);
 		}
 
@@ -127,6 +154,10 @@ public class TransmutationTableContainer extends ProjectContainer {
 
 	public EntityPlayer getPlayer() {
 		return player;
+	}
+
+	public InventoryBasic getInventory() {
+		return inventory;
 	}
 
 	public int getPage() {

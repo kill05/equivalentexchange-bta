@@ -12,7 +12,6 @@ import net.minecraft.core.player.inventory.slot.Slot;
 
 public class BurnSlot extends Slot {
 
-
 	public BurnSlot(TransmutationTableContainer container, int x, int y) {
 		super(new InventoryImpl(container), 0, x, y);
 	}
