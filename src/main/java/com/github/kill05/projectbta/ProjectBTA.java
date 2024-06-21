@@ -7,6 +7,7 @@ import com.github.kill05.projectbta.items.PhilosopherStoneItem;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.tag.BlockTags;
+import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -87,15 +88,13 @@ public class ProjectBTA implements ModInitializer, GameStartEntrypoint, RecipeEn
 
 	@Override
 	public void initNamespaces() {
-
+		Registries.RECIPES.register(MOD_ID, ProjectRecipes.RECIPE_NAMESPACE);
+		ProjectRecipes.RECIPE_NAMESPACE.register("workbench", ProjectRecipes.RECIPE_WORKBENCH);
 	}
 
 	@Override
 	public void onRecipesReady() {
 		ProjectRecipes.registerRecipes();
 	}
-
-
-
 
 }

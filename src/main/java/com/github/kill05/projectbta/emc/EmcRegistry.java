@@ -3,10 +3,7 @@ package com.github.kill05.projectbta.emc;
 import com.github.kill05.projectbta.config.ProjectConfig;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.Registries;
-import net.minecraft.core.data.registry.recipe.RecipeEntryBase;
-import net.minecraft.core.data.registry.recipe.RecipeGroup;
-import net.minecraft.core.data.registry.recipe.RecipeRegistry;
-import net.minecraft.core.data.registry.recipe.RecipeSymbol;
+import net.minecraft.core.data.registry.recipe.*;
 import net.minecraft.core.data.registry.recipe.entry.*;
 import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.Item;
@@ -36,7 +33,7 @@ public class EmcRegistry {
 	private final Map<EmcKey, Long> itemEmcMap;
 	private final Map<String, Long> itemGroupEmcMap;
 	private final List<EmcKey> sortedKeys;
-	private boolean initRegistries;
+	private boolean initValues;
 
 	private EmcRegistry() {
 		this.itemEmcMap = new HashMap<>();
@@ -112,11 +109,9 @@ public class EmcRegistry {
 		for (int i = 0; registeredInIteration > 0; i++) {
 			registeredInIteration = 0;
 
-			for (RecipeGroup<?> group : new RecipeGroup[]{registry.WORKBENCH, registry.FURNACE, registry.BLAST_FURNACE}) {
-				for (RecipeEntryBase<?, ?, ?> recipe : group.getAllRecipes()) {
-					if (!computeRecipeCostAndRegister(recipe, originalValues)) continue;
-					registeredInIteration++;
-				}
+			for (RecipeEntryBase<?, ?, ?> recipe : registry.getAllRecipes()) {
+				if (!computeRecipeCostAndRegister(recipe, originalValues)) continue;
+				registeredInIteration++;
 			}
 
 			amount += registeredInIteration;
@@ -131,10 +126,12 @@ public class EmcRegistry {
 
 		Iterable<RecipeSymbol> symbolIterable;
 		ItemStack output;
+		boolean consumeContainer = false;
 
 		if (recipe instanceof RecipeEntryCraftingShaped shaped) {
 			symbolIterable = Arrays.asList(shaped.getInput());
 			output = shaped.getOutput();
+			consumeContainer = shaped.consumeContainerItem;
 		} else if (recipe instanceof RecipeEntryCraftingShapeless shapeless) {
 			symbolIterable = shapeless.getInput();
 			output = shapeless.getOutput();
@@ -160,11 +157,18 @@ public class EmcRegistry {
 			Long lowestSymbolCost = null;
 
 			for (ItemStack stack : symbol.resolve()) {
-				Long emcValue = getEmcValue(stack);
-				if (emcValue == null) continue;
+				Long stackValue = getEmcValue(stack);
+				Item container = stack.getItem().getContainerItem();
 
-				if (lowestSymbolCost == null || emcValue < lowestSymbolCost) {
-					lowestSymbolCost = emcValue;
+				// reduce the cost if the item has a container that is not consumed
+				if(container != null && !consumeContainer) {
+					Long containerValue = getEmcValue(container);
+					stackValue = containerValue != null ? Math.max(0, stackValue - containerValue) : 0;
+				}
+
+				if (stackValue != null && (lowestSymbolCost == null || stackValue < lowestSymbolCost)) {
+					lowestSymbolCost = stackValue;
+					if(lowestSymbolCost == 0) break; // Cost can't go any lower
 				}
 			}
 
@@ -189,7 +193,7 @@ public class EmcRegistry {
 
 
 	public void initValues() {
-		if (initRegistries) throw new IllegalStateException("Registries have already been initialized!");
+		if (initValues) throw new IllegalStateException("Registries have already been initialized!");
 		for (Map.Entry<String, Long> entry : itemGroupEmcMap.entrySet()) {
 			if (entry.getValue() == null) continue;
 			initGroupValue(entry.getKey(), entry.getValue());
@@ -197,7 +201,7 @@ public class EmcRegistry {
 
 		computeRecipeCosts();
 		sortKeys();
-		initRegistries = true;
+		initValues = true;
 	}
 
 	protected void initGroupValue(String group, long value) {
@@ -230,7 +234,7 @@ public class EmcRegistry {
 
 	public void setEmcValue(@NotNull EmcKey key, long value) {
 		itemEmcMap.put(key, value);
-		if (initRegistries) sortKeys();
+		if (initValues) sortKeys();
 	}
 
 	public void removeEmcValue(@NotNull EmcKey key) {
@@ -270,7 +274,7 @@ public class EmcRegistry {
 
 	public void setEmcValue(String group, long value) {
 		itemGroupEmcMap.put(group, value);
-		if (initRegistries) initGroupValue(group, value);
+		if (initValues) initGroupValue(group, value);
 	}
 
 
@@ -287,8 +291,8 @@ public class EmcRegistry {
 		return itemGroupEmcMap;
 	}
 
-	public boolean hasInitRegistries() {
-		return initRegistries;
+	public boolean hasInitValues() {
+		return initValues;
 	}
 
 
@@ -312,6 +316,7 @@ public class EmcRegistry {
 		addEntry(defaults, Item.ammoPebble, 1);
 		addEntry(defaults, Block.gravel, 4);
 		addEntry(defaults, Item.flint, 4);
+		addEntry(defaults, Block.obsidian, 32);
 		addEntry(defaults, Block.netherrack, 1);
 		addEntry(defaults, Block.netherrackIgneous, 1);
 		addEntry(defaults, Block.soulsand, 4);
