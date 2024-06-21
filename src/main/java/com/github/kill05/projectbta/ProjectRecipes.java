@@ -83,6 +83,17 @@ public final class ProjectRecipes {
 		surroundLineRecipe.addInput('x', ProjectBTA.AETERNALIS_FUEL)
 			.addInput('o', ProjectBTA.DARK_MATTER)
 			.create("red_matter", ProjectBTA.RED_MATTER.getDefaultStack());
+
+		// Klein star
+		surroundCenterRecipe.addInput('x', ProjectBTA.MOBIUS_FUEL)
+			.addInput('o', Item.diamond)
+			.create("klein_star_ein", ProjectBTA.KLEIN_STAR_EIN.getDefaultStack());
+
+		compactRecipe(ProjectBTA.KLEIN_STAR_EIN, ProjectBTA.KLEIN_STAR_ZWEI.getDefaultStack(), "klein_star_zwei", 4);
+		compactRecipe(ProjectBTA.KLEIN_STAR_ZWEI, ProjectBTA.KLEIN_STAR_DREI.getDefaultStack(), "klein_star_drei", 4);
+		compactRecipe(ProjectBTA.KLEIN_STAR_DREI, ProjectBTA.KLEIN_STAR_VIER.getDefaultStack(), "klein_star_vier", 4);
+		compactRecipe(ProjectBTA.KLEIN_STAR_VIER, ProjectBTA.KLEIN_STAR_SPHERE.getDefaultStack(), "klein_star_sphere", 4);
+		compactRecipe(ProjectBTA.KLEIN_STAR_SPHERE, ProjectBTA.KLEIN_STAR_OMEGA.getDefaultStack(), "klein_star_omega", 4);
 	}
 
 
@@ -95,6 +106,16 @@ public final class ProjectRecipes {
 		}
 
 		recipe.create("philo_" + inputAmount + recipeId, output);
+	}
+
+	private static void compactRecipe(IItemConvertible input, ItemStack output, String recipeId, int inputAmount) {
+		RecipeBuilderShapeless recipe = RecipeBuilder.Shapeless(ProjectBTA.MOD_ID);
+
+		for (int i = 0; i < inputAmount; i++) {
+			recipe.addInput(input);
+		}
+
+		recipe.create(recipeId, output);
 	}
 
 

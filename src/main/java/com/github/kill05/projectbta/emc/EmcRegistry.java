@@ -1,10 +1,16 @@
 package com.github.kill05.projectbta.emc;
 
 import com.github.kill05.projectbta.config.ProjectConfig;
+import com.github.kill05.projectbta.emc.holder.IItemEmcHolder;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.Registries;
-import net.minecraft.core.data.registry.recipe.*;
-import net.minecraft.core.data.registry.recipe.entry.*;
+import net.minecraft.core.data.registry.recipe.RecipeEntryBase;
+import net.minecraft.core.data.registry.recipe.RecipeRegistry;
+import net.minecraft.core.data.registry.recipe.RecipeSymbol;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryBlastFurnace;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingShaped;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingShapeless;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -17,7 +23,8 @@ import turniplabs.halplibe.util.toml.Toml;
 
 import java.util.*;
 
-import static java.util.Comparator.*;
+import static java.util.Comparator.comparingLong;
+import static java.util.Comparator.reverseOrder;
 
 public class EmcRegistry {
 
@@ -228,8 +235,13 @@ public class EmcRegistry {
 
 	public Long getEmcValue(@NotNull EmcKey key) {
 		Long value = itemEmcMap.get(key);
-		if(value == null || !key.isItemDamageable()) return value;
-		return (long) (value * (1f - (key.meta() * 0.9f) / key.item().getMaxDamage()));
+		if(value == null) return null;
+
+		if(key.isItemDamageable()) {
+			value = (long) (value * (1f - (key.meta() * 0.9f) / key.item().getMaxDamage()));
+		}
+
+		return value;
 	}
 
 	public void setEmcValue(@NotNull EmcKey key, long value) {
@@ -243,7 +255,14 @@ public class EmcRegistry {
 
 
 	public Long getEmcValue(@NotNull ItemStack itemStack) {
-		return getEmcValue(new EmcKey(itemStack));
+		Long value = getEmcValue(new EmcKey(itemStack));
+		if(value == null) return null;
+
+		if(itemStack.getItem() instanceof IItemEmcHolder emcHolder) {
+			value += emcHolder.getEmc(itemStack);
+		}
+
+		return value;
 	}
 
 	public void setEmcValue(@NotNull ItemStack itemStack, long value) {

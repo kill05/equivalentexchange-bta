@@ -1,6 +1,6 @@
 package com.github.kill05.projectbta.blocks.transtable.inventory.slot;
 
-import com.github.kill05.projectbta.emc.ProjectPlayer;
+import com.github.kill05.projectbta.emc.holder.ProjectPlayer;
 import com.github.kill05.projectbta.blocks.transtable.inventory.TransmutationTableContainer;
 import com.github.kill05.projectbta.emc.EmcKey;
 import net.minecraft.core.entity.player.EntityPlayer;

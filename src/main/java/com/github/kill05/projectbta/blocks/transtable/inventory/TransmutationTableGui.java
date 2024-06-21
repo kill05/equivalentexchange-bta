@@ -1,15 +1,15 @@
 package com.github.kill05.projectbta.blocks.transtable.inventory;
 
-import com.github.kill05.projectbta.emc.ProjectPlayer;
+import com.github.kill05.projectbta.emc.holder.ProjectPlayer;
 import com.github.kill05.projectbta.utils.NumberUtils;
 import com.github.kill05.projectbta.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.core.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
+import turniplabs.halplibe.HalpLibe;
 
 public class TransmutationTableGui extends GuiContainer {
 
@@ -85,8 +85,8 @@ public class TransmutationTableGui extends GuiContainer {
 	}
 
 
-	public static void displayGuiMessage(TransmutationTableContainer container, String message) {
-		if(!(container.getPlayer() instanceof EntityPlayerSP)) return;
+	public static void displayGuiMessage(String message) {
+		if(!HalpLibe.isClient) return;
 		GuiScreen screen = Minecraft.getMinecraft(TransmutationTableGui.class).currentScreen;
 		if(screen instanceof TransmutationTableGui gui) gui.displayMiddleString(message);
 	}

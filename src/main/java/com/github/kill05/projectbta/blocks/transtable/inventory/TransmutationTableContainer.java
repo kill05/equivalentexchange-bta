@@ -1,11 +1,14 @@
 package com.github.kill05.projectbta.blocks.transtable.inventory;
 
 import com.github.kill05.projectbta.ProjectBTA;
-import com.github.kill05.projectbta.blocks.transtable.inventory.slot.BurnSlot;
 import com.github.kill05.projectbta.blocks.transtable.inventory.slot.TransmuteSlot;
 import com.github.kill05.projectbta.blocks.transtable.inventory.slot.UnlearnSlot;
-import com.github.kill05.projectbta.emc.ProjectPlayer;
+import com.github.kill05.projectbta.emc.holder.IEmcHolder;
+import com.github.kill05.projectbta.emc.holder.ProjectPlayer;
 import com.github.kill05.projectbta.inventory.ProjectContainer;
+import com.github.kill05.projectbta.inventory.slot.BurnSlot;
+import com.github.kill05.projectbta.inventory.slot.ChargeSlot;
+import com.github.kill05.projectbta.inventory.slot.DischargeSlot;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
@@ -40,11 +43,19 @@ public class TransmutationTableContainer extends ProjectContainer {
 	};
 
 	public static final int[][] chargeSlots = new int[][]{
-		new int[]{},
+		new int[]{42, 22},
+		new int[]{69, 49},
+		new int[]{42, 76},
+		new int[]{15, 49},
+
+		new int[]{33, 40},
+		new int[]{51, 40},
+		new int[]{51, 58},
+		new int[]{33, 58},
 	};
 
 	private final EntityPlayer player;
-	private final InventoryBasic inventory = new InventoryBasic(null, 13);
+	private final InventoryBasic inventory = new InventoryBasic(null, chargeSlots.length + 2);
 	private final BurnSlot burnSlot;
 	private int page;
 
@@ -52,13 +63,22 @@ public class TransmutationTableContainer extends ProjectContainer {
 		super(0, 0);
 		this.player = player;
 
+		// Slots with inventory
 		for (int i = 0; i < transmuteSlots.length; i++) {
 			int[] coords = transmuteSlots[i];
 			addSlot(new TransmuteSlot(this, i, coords[0], coords[1]));
 		}
 
+		for (int i = 0; i < chargeSlots.length; i++) {
+			int[] coords = chargeSlots[i];
+			addSlot(new ChargeSlot(inventory, (IEmcHolder) player, i, coords[0], coords[1]));
+		}
+
+		addSlot(new DischargeSlot(inventory, (IEmcHolder) player, chargeSlots.length, 157, 49));
 		addSlot(new UnlearnSlot(this, inventory.getSizeInventory() - 1, 89, 97));
-		burnSlot = new BurnSlot(this, 107, 97);
+
+		// Slots without inventory
+		burnSlot = new BurnSlot((IEmcHolder) player, 107, 97);
 		addSlot(burnSlot);
 
 		addPlayerInventory(player, 27, 117);

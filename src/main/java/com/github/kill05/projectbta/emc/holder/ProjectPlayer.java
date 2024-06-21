@@ -1,4 +1,6 @@
-package com.github.kill05.projectbta.emc;
+package com.github.kill05.projectbta.emc.holder;
+
+import com.github.kill05.projectbta.emc.EmcKey;
 
 import java.util.List;
 
@@ -14,4 +16,9 @@ public interface ProjectPlayer extends IEmcHolder {
 
 	boolean hasTome();
 
+
+	@Override
+	default long getMaxEmc() {
+		return Long.MAX_VALUE;
+	}
 }

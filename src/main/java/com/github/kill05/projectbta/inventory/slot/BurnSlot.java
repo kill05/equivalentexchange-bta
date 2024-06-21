@@ -1,10 +1,9 @@
-package com.github.kill05.projectbta.blocks.transtable.inventory.slot;
+package com.github.kill05.projectbta.inventory.slot;
 
 import com.github.kill05.projectbta.ProjectBTA;
-import com.github.kill05.projectbta.emc.ProjectPlayer;
 import com.github.kill05.projectbta.blocks.transtable.BurnResult;
-import com.github.kill05.projectbta.blocks.transtable.inventory.TransmutationTableContainer;
 import com.github.kill05.projectbta.blocks.transtable.inventory.TransmutationTableGui;
+import com.github.kill05.projectbta.emc.holder.IEmcHolder;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
@@ -12,8 +11,8 @@ import net.minecraft.core.player.inventory.slot.Slot;
 
 public class BurnSlot extends Slot {
 
-	public BurnSlot(TransmutationTableContainer container, int x, int y) {
-		super(new InventoryImpl(container), 0, x, y);
+	public BurnSlot(IEmcHolder holder, int x, int y) {
+		super(new InventoryImpl(holder), 0, x, y);
 	}
 
 
@@ -22,7 +21,7 @@ public class BurnSlot extends Slot {
 		return ProjectBTA.getEmcValue(itemstack) != null;
 	}
 
-	private record InventoryImpl(TransmutationTableContainer container) implements IInventory {
+	private record InventoryImpl(IEmcHolder holder) implements IInventory {
 
 		@Override
 		public int getSizeInventory() {
@@ -41,9 +40,8 @@ public class BurnSlot extends Slot {
 
 		@Override
 		public void setInventorySlotContents(int i, ItemStack itemStack) {
-			ProjectPlayer player = (ProjectPlayer) container.getPlayer();
-			if(player.burnItem(itemStack) != BurnResult.SUCCESS_LEARNED) return;
-			TransmutationTableGui.displayGuiMessage(container, "Learned!");
+			if(holder.burnItem(itemStack) != BurnResult.SUCCESS_LEARNED) return;
+			TransmutationTableGui.displayGuiMessage("Learned!");
 		}
 
 		@Override

@@ -1,6 +1,7 @@
 package com.github.kill05.projectbta.mixins;
 
-import com.github.kill05.projectbta.emc.ProjectPlayer;
+import com.github.kill05.projectbta.emc.EmcTransaction;
+import com.github.kill05.projectbta.emc.holder.ProjectPlayer;
 import com.github.kill05.projectbta.emc.EmcKey;
 import com.github.kill05.projectbta.emc.EmcRegistry;
 import com.github.kill05.projectbta.utils.NbtUtils;
@@ -71,10 +72,9 @@ public abstract class ProjectPlayerMixin implements ProjectPlayer {
 	}
 
 	@Override
-	public void setEmc(long emc) {
-		this.emc = emc;
+	public EmcTransaction setEmc(long emc, boolean ignoreLimit) {
+		return EmcTransaction.transactionSetEmc(emc, getMaxEmc(), ignoreLimit, aLong -> this.emc = aLong);
 	}
-
 
 	@Override
 	public List<EmcKey> getKnownItems() {

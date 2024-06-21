@@ -7,6 +7,7 @@
     "ProjectPlayerMixin"
   ],
   "client": [
+    "ItemModelStandardMixin",
     "GuiTooltipMixin"
   ],
   "injectors": {

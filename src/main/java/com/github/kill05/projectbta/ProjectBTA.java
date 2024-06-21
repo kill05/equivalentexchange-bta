@@ -2,7 +2,9 @@ package com.github.kill05.projectbta;
 
 import com.github.kill05.projectbta.blocks.transtable.TransmutationTableBlock;
 import com.github.kill05.projectbta.config.ProjectConfig;
+import com.github.kill05.projectbta.emc.EmcKey;
 import com.github.kill05.projectbta.emc.EmcRegistry;
+import com.github.kill05.projectbta.items.EmcItem;
 import com.github.kill05.projectbta.items.PhilosopherStoneItem;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.block.Block;
@@ -36,6 +38,13 @@ public class ProjectBTA implements ModInitializer, GameStartEntrypoint, RecipeEn
 
 	public static final Item PHILOSOPHER_STONE = simpleItem("philosopher_stone", new PhilosopherStoneItem(ProjectConfig.ITEM_ID++));
 
+	public static final Item KLEIN_STAR_EIN = simpleItem("stars/ein", new EmcItem("klein_star_ein", ProjectConfig.ITEM_ID++, 50_000));
+	public static final Item KLEIN_STAR_DREI = simpleItem("stars/drei", new EmcItem("klein_star_drei", ProjectConfig.ITEM_ID++, 200_000));
+	public static final Item KLEIN_STAR_ZWEI = simpleItem("stars/zwei", new EmcItem("klein_star_zwei", ProjectConfig.ITEM_ID++, 800_000));
+	public static final Item KLEIN_STAR_VIER = simpleItem("stars/vier", new EmcItem("klein_star_vier", ProjectConfig.ITEM_ID++, 3_200_000));
+	public static final Item KLEIN_STAR_SPHERE = simpleItem("stars/sphere", new EmcItem("klein_star_sphere", ProjectConfig.ITEM_ID++, 12_800_000));
+	public static final Item KLEIN_STAR_OMEGA = simpleItem("stars/omega", new EmcItem("klein_star_omega", ProjectConfig.ITEM_ID++, 51_200_000));
+
 
 	public static final Block TRANSMUTATION_TABLE = new BlockBuilder(MOD_ID)
 		.setTopTexture(MOD_ID + ":block/transmutation_table/top")
@@ -58,6 +67,10 @@ public class ProjectBTA implements ModInitializer, GameStartEntrypoint, RecipeEn
 			.build(item);
 	}
 
+
+	public static Long getEmcValue(EmcKey key) {
+		return EmcRegistry.getInstance().getEmcValue(key);
+	}
 
 	public static Long getEmcValue(ItemStack itemStack) {
 		return EmcRegistry.getInstance().getEmcValue(itemStack);

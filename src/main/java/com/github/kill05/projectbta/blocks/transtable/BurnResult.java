@@ -4,7 +4,8 @@ public enum BurnResult {
 
 	SUCCESS_LEARNED(true),
 	SUCCESS(true),
-	FAILURE_NO_VALUE(false);
+	FAILURE_NO_VALUE(false),
+	FAILURE_TRANSACTION(false);
 
 	private final boolean success;
 
