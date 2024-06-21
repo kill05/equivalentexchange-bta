@@ -2,7 +2,9 @@ package com.github.kill05.projectbta.block.transtable.inventory.slot;
 
 import com.github.kill05.projectbta.ProjectBTA;
 import com.github.kill05.projectbta.ProjectPlayer;
+import com.github.kill05.projectbta.block.transtable.BurnResult;
 import com.github.kill05.projectbta.block.transtable.inventory.TransmutationTableContainer;
+import com.github.kill05.projectbta.block.transtable.inventory.TransmutationTableGui;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
@@ -41,7 +43,8 @@ public class BurnSlot extends Slot {
 		@Override
 		public void setInventorySlotContents(int i, ItemStack itemStack) {
 			ProjectPlayer player = (ProjectPlayer) container.getPlayer();
-			if(!player.burnItem(itemStack).isSuccessful()) return;
+			if(player.burnItem(itemStack) != BurnResult.SUCCESS_LEARNED) return;
+			TransmutationTableGui.displayGuiMessage(container, "Learned!");
 		}
 
 		@Override

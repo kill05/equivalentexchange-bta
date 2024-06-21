@@ -3,6 +3,7 @@ package com.github.kill05.projectbta.block.transtable.inventory;
 import com.github.kill05.projectbta.ProjectPlayer;
 import com.github.kill05.projectbta.block.transtable.inventory.slot.BurnSlot;
 import com.github.kill05.projectbta.block.transtable.inventory.slot.TransmuteSlot;
+import com.github.kill05.projectbta.block.transtable.inventory.slot.UnlearnSlot;
 import com.github.kill05.projectbta.inventory.ProjectContainer;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -53,6 +54,7 @@ public class TransmutationTableContainer extends ProjectContainer {
 			addSlot(new TransmuteSlot(this, i, coords[0], coords[1]));
 		}
 
+		addSlot(new UnlearnSlot(this, 89, 97));
 		burnSlot = new BurnSlot(this, 107, 97);
 		addSlot(burnSlot);
 
