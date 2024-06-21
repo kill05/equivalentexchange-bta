@@ -1,7 +1,7 @@
 package com.github.kill05.projectbta;
 
-import com.github.kill05.projectbta.block.transtable.inventory.TransmutationTableContainer;
-import com.github.kill05.projectbta.block.transtable.inventory.TransmutationTableGui;
+import com.github.kill05.projectbta.blocks.transtable.inventory.TransmutationTableContainer;
+import com.github.kill05.projectbta.blocks.transtable.inventory.TransmutationTableGui;
 import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.core.entity.player.EntityPlayer;

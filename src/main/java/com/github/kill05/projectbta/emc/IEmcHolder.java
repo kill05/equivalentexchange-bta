@@ -1,7 +1,6 @@
-package com.github.kill05.projectbta;
+package com.github.kill05.projectbta.emc;
 
-import com.github.kill05.projectbta.block.transtable.BurnResult;
-import com.github.kill05.projectbta.registry.EmcKey;
+import com.github.kill05.projectbta.blocks.transtable.BurnResult;
 import net.minecraft.core.item.ItemStack;
 
 public interface IEmcHolder {

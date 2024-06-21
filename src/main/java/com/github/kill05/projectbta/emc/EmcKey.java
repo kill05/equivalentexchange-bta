@@ -1,4 +1,4 @@
-package com.github.kill05.projectbta.registry;
+package com.github.kill05.projectbta.emc;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.item.Item;

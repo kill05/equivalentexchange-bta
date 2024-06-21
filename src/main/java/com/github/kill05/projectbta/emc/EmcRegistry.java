@@ -1,4 +1,4 @@
-package com.github.kill05.projectbta.registry;
+package com.github.kill05.projectbta.emc;
 
 import com.github.kill05.projectbta.config.ProjectConfig;
 import net.minecraft.core.block.Block;

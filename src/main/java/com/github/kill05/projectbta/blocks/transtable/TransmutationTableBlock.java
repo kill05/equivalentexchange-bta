@@ -1,4 +1,4 @@
-package com.github.kill05.projectbta.block.transtable;
+package com.github.kill05.projectbta.blocks.transtable;
 
 import com.github.kill05.projectbta.ProjectGuis;
 import net.minecraft.core.block.Block;

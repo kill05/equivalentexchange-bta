@@ -1,6 +1,6 @@
-package com.github.kill05.projectbta.block.transtable.inventory;
+package com.github.kill05.projectbta.blocks.transtable.inventory;
 
-import com.github.kill05.projectbta.ProjectPlayer;
+import com.github.kill05.projectbta.emc.ProjectPlayer;
 import com.github.kill05.projectbta.utils.NumberUtils;
 import com.github.kill05.projectbta.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -21,7 +21,6 @@ public class TransmutationTableGui extends GuiContainer {
 		this.xSize = 229;
 		this.ySize = 197;
 	}
-
 
 	@Override
 	public void init() {

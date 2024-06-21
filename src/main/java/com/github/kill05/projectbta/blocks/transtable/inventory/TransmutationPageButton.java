@@ -1,4 +1,4 @@
-package com.github.kill05.projectbta.block.transtable.inventory;
+package com.github.kill05.projectbta.blocks.transtable.inventory;
 
 import com.github.kill05.projectbta.utils.RenderUtils;
 import net.minecraft.client.Minecraft;

@@ -1,9 +1,9 @@
-package com.github.kill05.projectbta.block.transtable.inventory;
+package com.github.kill05.projectbta.blocks.transtable.inventory;
 
-import com.github.kill05.projectbta.ProjectPlayer;
-import com.github.kill05.projectbta.block.transtable.inventory.slot.BurnSlot;
-import com.github.kill05.projectbta.block.transtable.inventory.slot.TransmuteSlot;
-import com.github.kill05.projectbta.block.transtable.inventory.slot.UnlearnSlot;
+import com.github.kill05.projectbta.emc.ProjectPlayer;
+import com.github.kill05.projectbta.blocks.transtable.inventory.slot.BurnSlot;
+import com.github.kill05.projectbta.blocks.transtable.inventory.slot.TransmuteSlot;
+import com.github.kill05.projectbta.blocks.transtable.inventory.slot.UnlearnSlot;
 import com.github.kill05.projectbta.inventory.ProjectContainer;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -63,6 +63,11 @@ public class TransmutationTableContainer extends ProjectContainer {
 
 
 	@Override
+	public void onCraftGuiClosed(EntityPlayer player) {
+		super.onCraftGuiClosed(player);
+	}
+
+	@Override
 	public ItemStack clickInventorySlot(InventoryAction action, int[] args, EntityPlayer player) {
 		if (args == null || args.length == 0 || !(this.getSlot(args[0]) instanceof TransmuteSlot slot))
 			return super.clickInventorySlot(action, args, player);
@@ -107,21 +112,18 @@ public class TransmutationTableContainer extends ProjectContainer {
 
 	@Override
 	public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
-		if(slot instanceof TransmuteSlot) {
-			return getSlots(burnSlot.id + 1, 36, true);
-		}
-
 		if(slot.id > burnSlot.id) {
 			return Collections.singletonList(burnSlot.id);
 		}
 
-		return null;
+		return getSlots(burnSlot.id + 1, 36, true);
 	}
 
 	@Override
 	public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
 		return this.player == entityPlayer;
 	}
+
 
 	public EntityPlayer getPlayer() {
 		return player;

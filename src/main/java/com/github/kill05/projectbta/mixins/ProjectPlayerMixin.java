@@ -1,8 +1,8 @@
 package com.github.kill05.projectbta.mixins;
 
-import com.github.kill05.projectbta.ProjectPlayer;
-import com.github.kill05.projectbta.registry.EmcKey;
-import com.github.kill05.projectbta.registry.EmcRegistry;
+import com.github.kill05.projectbta.emc.ProjectPlayer;
+import com.github.kill05.projectbta.emc.EmcKey;
+import com.github.kill05.projectbta.emc.EmcRegistry;
 import com.github.kill05.projectbta.utils.NbtUtils;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;

@@ -1,6 +1,4 @@
-package com.github.kill05.projectbta;
-
-import com.github.kill05.projectbta.registry.EmcKey;
+package com.github.kill05.projectbta.emc;
 
 import java.util.List;
 
