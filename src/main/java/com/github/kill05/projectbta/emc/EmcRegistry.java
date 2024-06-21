@@ -316,7 +316,7 @@ public class EmcRegistry {
 		addEntry(defaults, Item.ammoPebble, 1);
 		addEntry(defaults, Block.gravel, 4);
 		addEntry(defaults, Item.flint, 4);
-		addEntry(defaults, Block.obsidian, 32);
+		addEntry(defaults, Block.obsidian, 64);
 		addEntry(defaults, Block.netherrack, 1);
 		addEntry(defaults, Block.netherrackIgneous, 1);
 		addEntry(defaults, Block.soulsand, 4);
@@ -385,7 +385,7 @@ public class EmcRegistry {
 
 		addEntry(defaults, Item.bucketWater, 768);
 		addEntry(defaults, Item.bucketMilk, 768);
-		addEntry(defaults, Item.bucketLava, 800);
+		addEntry(defaults, Item.bucketLava, 832);
 		addEntry(defaults, Item.saddle, 2048);
 
 		addEntry(defaults, Item.record13, 512);
