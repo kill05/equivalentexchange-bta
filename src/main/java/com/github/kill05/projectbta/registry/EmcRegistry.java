@@ -20,10 +20,13 @@ import turniplabs.halplibe.util.toml.Toml;
 
 import java.util.*;
 
+import static java.util.Comparator.*;
+
 public class EmcRegistry {
 
 	private static EmcRegistry INSTANCE;
 	public static final Logger LOGGER = LoggerFactory.getLogger(EmcRegistry.class);
+	public static final Comparator<EmcKey> KEY_COMPARATOR = comparingLong(EmcKey::emcValue).reversed();
 
 	public static EmcRegistry getInstance() {
 		return INSTANCE != null ? INSTANCE : (INSTANCE = new EmcRegistry());
@@ -214,7 +217,7 @@ public class EmcRegistry {
 		sortedKeys.clear();
 		itemEmcMap.entrySet()
 			.stream()
-			.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+			.sorted(Map.Entry.comparingByValue(reverseOrder()))
 			.forEachOrdered(entry -> sortedKeys.add(entry.getKey()));
 	}
 

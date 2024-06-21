@@ -1,9 +1,9 @@
 package com.github.kill05.projectbta.block.transtable.inventory;
 
+import com.github.kill05.projectbta.ProjectPlayer;
 import com.github.kill05.projectbta.block.transtable.inventory.slot.BurnSlot;
 import com.github.kill05.projectbta.block.transtable.inventory.slot.TransmuteSlot;
 import com.github.kill05.projectbta.inventory.ProjectContainer;
-import com.github.kill05.projectbta.registry.EmcRegistry;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
@@ -130,9 +130,8 @@ public class TransmutationTableContainer extends ProjectContainer {
 	}
 
 	public void setPage(int page) {
-		int emcItems = EmcRegistry.getInstance().getSortedKeys().size();
+		int emcItems = ((ProjectPlayer) player).getKnownItems().size();
 		this.page = Math.max(Math.min(page, emcItems / transmuteSlots.length), 0);
 	}
-
 
 }

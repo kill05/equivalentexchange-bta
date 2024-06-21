@@ -2,10 +2,18 @@ package com.github.kill05.projectbta;
 
 import com.github.kill05.projectbta.registry.EmcKey;
 
+import java.util.List;
+
 public interface ProjectPlayer extends IEmcHolder {
 
-	boolean learnItem(EmcKey itemStack);
+	List<EmcKey> getKnownItems();
 
-	boolean unlearnItem(EmcKey itemStack);
+	boolean knowsItem(EmcKey key);
+
+	boolean learnItem(EmcKey key);
+
+	boolean unlearnItem(EmcKey key);
+
+	boolean hasTome();
 
 }

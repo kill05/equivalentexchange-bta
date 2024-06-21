@@ -40,6 +40,17 @@ public class TransmutationTableBlock extends Block {
 
 	public TransmutationTableBlock(int id) {
 		super("transmutation_table", id, Material.stone);
+		setBlockBounds(0, 0, 0, 1, 0.25, 1);
+	}
+
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	@Override
+	public boolean isSolidRender() {
+		return false;
 	}
 
 	@Override

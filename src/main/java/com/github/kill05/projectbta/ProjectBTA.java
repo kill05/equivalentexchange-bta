@@ -23,6 +23,9 @@ public class ProjectBTA implements ModInitializer, GameStartEntrypoint, RecipeEn
 
 
 	public static final Block TRANSMUTATION_TABLE = new BlockBuilder(MOD_ID)
+		.setTopTexture(MOD_ID + ":block/transmutation_table/top")
+		.setSideTextures(MOD_ID + ":block/transmutation_table/side")
+		.setBottomTexture(MOD_ID + ":block/transmutation_table/bottom")
 		.setHardness(2.5F)
 		.setResistance(5.0F)
 		.setBlockSound(BlockSounds.STONE)

@@ -3,7 +3,6 @@ package com.github.kill05.projectbta.block.transtable.inventory.slot;
 import com.github.kill05.projectbta.ProjectPlayer;
 import com.github.kill05.projectbta.block.transtable.inventory.TransmutationTableContainer;
 import com.github.kill05.projectbta.registry.EmcKey;
-import com.github.kill05.projectbta.registry.EmcRegistry;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
@@ -61,23 +60,23 @@ public class TransmuteSlot extends Slot {
 	private record InventoryImpl(TransmutationTableContainer container, int index) implements IInventory {
 
 		public EmcKey getKey() {
-			EmcRegistry registry = EmcRegistry.getInstance();
-			List<EmcKey> sortedKeys = registry.getSortedKeys();
-			long playerEmc = ((ProjectPlayer) container.getPlayer()).getEmc();
+			ProjectPlayer player = (ProjectPlayer) container.getPlayer();
+			List<EmcKey> knownItems = player.getKnownItems();
+			long playerEmc = player.getEmc();
 			if(playerEmc == 0) return null;
 
 			int offset = 0;
 			while (true) {
-				if(offset >= sortedKeys.size()) return null;
-				EmcKey emcKey = sortedKeys.get(offset);
+				if(offset >= knownItems.size()) return null;
+				EmcKey emcKey = knownItems.get(offset);
 				if(playerEmc >= emcKey.emcValue()) break;
 				offset++;
 			}
 
 			int totalIndex = container.getPage() * TransmutationTableContainer.transmuteSlots.length + this.index + offset;
 
-			if (totalIndex >= sortedKeys.size()) return null;
-			return sortedKeys.get(totalIndex);
+			if (totalIndex >= knownItems.size()) return null;
+			return knownItems.get(totalIndex);
 		}
 
 		@Override
