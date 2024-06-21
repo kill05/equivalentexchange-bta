@@ -10,6 +10,12 @@ import java.util.Objects;
 
 public record EmcKey(int itemId, int meta) {
 
+	public EmcKey {
+		if (meta < 0) throw new IllegalArgumentException("invalid meta: " + meta);
+		if (itemId < 0 || itemId >= Item.itemsList.length || Item.itemsList[itemId] == null)
+			throw new IllegalArgumentException("Invalid id: " + itemId);
+	}
+
 	public EmcKey(int itemId) {
 		this(itemId, 0);
 	}
@@ -23,24 +29,32 @@ public record EmcKey(int itemId, int meta) {
 		int itemId = tag.getIntegerOrDefault("item_id", -1);
 		int meta = tag.getInteger("meta");
 
-		if(itemId <= 0 || itemId >= Item.itemsList.length || Item.itemsList[itemId] == null) return null;
-		if(meta < 0) return null;
+		if (itemId <= 0 || itemId >= Item.itemsList.length || Item.itemsList[itemId] == null) return null;
+		if (meta < 0) return null;
 
 		return new EmcKey(itemId, meta);
 	}
 
 
-	public ItemStack item(int stackSize) {
-		if(stackSize <= 0) return null;
+	public ItemStack itemStack(int stackSize) {
+		if (stackSize <= 0) return null;
 		return new ItemStack(itemId, stackSize, meta);
 	}
 
-	public ItemStack item() {
-		return item(1);
+	public ItemStack itemStack() {
+		return itemStack(1);
+	}
+
+	public Item item() {
+		return Item.itemsList[itemId];
 	}
 
 	public Long emcValue() {
 		return EmcRegistry.getInstance().getEmcValue(this);
+	}
+
+	public boolean isItemDamageable() {
+		return item().getMaxDamage() > 0;
 	}
 
 	public CompoundTag serialize() {
@@ -55,11 +69,12 @@ public record EmcKey(int itemId, int meta) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		EmcKey entry = (EmcKey) o;
-		return itemId == entry.itemId && meta == entry.meta;
+
+		return itemId == entry.itemId && (meta == entry.meta || isItemDamageable());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(itemId, meta);
+		return Objects.hash(itemId);
 	}
 }

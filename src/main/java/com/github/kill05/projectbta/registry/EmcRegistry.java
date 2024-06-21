@@ -220,7 +220,9 @@ public class EmcRegistry {
 
 
 	public Long getEmcValue(@NotNull EmcKey key) {
-		return itemEmcMap.get(key);
+		Long value = itemEmcMap.get(key);
+		if(value == null || !key.isItemDamageable()) return value;
+		return (long) (value * (1f - (key.meta() * 0.9f) / key.item().getMaxDamage()));
 	}
 
 	public void setEmcValue(@NotNull EmcKey key, long value) {
@@ -362,6 +364,7 @@ public class EmcRegistry {
 		addEntry(defaults, Item.string, 64);
 		addEntry(defaults, Item.sulphur, 128);
 		addEntry(defaults, Item.slimeball, 128);
+		addEntry(defaults, Item.chainlink, 256);
 
 		addEntry(defaults, Item.dustRedstone, 64);
 		addEntry(defaults, Item.coal, 128);

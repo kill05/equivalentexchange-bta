@@ -30,7 +30,7 @@ public class TransmuteSlot extends Slot {
 		amount = (int) Math.min(amount, player.getEmc() / cost);
 		if(removeEmc) player.removeEmc(amount * cost);
 
-		return key.item(amount);
+		return key.itemStack(amount);
 	}
 
 	public void removeEmc(int itemAmount) {
@@ -83,7 +83,7 @@ public class TransmuteSlot extends Slot {
 		@Override
 		public ItemStack getStackInSlot(int slot) {
 			EmcKey key = getKey();
-			return key != null ? key.item() : null;
+			return key != null ? key.itemStack() : null;
 		}
 
 		@Override

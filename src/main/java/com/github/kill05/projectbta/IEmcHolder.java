@@ -25,9 +25,9 @@ public interface IEmcHolder {
 
 		addEmc(emc * itemStack.stackSize);
 
-		boolean learned = false;
-		if(this instanceof ProjectPlayer player) learned = player.learnItem(key);
-		return learned ? BurnResult.SUCCESS_LEARNED : BurnResult.SUCCESS;
+		return (this instanceof ProjectPlayer player && player.learnItem(key))
+			? BurnResult.SUCCESS_LEARNED
+			: BurnResult.SUCCESS;
 	}
 
 }
