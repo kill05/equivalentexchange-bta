@@ -1,4 +1,4 @@
-package com.github.kill05.equivalentexchange.blocks.transtable;
+package com.github.kill05.equivalentexchange.blocks;
 
 public enum BurnResult {
 

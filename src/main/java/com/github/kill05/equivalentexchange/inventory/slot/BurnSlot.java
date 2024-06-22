@@ -1,8 +1,8 @@
 package com.github.kill05.equivalentexchange.inventory.slot;
 
 import com.github.kill05.equivalentexchange.EquivalentExchange;
-import com.github.kill05.equivalentexchange.blocks.transtable.BurnResult;
-import com.github.kill05.equivalentexchange.blocks.transtable.inventory.TransmutationTableGui;
+import com.github.kill05.equivalentexchange.blocks.BurnResult;
+import com.github.kill05.equivalentexchange.inventory.gui.TransmutationTableGui;
 import com.github.kill05.equivalentexchange.emc.holder.IEmcHolder;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;

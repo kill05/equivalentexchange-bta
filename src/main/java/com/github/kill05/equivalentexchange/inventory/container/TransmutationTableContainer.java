@@ -1,11 +1,10 @@
-package com.github.kill05.equivalentexchange.blocks.transtable.inventory;
+package com.github.kill05.equivalentexchange.inventory.container;
 
 import com.github.kill05.equivalentexchange.EquivalentExchange;
-import com.github.kill05.equivalentexchange.blocks.transtable.inventory.slot.TransmuteSlot;
-import com.github.kill05.equivalentexchange.blocks.transtable.inventory.slot.UnlearnSlot;
+import com.github.kill05.equivalentexchange.inventory.slot.TransmuteSlot;
+import com.github.kill05.equivalentexchange.inventory.slot.UnlearnSlot;
 import com.github.kill05.equivalentexchange.emc.holder.IEmcHolder;
 import com.github.kill05.equivalentexchange.emc.holder.IPlayerEmcHolder;
-import com.github.kill05.equivalentexchange.inventory.EEContainer;
 import com.github.kill05.equivalentexchange.inventory.slot.BurnSlot;
 import com.github.kill05.equivalentexchange.inventory.slot.ChargeSlot;
 import com.github.kill05.equivalentexchange.inventory.slot.DischargeSlot;
@@ -164,11 +163,6 @@ public class TransmutationTableContainer extends EEContainer {
 		}
 
 		return getSlots(burnSlot.id + 1, 36, true);
-	}
-
-	@Override
-	public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
-		return this.player == entityPlayer;
 	}
 
 

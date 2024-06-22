@@ -1,7 +1,7 @@
 package com.github.kill05.equivalentexchange.emc.holder;
 
 import com.github.kill05.equivalentexchange.EquivalentExchange;
-import com.github.kill05.equivalentexchange.blocks.transtable.BurnResult;
+import com.github.kill05.equivalentexchange.blocks.BurnResult;
 import com.github.kill05.equivalentexchange.emc.EmcKey;
 import com.github.kill05.equivalentexchange.emc.EmcTransaction;
 import net.minecraft.core.item.ItemStack;

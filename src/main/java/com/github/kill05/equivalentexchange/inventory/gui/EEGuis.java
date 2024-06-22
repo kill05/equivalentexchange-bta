@@ -1,7 +1,9 @@
-package com.github.kill05.equivalentexchange;
+package com.github.kill05.equivalentexchange.inventory.gui;
 
-import com.github.kill05.equivalentexchange.blocks.transtable.inventory.TransmutationTableContainer;
-import com.github.kill05.equivalentexchange.blocks.transtable.inventory.TransmutationTableGui;
+import com.github.kill05.equivalentexchange.EquivalentExchange;
+import com.github.kill05.equivalentexchange.inventory.container.AlchemicalChestContainer;
+import com.github.kill05.equivalentexchange.inventory.container.TransmutationTableContainer;
+import com.github.kill05.equivalentexchange.tile.AlchemicalChestTile;
 import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -10,6 +12,7 @@ import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.jetbrains.annotations.NotNull;
 import turniplabs.halplibe.helper.gui.GuiHelper;
 import turniplabs.halplibe.helper.gui.factory.base.GuiFactory;
+import turniplabs.halplibe.helper.gui.factory.block.TileGuiFactory;
 import turniplabs.halplibe.helper.gui.registered.RegisteredGui;
 
 public final class EEGuis {
@@ -31,6 +34,18 @@ public final class EEGuis {
 			if(!(player.craftingInventory instanceof TransmutationTableContainer container)) return;
 
 			container.setPage(container.getPage() + (buttonId == 0 ? -1 : 1));
+		}
+	});
+
+	public static final RegisteredGui ALCHEMICAL_CHEST = GuiHelper.registerServerGui(EquivalentExchange.MOD_ID, "alchemical_chest", new TileGuiFactory<AlchemicalChestTile>() {
+		@Override
+		public @NotNull GuiScreen createGui(@NotNull RegisteredGui gui, @NotNull EntityPlayerSP player, @NotNull AlchemicalChestTile tile) {
+			return new AlchemicalChestGui(player, tile);
+		}
+
+		@Override
+		public @NotNull Container createContainer(@NotNull RegisteredGui gui, @NotNull EntityPlayerMP player, @NotNull AlchemicalChestTile tile) {
+			return new AlchemicalChestContainer(player, tile);
 		}
 	});
 

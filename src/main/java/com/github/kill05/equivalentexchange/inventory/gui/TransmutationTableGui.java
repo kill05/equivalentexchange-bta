@@ -1,6 +1,8 @@
-package com.github.kill05.equivalentexchange.blocks.transtable.inventory;
+package com.github.kill05.equivalentexchange.inventory.gui;
 
 import com.github.kill05.equivalentexchange.emc.holder.IPlayerEmcHolder;
+import com.github.kill05.equivalentexchange.inventory.buttons.TransmutationPageButton;
+import com.github.kill05.equivalentexchange.inventory.container.TransmutationTableContainer;
 import com.github.kill05.equivalentexchange.utils.NumberUtils;
 import com.github.kill05.equivalentexchange.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -40,12 +42,7 @@ public class TransmutationTableGui extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f) {
-		RenderUtils.bindTexture("gui/transmute.png");
-		GL11.glColor4f(1f, 1f, 1f, 1f);
-
-		int x = (this.width - this.xSize) / 2;
-		int y = (this.height - this.ySize) / 2;
-		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+		RenderUtils.drawGui(this, "gui/transmute.png");
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.github.kill05.equivalentexchange.inventory;
+package com.github.kill05.equivalentexchange.inventory.container;
 
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.Container;
@@ -52,6 +52,11 @@ public abstract class EEContainer extends Container {
 
 	public int alignY(float y) {
 		return (int) (y * SLOT_SIZE) + alignOffsetY;
+	}
+
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
+		return true;
 	}
 
 }

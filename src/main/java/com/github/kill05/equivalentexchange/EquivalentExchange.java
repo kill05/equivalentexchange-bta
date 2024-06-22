@@ -1,6 +1,7 @@
 package com.github.kill05.equivalentexchange;
 
-import com.github.kill05.equivalentexchange.blocks.transtable.TransmutationTableBlock;
+import com.github.kill05.equivalentexchange.blocks.AlchemicalChestBlock;
+import com.github.kill05.equivalentexchange.blocks.TransmutationTableBlock;
 import com.github.kill05.equivalentexchange.config.EEConfig;
 import com.github.kill05.equivalentexchange.emc.EmcKey;
 import com.github.kill05.equivalentexchange.emc.EmcRegistry;
@@ -50,11 +51,18 @@ public final class EquivalentExchange implements ModInitializer, GameStartEntryp
 		.setTopTexture(MOD_ID + ":block/transmutation_table/top")
 		.setSideTextures(MOD_ID + ":block/transmutation_table/side")
 		.setBottomTexture(MOD_ID + ":block/transmutation_table/bottom")
-		.setHardness(2.5F)
-		.setResistance(5.0F)
+		.setHardness(2.5f)
+		.setResistance(5.0f)
 		.setBlockSound(BlockSounds.STONE)
 		.setTags(BlockTags.MINEABLE_BY_PICKAXE)
 		.build(new TransmutationTableBlock(EEConfig.BLOCK_ID++));
+
+	public static final Block ALCHEMICAL_CHEST = new BlockBuilder(MOD_ID)
+		.setHardness(2.5f)
+		.setResistance(5.0f)
+		.setBlockSound(BlockSounds.STONE)
+		.setTags(BlockTags.MINEABLE_BY_PICKAXE)
+		.build(new AlchemicalChestBlock(EEConfig.BLOCK_ID++));
 
 
 	private static Item simpleItem(String name, String texture) {

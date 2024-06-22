@@ -1,4 +1,4 @@
-package com.github.kill05.equivalentexchange.blocks.transtable.inventory;
+package com.github.kill05.equivalentexchange.inventory.buttons;
 
 import com.github.kill05.equivalentexchange.utils.RenderUtils;
 import net.minecraft.client.Minecraft;

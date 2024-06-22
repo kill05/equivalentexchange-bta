@@ -1,7 +1,7 @@
-package com.github.kill05.equivalentexchange.blocks.transtable.inventory.slot;
+package com.github.kill05.equivalentexchange.inventory.slot;
 
 import com.github.kill05.equivalentexchange.emc.holder.IPlayerEmcHolder;
-import com.github.kill05.equivalentexchange.blocks.transtable.inventory.TransmutationTableContainer;
+import com.github.kill05.equivalentexchange.inventory.container.TransmutationTableContainer;
 import com.github.kill05.equivalentexchange.emc.EmcKey;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
