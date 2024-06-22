@@ -4,9 +4,12 @@ import net.minecraft.core.player.inventory.InventoryBasic;
 
 public class AlchemicalChestTile extends InventoryTileEntity {
 
-	public AlchemicalChestTile() {
-		super(new InventoryBasic(null, 13 * 8));
+	public AlchemicalChestTile(int slots) {
+		super(new InventoryBasic(null, slots));
 	}
 
+	public AlchemicalChestTile() {
+		this(13 * 8);
+	}
 
 }

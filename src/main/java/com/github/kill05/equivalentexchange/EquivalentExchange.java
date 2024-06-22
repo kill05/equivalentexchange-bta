@@ -1,6 +1,7 @@
 package com.github.kill05.equivalentexchange;
 
 import com.github.kill05.equivalentexchange.blocks.AlchemicalChestBlock;
+import com.github.kill05.equivalentexchange.blocks.EnergyCondenserBlock;
 import com.github.kill05.equivalentexchange.blocks.TransmutationTableBlock;
 import com.github.kill05.equivalentexchange.config.EEConfig;
 import com.github.kill05.equivalentexchange.emc.EmcKey;
@@ -63,6 +64,13 @@ public final class EquivalentExchange implements ModInitializer, GameStartEntryp
 		.setBlockSound(BlockSounds.STONE)
 		.setTags(BlockTags.MINEABLE_BY_PICKAXE)
 		.build(new AlchemicalChestBlock(EEConfig.BLOCK_ID++));
+
+	public static final Block ENERGY_CONDENSER = new BlockBuilder(MOD_ID)
+		.setHardness(2.5f)
+		.setResistance(5.0f)
+		.setBlockSound(BlockSounds.STONE)
+		.setTags(BlockTags.MINEABLE_BY_PICKAXE)
+		.build(new EnergyCondenserBlock("energy_condenser", EEConfig.BLOCK_ID++));
 
 
 	private static Item simpleItem(String name, String texture) {

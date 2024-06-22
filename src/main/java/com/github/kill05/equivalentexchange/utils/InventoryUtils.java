@@ -7,6 +7,8 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.world.World;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class InventoryUtils {
 
@@ -20,7 +22,7 @@ public final class InventoryUtils {
 			if (item == null) continue;
 
 			CompoundTag itemTag = new CompoundTag();
-			itemTag.putByte("Slot", (byte)i);
+			itemTag.putByte("Slot", (byte) i);
 			item.writeToNBT(itemTag);
 
 			list.addTag(itemTag);
@@ -43,7 +45,7 @@ public final class InventoryUtils {
 
 
 	public static void dropInventoryContents(IInventory inventory, World world, int x, int y, int z) {
-		for(int i = 0; i < inventory.getSizeInventory(); ++i) {
+		for (int i = 0; i < inventory.getSizeInventory(); ++i) {
 			ItemStack itemStack = inventory.getStackInSlot(i);
 			if (itemStack != null) {
 				EntityItem item = world.dropItem(x, y, z, itemStack);
@@ -53,7 +55,36 @@ public final class InventoryUtils {
 				item.delayBeforeCanPickup = 0;
 			}
 		}
+	}
 
+	@Nullable
+	public static ItemStack addItem(@NotNull IInventory inventory, @Nullable ItemStack stack) {
+		if (stack == null || inventory.getSizeInventory() == 0) return stack;
+
+		int maxSize = stack.getMaxStackSize(inventory);
+		stack = stack.copy();
+
+		for (int i = 0; i < inventory.getSizeInventory(); i++) {
+			ItemStack invStack = inventory.getStackInSlot(i);
+			int amount = -1;
+
+			if (invStack == null) {
+				amount = Math.min(stack.stackSize, maxSize);
+				invStack = stack.copy();
+				inventory.setInventorySlotContents(i, invStack);
+			} else if (invStack.canStackWith(stack) && invStack.stackSize < maxSize) {
+				amount = Math.min(invStack.stackSize + stack.stackSize, maxSize);
+			}
+
+			if(amount > 0) {
+				stack.stackSize -= amount;
+				invStack.stackSize = amount;
+			}
+
+			if (stack.stackSize <= 0) break;
+		}
+
+		return stack.stackSize > 0 ? stack : null;
 	}
 
 }

@@ -2,8 +2,10 @@ package com.github.kill05.equivalentexchange.inventory.gui;
 
 import com.github.kill05.equivalentexchange.EquivalentExchange;
 import com.github.kill05.equivalentexchange.inventory.container.AlchemicalChestContainer;
+import com.github.kill05.equivalentexchange.inventory.container.EnergyCondenserContainer;
 import com.github.kill05.equivalentexchange.inventory.container.TransmutationTableContainer;
 import com.github.kill05.equivalentexchange.tile.AlchemicalChestTile;
+import com.github.kill05.equivalentexchange.tile.EnergyCondenserTile;
 import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -46,6 +48,18 @@ public final class EEGuis {
 		@Override
 		public @NotNull Container createContainer(@NotNull RegisteredGui gui, @NotNull EntityPlayerMP player, @NotNull AlchemicalChestTile tile) {
 			return new AlchemicalChestContainer(player, tile);
+		}
+	});
+
+	public static final RegisteredGui ENERGY_CONDENSER = GuiHelper.registerServerGui(EquivalentExchange.MOD_ID, "energy_condenser", new TileGuiFactory<EnergyCondenserTile>() {
+		@Override
+		public @NotNull GuiScreen createGui(@NotNull RegisteredGui gui, @NotNull EntityPlayerSP player, @NotNull EnergyCondenserTile tile) {
+			return new EnergyCondenserGui(player, tile);
+		}
+
+		@Override
+		public @NotNull Container createContainer(@NotNull RegisteredGui gui, @NotNull EntityPlayerMP player, @NotNull EnergyCondenserTile tile) {
+			return new EnergyCondenserContainer(player, tile);
 		}
 	});
 

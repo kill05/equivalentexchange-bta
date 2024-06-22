@@ -36,6 +36,12 @@ public record EmcKey(int itemId, int meta) {
 	}
 
 
+	public boolean matches(ItemStack itemStack) {
+		if(itemStack == null) return false;
+		return itemStack.itemID == itemId && itemStack.getMetadata() == meta;
+	}
+
+
 	public ItemStack itemStack(int stackSize) {
 		if (stackSize <= 0) return null;
 		return new ItemStack(itemId, stackSize, meta);

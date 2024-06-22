@@ -12,21 +12,25 @@ public class AlchemicalChestContainer extends EEContainer {
 
 	protected final IInventory inventory;
 
-	public AlchemicalChestContainer(EntityPlayer player, IInventory inventory, int slotPerRow) {
-		super(4, 5);
+	public AlchemicalChestContainer(EntityPlayer player, IInventory inventory, int slotPerRow, int offsetX, int offsetY) {
+		super(offsetX, offsetY);
 		this.inventory = inventory;
 
 		for(int i = 0; i < this.inventory.getSizeInventory(); i++) {
 			int x = i % slotPerRow;
 			int y = i / slotPerRow;
-			addAlignedSlot(createSlot(i), x, y);
+			addSlot(createSlot(i, alignX(x), alignY(y)));
 		}
 
 		addPlayerInventory(player, 36, 147);
 	}
 
-	public Slot createSlot(int index) {
-		return new Slot(this.inventory, index, 0, 0);
+	public AlchemicalChestContainer(EntityPlayer player, IInventory inventory) {
+		this(player, inventory, 13, 4, 5);
+	}
+
+	public Slot createSlot(int index, int x, int y) {
+		return new Slot(this.inventory, index, x, y);
 	}
 
 
