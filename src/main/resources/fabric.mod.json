@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "projectbta",
+  "id": "equivalentexchange",
   "version": "${version}",
 
-  "name": "Project Bta",
+  "name": "Equivalent Exchange (BTA!)",
   "description": "A port of projectE for BTA.",
   "authors": [
     "kill05"
@@ -19,20 +19,20 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-			"com.github.kill05.projectbta.ProjectBTA"
+			"com.github.kill05.equivalentexchange.EquivalentExchange"
     ],
 		"beforeGameStart": [
-			"com.github.kill05.projectbta.ProjectBTA"
+			"com.github.kill05.equivalentexchange.EquivalentExchange"
 		],
 		"afterGameStart": [
-			"com.github.kill05.projectbta.ProjectBTA"
+			"com.github.kill05.equivalentexchange.EquivalentExchange"
 		],
 		"recipesReady": [
-			"com.github.kill05.projectbta.ProjectBTA"
+			"com.github.kill05.equivalentexchange.EquivalentExchange"
 		]
 	},
   "mixins": [
-		"projectbta.mixins.json"
+		"equivalentexchange.mixins.json"
   ],
 
   "depends": {
