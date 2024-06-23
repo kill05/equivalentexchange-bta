@@ -16,6 +16,6 @@ public class AlchemicalChestGui extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f) {
-		RenderUtils.drawGui(this, "gui/alchemical_chest.png");
+		RenderUtils.drawGui("gui/alchemical_chest.png");
 	}
 }

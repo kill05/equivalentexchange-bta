@@ -2,31 +2,24 @@ package com.github.kill05.equivalentexchange.tile;
 
 import com.github.kill05.equivalentexchange.emc.EmcKey;
 import com.github.kill05.equivalentexchange.emc.EmcTransaction;
-import com.github.kill05.equivalentexchange.emc.holder.ITileEmcHolder;
+import com.github.kill05.equivalentexchange.emc.holder.IEmcHolder;
 import com.github.kill05.equivalentexchange.utils.InventoryUtils;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 
-public class EnergyCondenserTile extends AlchemicalChestTile implements ITileEmcHolder<EnergyCondenserTile> {
+public class EnergyCondenserMK2Tile extends EnergyCondenserTile implements IEmcHolder {
 
 	public static final int BURN_SPEED = 1;
 	private long emc;
 	private EmcKey output;
 
-	protected EnergyCondenserTile(int slots) {
-		super(slots);
+	public EnergyCondenserMK2Tile() {
+		super(6 * 7);
 	}
-
-	public EnergyCondenserTile() {
-		this(13 * 7);
-	}
-
 
 	@Override
 	public void tick() {
-		tickEmc();
-
 		if (output == null) return;
 		IInventory inv = getInputInventory();
 
@@ -93,11 +86,6 @@ public class EnergyCondenserTile extends AlchemicalChestTile implements ITileEmc
 
 
 	public IInventory getInputInventory() {
-		return this;
-	}
-
-	@Override
-	public EnergyCondenserTile asTile() {
 		return this;
 	}
 }

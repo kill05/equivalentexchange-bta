@@ -1,6 +1,7 @@
 package com.github.kill05.equivalentexchange.emc;
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -20,12 +21,21 @@ public record EmcKey(int itemId, int meta) {
 		this(itemId, 0);
 	}
 
-	public EmcKey(ItemStack item) {
+	public EmcKey(@NotNull ItemStack item) {
 		this(item.itemID, item.getMetadata());
 	}
 
-	@Nullable
-	public static EmcKey deserialize(@NotNull CompoundTag tag) {
+	public EmcKey(@NotNull IItemConvertible item, int meta) {
+		this(item.asItem().id, meta);
+	}
+
+	public EmcKey(@NotNull IItemConvertible item) {
+		this(item.asItem().id, 0);
+	}
+
+
+	public static @Nullable EmcKey deserialize(@Nullable CompoundTag tag) {
+		if(tag == null) return null;
 		int itemId = tag.getIntegerOrDefault("item_id", -1);
 		int meta = tag.getInteger("meta");
 
@@ -36,7 +46,7 @@ public record EmcKey(int itemId, int meta) {
 	}
 
 
-	public boolean matches(ItemStack itemStack) {
+	public boolean matches(@Nullable ItemStack itemStack) {
 		if(itemStack == null) return false;
 		return itemStack.itemID == itemId && itemStack.getMetadata() == meta;
 	}

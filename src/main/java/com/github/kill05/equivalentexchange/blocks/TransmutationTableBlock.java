@@ -1,6 +1,6 @@
 package com.github.kill05.equivalentexchange.blocks;
 
-import com.github.kill05.equivalentexchange.inventory.gui.EEGuis;
+import com.github.kill05.equivalentexchange.EEGuis;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;

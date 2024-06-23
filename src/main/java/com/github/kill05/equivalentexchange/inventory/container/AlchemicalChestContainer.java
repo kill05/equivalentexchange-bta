@@ -1,6 +1,5 @@
 package com.github.kill05.equivalentexchange.inventory.container;
 
-import com.github.kill05.equivalentexchange.tile.InventoryTileEntity;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.IInventory;
@@ -12,7 +11,7 @@ public class AlchemicalChestContainer extends EEContainer {
 
 	protected final IInventory inventory;
 
-	public AlchemicalChestContainer(EntityPlayer player, IInventory inventory, int slotPerRow, int offsetX, int offsetY) {
+	protected AlchemicalChestContainer(EntityPlayer player, IInventory inventory, int slotPerRow, int offsetX, int offsetY) {
 		super(offsetX, offsetY);
 		this.inventory = inventory;
 
@@ -21,15 +20,14 @@ public class AlchemicalChestContainer extends EEContainer {
 			int y = i / slotPerRow;
 			addSlot(createSlot(i, alignX(x), alignY(y)));
 		}
-
-		addPlayerInventory(player, 36, 147);
 	}
 
 	public AlchemicalChestContainer(EntityPlayer player, IInventory inventory) {
 		this(player, inventory, 13, 4, 5);
+		addPlayerInventory(player, 36, 147);
 	}
 
-	public Slot createSlot(int index, int x, int y) {
+	protected Slot createSlot(int index, int x, int y) {
 		return new Slot(this.inventory, index, x, y);
 	}
 

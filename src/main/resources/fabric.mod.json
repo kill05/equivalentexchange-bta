@@ -39,7 +39,7 @@
 		"minecraft": "~7.2-beta",
     "fabricloader": ">=0.15.5",
 		"halplibe": ">=4.1.2",
-		"catalyst": ">=1.4.3"
+		"catalyst-core": ">=1.4.3"
 	},
   "suggests": {
   }

@@ -26,13 +26,43 @@ public final class RenderUtils {
 		return ItemModelDispatcher.getInstance().getDispatch(item);
 	}
 
-	public static void drawGui(GuiContainer gui, String texture) {
+	public static void drawGui(String texture) {
+		GuiContainer gui = getGui();
 		RenderUtils.bindTexture(texture);
 		GL11.glColor4f(1f, 1f, 1f, 1f);
+		gui.drawTexturedModalRect(startX(), startY(), 0, 0,gui.xSize, gui.ySize);
+	}
 
-		int x = (gui.width - gui.xSize) / 2;
-		int y = (gui.height - gui.ySize) / 2;
-		gui.drawTexturedModalRect(x, y, 0, 0,gui.xSize, gui.ySize);
+	public static void drawProgressBar(long value, long maxValue, int barLength, int x, int y, int u, int v, int barWidth, boolean vertical) {
+		GuiContainer gui = getGui();
+		int size = (int) Math.ceil(((float) Math.min(value, maxValue) / maxValue) * barLength);
+
+		gui.drawTexturedModalRect(
+			RenderUtils.startX() + x,
+			RenderUtils.startY() + y,
+			u, v,
+			vertical ? barWidth : size,
+			vertical ? size : barWidth
+		);
+	}
+
+
+	public static int startX() {
+		GuiContainer gui = getGui();
+		return (gui.width - gui.xSize) / 2;
+	}
+
+	public static int startY() {
+		GuiContainer gui = getGui();
+		return (gui.height - gui.ySize) / 2;
+	}
+
+	private static GuiContainer getGui() {
+		GuiScreen screen = Minecraft.getMinecraft(RenderUtils.class).currentScreen;
+		if(!(screen instanceof GuiContainer gui))
+			throw new IllegalStateException("Current gui must be a gui container!");
+
+		return gui;
 	}
 
 }

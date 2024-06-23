@@ -10,7 +10,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.core.entity.player.EntityPlayer;
-import org.lwjgl.opengl.GL11;
 import turniplabs.halplibe.HalpLibe;
 
 public class TransmutationTableGui extends GuiContainer {
@@ -42,7 +41,7 @@ public class TransmutationTableGui extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f) {
-		RenderUtils.drawGui(this, "gui/transmute.png");
+		RenderUtils.drawGui("gui/transmute.png");
 	}
 
 	@Override

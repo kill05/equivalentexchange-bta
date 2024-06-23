@@ -18,6 +18,15 @@ public final class EERecipes {
 	public static final RecipeGroup<RecipeEntryCrafting<?, ?>> RECIPE_WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
 
 	public static void registerRecipes() {
+		// Blocks
+		blockRecipe3(EEItems.ALCHEMICAL_COAL, EEBlocks.ALCHEMICAL_COAL_BLOCK.getDefaultStack(), "alchemical_coal_block");
+		blockRecipe3(EEItems.MOBIUS_FUEL, EEBlocks.MOBIUS_FUEL_BLOCK.getDefaultStack(), "mobius_fuel_block");
+		blockRecipe3(EEItems.AETERNALIS_FUEL, EEBlocks.AETERNALIS_FUEL_BLOCK.getDefaultStack(), "aeternalis_fuel_block");
+
+		blockRecipe2(EEItems.DARK_MATTER, EEBlocks.DARK_MATTER_BLOCK.getDefaultStack(), "dark_matter_block");
+		blockRecipe2(EEItems.RED_MATTER, EEBlocks.RED_MATTER_BLOCK.getDefaultStack(), "red_matter_block");
+
+		// Philosopher's stone recipes
 		philoRecipe(
 			Item.ingotIron,
 			Item.ingotGold.getDefaultStack(),
@@ -32,74 +41,93 @@ public final class EERecipes {
 
 		philoRecipe(
 			Item.coal,
-			EquivalentExchange.ALCHEMICAL_COAL.getDefaultStack(),
+			EEItems.ALCHEMICAL_COAL.getDefaultStack(),
 			"coal_to_alchemical", 4
 		);
 
 		philoRecipe(
-			EquivalentExchange.ALCHEMICAL_COAL,
-			EquivalentExchange.MOBIUS_FUEL.getDefaultStack(),
+			EEItems.ALCHEMICAL_COAL,
+			EEItems.MOBIUS_FUEL.getDefaultStack(),
 			"alchemical_to_mobius", 4
 		);
 
 		philoRecipe(
-			EquivalentExchange.MOBIUS_FUEL,
-			EquivalentExchange.AETERNALIS_FUEL.getDefaultStack(),
+			EEItems.MOBIUS_FUEL,
+			EEItems.AETERNALIS_FUEL.getDefaultStack(),
 			"mobius_to_aeternalis", 4
 		);
 
 
 		RecipeBuilderShaped surroundCenterRecipe = RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xxx", "xox", "xxx");
-		RecipeBuilderShaped surroundCenterAlternateRecipe = RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xyx", "yoy", "xyx");
 		RecipeBuilderShaped surroundLineRecipe = RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xxx", "ooo", "xxx");
 
 		// Philosopher's stone
-		surroundCenterAlternateRecipe.addInput('x', Item.dustRedstone)
-			.addInput('y', Item.dustGlowstone)
-			.addInput('o', Item.diamond)
-			.create("philosopher_stone_0", EquivalentExchange.PHILOSOPHER_STONE.getDefaultStack());
-
-		surroundCenterAlternateRecipe.addInput('x', Item.dustGlowstone)
-			.addInput('y', Item.dustRedstone)
-			.addInput('o', Item.diamond)
-			.create("philosopher_stone_1", EquivalentExchange.PHILOSOPHER_STONE.getDefaultStack());
+		surroundAlternateRecipe(
+			Item.diamond, Item.dustGlowstone, Item.dustRedstone,
+			EEItems.PHILOSOPHER_STONE.getDefaultStack(),
+			"philosopher_stone"
+		);
 
 		// Transmutation table
-		surroundCenterAlternateRecipe.addInput('x', Block.obsidian)
-			.addInput('y', Block.stone)
-			.addInput('o', EquivalentExchange.PHILOSOPHER_STONE)
-			.create("transmutation_table_0", EquivalentExchange.TRANSMUTATION_TABLE.getDefaultStack());
+		surroundAlternateRecipe(
+			Item.diamond, Item.dustGlowstone, Item.dustRedstone,
+			EEItems.PHILOSOPHER_STONE.getDefaultStack(),
+			"philosopher_stone"
+		);
 
-		surroundCenterAlternateRecipe.addInput('x', Block.stone)
-			.addInput('y', Block.obsidian)
-			.addInput('o', EquivalentExchange.PHILOSOPHER_STONE)
-			.create("transmutation_table_1", EquivalentExchange.TRANSMUTATION_TABLE.getDefaultStack());
+		surroundAlternateRecipe(
+			EEItems.PHILOSOPHER_STONE, Block.stone, Block.obsidian,
+			EEBlocks.TRANSMUTATION_TABLE.getDefaultStack(),
+			"transmutation_table"
+		);
 
 		// Matter
-		surroundCenterRecipe.addInput('x', EquivalentExchange.AETERNALIS_FUEL)
-			.addInput('o', Block.blockDiamond)
-			.create("dark_matter", EquivalentExchange.DARK_MATTER.getDefaultStack());
+		surroundRecipe(Block.blockDiamond, EEItems.AETERNALIS_FUEL, EEItems.DARK_MATTER.getDefaultStack(), "dark_matter");
 
-		surroundLineRecipe.addInput('x', EquivalentExchange.AETERNALIS_FUEL)
-			.addInput('o', EquivalentExchange.DARK_MATTER)
-			.create("red_matter", EquivalentExchange.RED_MATTER.getDefaultStack());
+		surroundLineRecipe.addInput('x', EEItems.AETERNALIS_FUEL)
+			.addInput('o', EEItems.DARK_MATTER)
+			.create("red_matter", EEItems.RED_MATTER.getDefaultStack());
 
 		// Klein star
-		surroundCenterRecipe.addInput('x', EquivalentExchange.MOBIUS_FUEL)
-			.addInput('o', Item.diamond)
-			.create("klein_star_ein", EquivalentExchange.KLEIN_STAR_EIN.getDefaultStack());
+		surroundRecipe(Item.diamond, EEItems.MOBIUS_FUEL, EEItems.KLEIN_STAR_EIN.getDefaultStack(), "dark_matter");
+		compactRecipe(EEItems.KLEIN_STAR_EIN, EEItems.KLEIN_STAR_ZWEI.getDefaultStack(), "klein_star_zwei", 4);
+		compactRecipe(EEItems.KLEIN_STAR_ZWEI, EEItems.KLEIN_STAR_DREI.getDefaultStack(), "klein_star_drei", 4);
+		compactRecipe(EEItems.KLEIN_STAR_DREI, EEItems.KLEIN_STAR_VIER.getDefaultStack(), "klein_star_vier", 4);
+		compactRecipe(EEItems.KLEIN_STAR_VIER, EEItems.KLEIN_STAR_SPHERE.getDefaultStack(), "klein_star_sphere", 4);
+		compactRecipe(EEItems.KLEIN_STAR_SPHERE, EEItems.KLEIN_STAR_OMEGA.getDefaultStack(), "klein_star_omega", 4);
 
-		compactRecipe(EquivalentExchange.KLEIN_STAR_EIN, EquivalentExchange.KLEIN_STAR_ZWEI.getDefaultStack(), "klein_star_zwei", 4);
-		compactRecipe(EquivalentExchange.KLEIN_STAR_ZWEI, EquivalentExchange.KLEIN_STAR_DREI.getDefaultStack(), "klein_star_drei", 4);
-		compactRecipe(EquivalentExchange.KLEIN_STAR_DREI, EquivalentExchange.KLEIN_STAR_VIER.getDefaultStack(), "klein_star_vier", 4);
-		compactRecipe(EquivalentExchange.KLEIN_STAR_VIER, EquivalentExchange.KLEIN_STAR_SPHERE.getDefaultStack(), "klein_star_sphere", 4);
-		compactRecipe(EquivalentExchange.KLEIN_STAR_SPHERE, EquivalentExchange.KLEIN_STAR_OMEGA.getDefaultStack(), "klein_star_omega", 4);
+		// Chests
+
+		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "123", "sds", "ici")
+			.addInput('d', Item.diamond)
+			.addInput('i', Item.ingotIron)
+			.addInput('s', "minecraft:stones")
+			.addInput('c', "minecraft:chests")
+			.create("alchemical_chest", EEBlocks.ALCHEMICAL_CHEST.getDefaultStack());
+
+		surroundAlternateRecipe(
+			EEBlocks.ALCHEMICAL_CHEST, Block.obsidian, Item.diamond,
+			EEBlocks.ENERGY_CONDENSER.getDefaultStack(),
+			"energy_condenser"
+		);
 	}
 
 
+	private static void blockRecipe2(IItemConvertible input, ItemStack output, String recipeId) {
+		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xx", "xx")
+			.addInput('x', input)
+			.create(recipeId, output);
+	}
+
+	private static void blockRecipe3(IItemConvertible input, ItemStack output, String recipeId) {
+		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xxx", "xxx", "xxx")
+			.addInput('x', input)
+			.create(recipeId, output);
+	}
+
 	private static void philoRecipe(IItemConvertible input, ItemStack output, String recipeId, int inputAmount) {
 		RecipeBuilderShapeless recipe = RecipeBuilder.Shapeless(EquivalentExchange.MOD_ID)
-			.addInput(EquivalentExchange.PHILOSOPHER_STONE);
+			.addInput(EEItems.PHILOSOPHER_STONE);
 
 		for (int i = 0; i < inputAmount; i++) {
 			recipe.addInput(input);
@@ -116,6 +144,26 @@ public final class EERecipes {
 		}
 
 		recipe.create(recipeId, output);
+	}
+
+	private static void surroundRecipe(IItemConvertible center, IItemConvertible item1, ItemStack output, String recipeId) {
+		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xxx", "xox", "xxx")
+			.addInput('o', center)
+			.addInput('x', item1)
+			.create(recipeId + "_0", output);
+	}
+
+	private static void surroundAlternateRecipe(IItemConvertible center, IItemConvertible item1, IItemConvertible item2, ItemStack output, String recipeId) {
+		RecipeBuilderShaped recipe = RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xyx", "yoy", "xyx")
+			.addInput('o', center);
+
+		recipe.addInput('x', item1)
+			.addInput('y', item2)
+			.create(recipeId + "_0", output);
+
+		recipe.addInput('x', item2)
+			.addInput('y', item1)
+			.create(recipeId + "_1", output);
 	}
 
 

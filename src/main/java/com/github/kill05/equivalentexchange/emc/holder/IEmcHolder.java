@@ -4,6 +4,7 @@ import com.github.kill05.equivalentexchange.EquivalentExchange;
 import com.github.kill05.equivalentexchange.blocks.BurnResult;
 import com.github.kill05.equivalentexchange.emc.EmcKey;
 import com.github.kill05.equivalentexchange.emc.EmcTransaction;
+import com.github.kill05.equivalentexchange.utils.NumberUtils;
 import net.minecraft.core.item.ItemStack;
 
 public interface IEmcHolder {
@@ -47,6 +48,11 @@ public interface IEmcHolder {
 		return (this instanceof IPlayerEmcHolder player && player.learnItem(key))
 			? BurnResult.SUCCESS_LEARNED
 			: BurnResult.SUCCESS;
+	}
+
+
+	default String getFormattedEmc() {
+		return NumberUtils.formatNumber(getEmc());
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.github.kill05.equivalentexchange.blocks;
 
-import com.github.kill05.equivalentexchange.inventory.gui.EEGuis;
+import com.github.kill05.equivalentexchange.EEGuis;
 import com.github.kill05.equivalentexchange.tile.AlchemicalChestTile;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;

@@ -1,10 +1,15 @@
-package com.github.kill05.equivalentexchange.inventory.gui;
+package com.github.kill05.equivalentexchange;
 
-import com.github.kill05.equivalentexchange.EquivalentExchange;
 import com.github.kill05.equivalentexchange.inventory.container.AlchemicalChestContainer;
+import com.github.kill05.equivalentexchange.inventory.container.EnergyCollectorContainer;
 import com.github.kill05.equivalentexchange.inventory.container.EnergyCondenserContainer;
 import com.github.kill05.equivalentexchange.inventory.container.TransmutationTableContainer;
+import com.github.kill05.equivalentexchange.inventory.gui.AlchemicalChestGui;
+import com.github.kill05.equivalentexchange.inventory.gui.EnergyCollectorGui;
+import com.github.kill05.equivalentexchange.inventory.gui.EnergyCondenserGui;
+import com.github.kill05.equivalentexchange.inventory.gui.TransmutationTableGui;
 import com.github.kill05.equivalentexchange.tile.AlchemicalChestTile;
+import com.github.kill05.equivalentexchange.tile.EnergyCollectorTile;
 import com.github.kill05.equivalentexchange.tile.EnergyCondenserTile;
 import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.gui.GuiScreen;
@@ -60,6 +65,18 @@ public final class EEGuis {
 		@Override
 		public @NotNull Container createContainer(@NotNull RegisteredGui gui, @NotNull EntityPlayerMP player, @NotNull EnergyCondenserTile tile) {
 			return new EnergyCondenserContainer(player, tile);
+		}
+	});
+
+	public static final RegisteredGui ENERGY_COLLECTOR = GuiHelper.registerServerGui(EquivalentExchange.MOD_ID, "energy_collector", new TileGuiFactory<EnergyCollectorTile>() {
+		@Override
+		public @NotNull GuiScreen createGui(@NotNull RegisteredGui gui, @NotNull EntityPlayerSP player, @NotNull EnergyCollectorTile tile) {
+			return new EnergyCollectorGui(player, tile);
+		}
+
+		@Override
+		public @NotNull Container createContainer(@NotNull RegisteredGui gui, @NotNull EntityPlayerMP player, @NotNull EnergyCollectorTile tile) {
+			return new EnergyCollectorContainer(player, tile);
 		}
 	});
 
