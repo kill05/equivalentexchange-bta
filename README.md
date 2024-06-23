@@ -1,6 +1,6 @@
 # Equivalent Exchange (BTA!)
 
-A port of ProjectE for [**BTA**](https://www.betterthanadventure.net).
+A port of Equivalent Exchange 2/ProjectE for [**BTA**](https://www.betterthanadventure.net).
 
 ## Disclaimer
 - This mod is in **alpha**.
