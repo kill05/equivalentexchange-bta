@@ -389,7 +389,7 @@ public class EmcRegistry {
 		addEntry(defaults, Item.bone, 192);
 		addEntry(defaults, Item.ammoArrow, 64);
 		addEntry(defaults, Item.string, 64);
-		addEntry(defaults, Item.sulphur, 128);
+		addEntry(defaults, Item.sulphur, 192);
 		addEntry(defaults, Item.slimeball, 128);
 		addEntry(defaults, Item.chainlink, 256);
 
