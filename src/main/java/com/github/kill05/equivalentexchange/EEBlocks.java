@@ -15,6 +15,7 @@ public final class EEBlocks {
 
 	// Simple blocks
 	public static final Block ALCHEMICAL_COAL_BLOCK = new BlockBuilder(EquivalentExchange.MOD_ID)
+		.setTextures(EquivalentExchange.MOD_ID + ":block/blocks/alchemical_coal")
 		.setHardness(1f)
 		.setResistance(10.0f)
 		.setBlockSound(BlockSounds.STONE)
@@ -22,6 +23,7 @@ public final class EEBlocks {
 		.build(new Block("alchemical_coal_block", EEConfig.BLOCK_ID++, Material.stone));
 
 	public static final Block MOBIUS_FUEL_BLOCK = new BlockBuilder(EquivalentExchange.MOD_ID)
+		.setTextures(EquivalentExchange.MOD_ID + ":block/blocks/mobius_fuel")
 		.setHardness(1f)
 		.setResistance(10.0f)
 		.setBlockSound(BlockSounds.STONE)
@@ -29,6 +31,7 @@ public final class EEBlocks {
 		.build(new Block("mobius_fuel_block", EEConfig.BLOCK_ID++, Material.stone));
 
 	public static final Block AETERNALIS_FUEL_BLOCK = new BlockBuilder(EquivalentExchange.MOD_ID)
+		.setTextures(EquivalentExchange.MOD_ID + ":block/blocks/aeternalis_fuel")
 		.setHardness(1f)
 		.setResistance(10.0f)
 		.setBlockSound(BlockSounds.STONE)
@@ -37,6 +40,7 @@ public final class EEBlocks {
 
 
 	public static final Block DARK_MATTER_BLOCK = new BlockBuilder(EquivalentExchange.MOD_ID)
+		.setTextures(EquivalentExchange.MOD_ID + ":block/blocks/dark_matter")
 		.setHardness(10f)
 		.setResistance(50.0f)
 		.setBlockSound(BlockSounds.STONE)
@@ -44,6 +48,7 @@ public final class EEBlocks {
 		.build(new Block("dark_matter_block", EEConfig.BLOCK_ID++, Material.stone));
 
 	public static final Block RED_MATTER_BLOCK = new BlockBuilder(EquivalentExchange.MOD_ID)
+		.setTextures(EquivalentExchange.MOD_ID + ":block/blocks/red_matter")
 		.setHardness(15f)
 		.setResistance(100.0f)
 		.setBlockSound(BlockSounds.STONE)
