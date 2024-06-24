@@ -379,18 +379,18 @@ public class EmcRegistry {
 		addEntry(defaults, Item.foodApple, 128);
 		addEntry(defaults, Item.cherry, 64);
 
-		addEntry(defaults, Item.leather, 64);
+		addEntry(defaults, Item.featherChicken, 48);
 		addEntry(defaults, Item.eggChicken, 64);
-		addEntry(defaults, Item.featherChicken, 64);
+		addEntry(defaults, Item.leather, 64);
 		addEntry(defaults, Item.foodPorkchopRaw, 256);
-		addEntry(defaults, Item.foodFishRaw, 128);
+		addEntry(defaults, Item.foodFishRaw, 192);
 		addEntry(defaults, Item.dye, 0, 32);
 		addEntry(defaults, Item.cloth, 128);
-		addEntry(defaults, Item.bone, 192);
+		addEntry(defaults, Item.bone, 144);
 		addEntry(defaults, Item.ammoArrow, 64);
 		addEntry(defaults, Item.string, 64);
 		addEntry(defaults, Item.sulphur, 192);
-		addEntry(defaults, Item.slimeball, 128);
+		addEntry(defaults, Item.slimeball, 32);
 		addEntry(defaults, Item.chainlink, 256);
 
 		addEntry(defaults, Item.dustRedstone, 64);
