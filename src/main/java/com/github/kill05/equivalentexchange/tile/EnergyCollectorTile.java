@@ -42,7 +42,7 @@ public class EnergyCollectorTile extends InventoryEmcTileEntity<EnergyCollectorT
 
 	@Override
 	public void tick() {
-		long genPerSec = getGeneration();
+		long genPerSec = (long) (getGeneration() * ((float) getLightLevel() / 15));
 		long gcd = NumberUtils.gcd(genPerSec, 20);
 		long genPerTick = genPerSec / gcd;
 
