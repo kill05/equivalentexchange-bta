@@ -107,6 +107,7 @@ public class EnergyCollectorTile extends InventoryEmcTileEntity<EnergyCollectorT
 	@Override
 	public void readFromNBT(CompoundTag tag) {
 		tier = tag.getIntegerOrDefault("tier", -1);
+		filter = EmcKey.deserialize(tag.getCompound("filter"));
 		if (!isTierValid())
 			EquivalentExchange.LOGGER.warn(String.format("Loaded tile entity with invalid tier '%s'.", tier));
 
@@ -116,6 +117,7 @@ public class EnergyCollectorTile extends InventoryEmcTileEntity<EnergyCollectorT
 	@Override
 	public void writeToNBT(CompoundTag tag) {
 		tag.putInt("tier", tier);
+		if(filter != null) tag.putCompound("filter", filter.serialize());
 		super.writeToNBT(tag);
 	}
 
