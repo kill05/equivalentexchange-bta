@@ -11,7 +11,7 @@ public class AlchemicalChestContainer extends EEContainer {
 
 	protected final IInventory inventory;
 
-	protected AlchemicalChestContainer(EntityPlayer player, IInventory inventory, int slotPerRow, int offsetX, int offsetY) {
+	protected AlchemicalChestContainer(IInventory inventory, int slotPerRow, int offsetX, int offsetY) {
 		super(offsetX, offsetY);
 		this.inventory = inventory;
 
@@ -23,7 +23,7 @@ public class AlchemicalChestContainer extends EEContainer {
 	}
 
 	public AlchemicalChestContainer(EntityPlayer player, IInventory inventory) {
-		this(player, inventory, 13, 4, 5);
+		this(inventory, 13, 4, 5);
 		addPlayerInventory(player, 36, 147);
 	}
 

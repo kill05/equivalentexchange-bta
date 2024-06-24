@@ -53,6 +53,11 @@ public class EnergyCondenserTile extends AlchemicalChestTile implements ITileEmc
 	}
 
 	@Override
+	public boolean shouldPullEmc() {
+		return output != null;
+	}
+
+	@Override
 	public void readFromNBT(CompoundTag compound) {
 		super.readFromNBT(compound);
 		emc = compound.getLong("emc");

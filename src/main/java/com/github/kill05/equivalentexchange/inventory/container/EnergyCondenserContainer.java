@@ -13,7 +13,7 @@ public class EnergyCondenserContainer extends AlchemicalChestContainer {
 	private final EnergyCondenserTile tile;
 
 	public EnergyCondenserContainer(EntityPlayer player, EnergyCondenserTile tile) {
-		super(player, tile.getInputInventory(), 13, 4, 26);
+		super(tile.getInputInventory(), 13, 4, 26);
 		this.tile = tile;
 
 		addSlot(new CondenserFilterSlot(tile, 12, 6));
