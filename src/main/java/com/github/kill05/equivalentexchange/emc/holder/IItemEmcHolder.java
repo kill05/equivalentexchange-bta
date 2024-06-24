@@ -1,6 +1,7 @@
 package com.github.kill05.equivalentexchange.emc.holder;
 
 import com.github.kill05.equivalentexchange.emc.EmcTransaction;
+import com.github.kill05.equivalentexchange.utils.NumberUtils;
 import net.minecraft.core.item.ItemStack;
 
 public interface IItemEmcHolder {
@@ -31,6 +32,14 @@ public interface IItemEmcHolder {
 
 	default EmcTransaction removeEmc(ItemStack itemStack, long emc, boolean ignoreLimit) {
 		return addEmc(itemStack, -emc, ignoreLimit);
+	}
+
+	default boolean isFull(ItemStack itemStack) {
+		return getEmc(itemStack) >= getMaxEmc(itemStack);
+	}
+
+	default String getFormattedEmc(ItemStack itemStack) {
+		return NumberUtils.formatNumber(getEmc(itemStack));
 	}
 
 }

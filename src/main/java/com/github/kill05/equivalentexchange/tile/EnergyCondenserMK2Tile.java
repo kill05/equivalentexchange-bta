@@ -60,11 +60,6 @@ public class EnergyCondenserMK2Tile extends EnergyCondenserTile implements IEmcH
 	}
 
 	@Override
-	public long getMaxEmc() {
-		return Long.MAX_VALUE;
-	}
-
-	@Override
 	public long getEmc() {
 		return emc;
 	}

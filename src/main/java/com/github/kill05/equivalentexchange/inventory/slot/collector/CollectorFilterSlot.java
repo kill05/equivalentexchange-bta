@@ -15,9 +15,17 @@ public class CollectorFilterSlot extends SelectItemSlot {
 		this.tile = tile;
 	}
 
+
 	@Override
 	public void selectItem(@Nullable ItemStack itemStack) {
-		tile.setFilter(itemStack != null ? new EmcKey(itemStack) : null);
+		if(itemStack == null) {
+			tile.setFilter(null);
+			return;
+		}
+
+		EmcKey itemKey = new EmcKey(itemStack);
+		if(!EnergyCollectorTile.CONVERSION_MAP.containsValue(itemKey)) return;
+		tile.setFilter(itemKey);
 	}
 
 	@Override

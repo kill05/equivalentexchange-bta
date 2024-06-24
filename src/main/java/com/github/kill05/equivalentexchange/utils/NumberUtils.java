@@ -10,6 +10,18 @@ public final class NumberUtils {
 	private static final DecimalFormat LETTER_FORMAT = new DecimalFormat("#.##", DecimalFormatSymbols.getInstance(Locale.US));
 	private static final String[] numberLiterals = {"", "k", "M", "B", "t", "q", "Q"};
 
+
+	public static int gcd(int a, int b) {
+		if (b == 0) return a;
+		return gcd(b, a % b);
+	}
+
+	public static long gcd(long a, long b) {
+		if (b == 0) return a;
+		return gcd(b, a % b);
+	}
+
+
 	public static String letterFormat(double value) {
 		int index = 0;
 		while ((value / 1000) >= 1) {

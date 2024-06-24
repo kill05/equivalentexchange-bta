@@ -8,7 +8,12 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.world.World;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class EnergyCollectorBlock extends BlockTileEntityRotatable {
+
+	public static final Map<Integer, EnergyCollectorBlock> TIER_MAP = new HashMap<>();
 
 	private final int tier;
 	private final long generation;
@@ -19,11 +24,13 @@ public class EnergyCollectorBlock extends BlockTileEntityRotatable {
 		this.tier = tier;
 		this.maxEmc = maxEmc;
 		this.generation = generation;
+
+		TIER_MAP.put(tier, this);
 	}
 
 	@Override
 	protected TileEntity getNewBlockEntity() {
-		return new EnergyCollectorTile();
+		return new EnergyCollectorTile(tier);
 	}
 
 	@Override

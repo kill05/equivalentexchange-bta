@@ -57,8 +57,6 @@ public final class EERecipes {
 			"mobius_to_aeternalis", 4
 		);
 
-
-		RecipeBuilderShaped surroundCenterRecipe = RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xxx", "xox", "xxx");
 		RecipeBuilderShaped surroundLineRecipe = RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xxx", "ooo", "xxx");
 
 		// Philosopher's stone
@@ -96,8 +94,7 @@ public final class EERecipes {
 		compactRecipe(EEItems.KLEIN_STAR_VIER, EEItems.KLEIN_STAR_SPHERE.getDefaultStack(), "klein_star_sphere", 4);
 		compactRecipe(EEItems.KLEIN_STAR_SPHERE, EEItems.KLEIN_STAR_OMEGA.getDefaultStack(), "klein_star_omega", 4);
 
-		// Chests
-
+		// Containers
 		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "123", "sds", "ici")
 			.addInput('d', Item.diamond)
 			.addInput('i', Item.ingotIron)
@@ -110,6 +107,25 @@ public final class EERecipes {
 			EEBlocks.ENERGY_CONDENSER.getDefaultStack(),
 			"energy_condenser"
 		);
+
+		// Collectors
+		RecipeBuilderShaped collectorUpgradeRecipe = RecipeBuilder.Shaped("xmx", "xcx", "xxx")
+			.addInput('x', Block.glowstone);
+
+		RecipeBuilder.Shaped("xgx", "xdx", "xfx")
+			.addInput('x', Block.glowstone)
+			.addInput('g', Block.glass)
+			.addInput('d', Block.blockDiamond)
+			.addInput('f', Block.furnaceStoneIdle)
+			.create("collector_mk1", EEBlocks.COLLECTOR_MK1.getDefaultStack());
+
+		collectorUpgradeRecipe.addInput('m', EEItems.DARK_MATTER)
+			.addInput('c', EEBlocks.COLLECTOR_MK1)
+			.create("collector_mk2", EEBlocks.COLLECTOR_MK2.getDefaultStack());
+
+		collectorUpgradeRecipe.addInput('m', EEItems.RED_MATTER)
+			.addInput('c', EEBlocks.COLLECTOR_MK2)
+			.create("collector_mk3", EEBlocks.COLLECTOR_MK3.getDefaultStack());
 	}
 
 

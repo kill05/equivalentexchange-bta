@@ -61,30 +61,41 @@ public final class InventoryUtils {
 	public static ItemStack addItem(@NotNull IInventory inventory, @Nullable ItemStack stack) {
 		if (stack == null || inventory.getSizeInventory() == 0) return stack;
 
-		int maxSize = stack.getMaxStackSize(inventory);
-		stack = stack.copy();
-
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
-			ItemStack invStack = inventory.getStackInSlot(i);
-			int amount = -1;
-
-			if (invStack == null) {
-				amount = Math.min(stack.stackSize, maxSize);
-				invStack = stack.copy();
-				inventory.setInventorySlotContents(i, invStack);
-			} else if (invStack.canStackWith(stack) && invStack.stackSize < maxSize) {
-				amount = Math.min(invStack.stackSize + stack.stackSize, maxSize);
-			}
-
-			if(amount > 0) {
-				stack.stackSize -= amount;
-				invStack.stackSize = amount;
-			}
-
-			if (stack.stackSize <= 0) break;
+			stack = addItem(inventory, stack, i);
+			if (stack == null) break;
 		}
 
-		return stack.stackSize > 0 ? stack : null;
+		return stack;
+	}
+
+	@Nullable
+	public static ItemStack addItem(@NotNull IInventory inventory, @Nullable ItemStack putStack, int slot) {
+		if (putStack == null || putStack.stackSize <= 0) return null;
+		if (slot < 0 || slot >= inventory.getSizeInventory())
+			return putStack;
+
+		ItemStack slotStack = inventory.getStackInSlot(slot);
+		int maxStack = putStack.getMaxStackSize(inventory);
+
+		if (slotStack == null) {
+			int putAmount = Math.min(putStack.stackSize, maxStack);
+			inventory.setInventorySlotContents(slot, putStack.splitStack(putAmount));
+		} else if (putStack.canStackWith(slotStack)) {
+			int putAmount = Math.max(Math.min(maxStack - slotStack.stackSize, putStack.stackSize), 0);
+			slotStack.stackSize += putAmount;
+			putStack.stackSize -= putAmount;
+		}
+
+		return putStack.stackSize > 0 ? putStack : null;
+	}
+
+	public static void removeItem(@NotNull IInventory inventory, int amount, int slot) {
+		if (slot < 0 || slot >= inventory.getSizeInventory()) return;
+
+		ItemStack itemStack = inventory.getStackInSlot(slot);
+		itemStack.stackSize -= amount;
+		if(itemStack.stackSize <= 0) inventory.setInventorySlotContents(slot, null);
 	}
 
 }

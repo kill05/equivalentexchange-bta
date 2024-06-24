@@ -5,6 +5,7 @@ import com.github.kill05.equivalentexchange.blocks.EnergyCollectorBlock;
 import com.github.kill05.equivalentexchange.blocks.EnergyCondenserBlock;
 import com.github.kill05.equivalentexchange.blocks.TransmutationTableBlock;
 import com.github.kill05.equivalentexchange.config.EEConfig;
+import net.minecraft.client.render.block.model.BlockModelHorizontalRotation;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
@@ -86,6 +87,7 @@ public final class EEBlocks {
 		.setTextures(EquivalentExchange.MOD_ID + ":block/collectors/other")
 		.setNorthTexture(EquivalentExchange.MOD_ID + ":block/collectors/front")
 		.setTopTexture(EquivalentExchange.MOD_ID + ":block/collectors/top_1")
+		.setBlockModel(BlockModelHorizontalRotation::new)
 		.setHardness(5f)
 		.setResistance(15f)
 		.setLuminance(5)
@@ -97,6 +99,7 @@ public final class EEBlocks {
 		.setTextures(EquivalentExchange.MOD_ID + ":block/collectors/other")
 		.setNorthTexture(EquivalentExchange.MOD_ID + ":block/collectors/front")
 		.setTopTexture(EquivalentExchange.MOD_ID + ":block/collectors/top_2")
+		.setBlockModel(BlockModelHorizontalRotation::new)
 		.setHardness(5f)
 		.setResistance(17.5f)
 		.setLuminance(10)
@@ -108,6 +111,7 @@ public final class EEBlocks {
 		.setTextures(EquivalentExchange.MOD_ID + ":block/collectors/other")
 		.setNorthTexture(EquivalentExchange.MOD_ID + ":block/collectors/front")
 		.setTopTexture(EquivalentExchange.MOD_ID + ":block/collectors/top_3")
+		.setBlockModel(BlockModelHorizontalRotation::new)
 		.setHardness(5f)
 		.setResistance(20f)
 		.setLuminance(15)

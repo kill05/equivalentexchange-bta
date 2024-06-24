@@ -1,7 +1,6 @@
 package com.github.kill05.equivalentexchange.emc.holder;
 
 import com.github.kill05.equivalentexchange.emc.EmcTransaction;
-import com.github.kill05.equivalentexchange.tile.emc.EmcTileEntity;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.util.helper.Direction;
@@ -26,15 +25,14 @@ public interface ITileEmcHolder<T extends TileEntity & ITileEmcHolder<T>> extend
 				thisTile.z + dir.getOffsetZ()
 			);
 
-			if(!(tile instanceof EmcTileEntity<?> emcTile) || emcTile.shouldPullEmc()) continue;
-			EmcTransaction transaction = emcTile.setEmc(0);
-			if(transaction.success()) addEmc(transaction.transferredAmount());
+			if(!(tile instanceof ITileEmcHolder<?> emcTile) || emcTile.shouldPullEmc()) continue;
+			EmcTransaction transaction = emcTile.removeEmc(emcTile.getEmc());
+			if(transaction.success()) addEmc(-transaction.transferredAmount());
 		}
 	}
 
 	default void readEmc(CompoundTag tag) {
 		setEmc(tag.getLong("emc"));
-
 	}
 
 	default void writeEmc(CompoundTag tag) {
