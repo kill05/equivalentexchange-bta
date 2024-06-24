@@ -21,8 +21,12 @@ public class EnergyCollectorContainer extends EEContainer {
 		// Charging slot
 		addSlot(new CollectorInputSlot(tile, 0, 140, 58));
 
-		for(int i = 0; i < 12; i++) {
-			addSlot(new CollectorInputSlot(tile, 1 +i, 18 + (i % 3) * 18, 62 - (i / 3) * 18));
+		for (int i = 0; i < 12; i++) {
+			addSlot(new CollectorInputSlot(
+				tile, 1 + i,
+				54 - (i % 3) * 18,
+				62 - (i / 3) * 18
+			));
 		}
 
 		addSlot(new CollectorInputSlot(tile, 13, 140, 13));
@@ -39,7 +43,7 @@ public class EnergyCollectorContainer extends EEContainer {
 
 	@Override
 	public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
-		if(slot.id >= tile.getSizeInventory()) {
+		if (slot.id >= tile.getSizeInventory()) {
 			return getSlots(0, tile.getSizeInventory(), false);
 		}
 

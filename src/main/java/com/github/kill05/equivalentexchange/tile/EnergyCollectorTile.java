@@ -58,10 +58,9 @@ public class EnergyCollectorTile extends InventoryEmcTileEntity<EnergyCollectorT
 			boolean isHolder = itemStack.getItem() instanceof IItemEmcHolder;
 
 			// Move item to output slot
-			if (
-				!isHolder && (conversion == null || input.equals(getFilter())) ||
-					isHolder && ((IItemEmcHolder) itemStack.getItem()).isFull(itemStack)
-			) {
+			boolean cond1 = isHolder && ((IItemEmcHolder) itemStack.getItem()).isFull(itemStack);
+			boolean cond2 = !isHolder && (conversion == null || input.equals(getFilter()));
+			if (cond2 || cond1) {
 				setInventorySlotContents(0, InventoryUtils.addItem(this, itemStack, 14));
 			}
 
@@ -69,11 +68,20 @@ public class EnergyCollectorTile extends InventoryEmcTileEntity<EnergyCollectorT
 			convertInput(itemStack, conversion);
 		}
 
+		// Cycle items to input
+		for(int i = 1; i < 14; i++) {
+			ItemStack currentStack = getStackInSlot(i);
+			setInventorySlotContents(i, null);
+			InventoryUtils.addItem(this, currentStack);
+		}
+
 		super.tick();
 	}
 
 	protected void convertInput(ItemStack inputStack, EmcKey conversion) {
 		EmcKey input = new EmcKey(inputStack);
+		if(input.equals(filter)) return;
+
 		if (conversion == null) {
 			if (!(inputStack.getItem() instanceof IItemEmcHolder holder)) return;
 			EmcTransaction transaction = holder.addEmc(inputStack, getEmc());

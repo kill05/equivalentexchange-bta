@@ -92,8 +92,9 @@ public final class InventoryUtils {
 
 	public static void removeItem(@NotNull IInventory inventory, int amount, int slot) {
 		if (slot < 0 || slot >= inventory.getSizeInventory()) return;
-
 		ItemStack itemStack = inventory.getStackInSlot(slot);
+		if(itemStack == null) return;
+
 		itemStack.stackSize -= amount;
 		if(itemStack.stackSize <= 0) inventory.setInventorySlotContents(slot, null);
 	}
