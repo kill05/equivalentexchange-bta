@@ -26,6 +26,25 @@ public final class EERecipes {
 		blockRecipe2(EEItems.DARK_MATTER, EEBlocks.DARK_MATTER_BLOCK.getDefaultStack(), "dark_matter_block");
 		blockRecipe2(EEItems.RED_MATTER, EEBlocks.RED_MATTER_BLOCK.getDefaultStack(), "red_matter_block");
 
+		// Covalence dust
+		RecipeBuilderShapeless lowDust = RecipeBuilder.Shapeless(EquivalentExchange.MOD_ID);
+		for(int i = 0; i < 8; i++) {
+			lowDust.addInput("minecraft:cobblestones");
+		}
+
+		lowDust.addInput(Item.coal, 1)
+			.create("covalence_dust_low", new ItemStack(EEItems.LOW_COVALENCE_DUST, 40));
+
+		RecipeBuilder.Shapeless(EquivalentExchange.MOD_ID)
+			.addInput(Item.dustRedstone)
+			.addInput(Item.ingotIron)
+			.create("covalence_dust_medium", new ItemStack(EEItems.MEDIUM_COVALENCE_DUST, 40));
+
+		RecipeBuilder.Shapeless(EquivalentExchange.MOD_ID)
+			.addInput(Item.coal)
+			.addInput(Item.diamond)
+			.create("covalence_dust_high", new ItemStack(EEItems.HIGH_COVALENCE_DUST, 40));
+
 		// Philosopher's stone recipes
 		philoRecipe(
 			Item.ingotIron,
@@ -96,6 +115,9 @@ public final class EERecipes {
 
 		// Containers
 		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "123", "sds", "ici")
+			.addInput('1', EEItems.LOW_COVALENCE_DUST)
+			.addInput('2', EEItems.MEDIUM_COVALENCE_DUST)
+			.addInput('3', EEItems.HIGH_COVALENCE_DUST)
 			.addInput('d', Item.diamond)
 			.addInput('i', Item.ingotIron)
 			.addInput('s', "minecraft:stones")

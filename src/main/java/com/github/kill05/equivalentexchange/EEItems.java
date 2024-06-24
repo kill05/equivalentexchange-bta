@@ -8,11 +8,17 @@ import turniplabs.halplibe.helper.ItemBuilder;
 
 public final class EEItems {
 
+	public static final Item LOW_COVALENCE_DUST = simpleItem("covalence_dust_low", "covalence_dust/low");
+	public static final Item MEDIUM_COVALENCE_DUST = simpleItem("covalence_dust_medium", "covalence_dust/medium");
+	public static final Item HIGH_COVALENCE_DUST = simpleItem("covalence_dust_high", "covalence_dust/high");
+
 	public static final Item ALCHEMICAL_COAL = simpleItem("alchemical_coal", "fuels/alchemical_coal");
 	public static final Item MOBIUS_FUEL = simpleItem("mobius_fuel", "fuels/mobius");
 	public static final Item AETERNALIS_FUEL = simpleItem("aeternalis_fuel", "fuels/aeternalis");
+
 	public static final Item DARK_MATTER = simpleItem("dark_matter", "matter/dark");
 	public static final Item RED_MATTER = simpleItem("red_matter", "matter/red");
+
 	public static final Item PHILOSOPHER_STONE = simpleItem("philosopher_stone", new PhilosopherStoneItem(EEConfig.ITEM_ID++));
 	public static final Item KLEIN_STAR_EIN = simpleItem("stars/ein", new EmcItem("klein_star_ein", EEConfig.ITEM_ID++, 50_000));
 	public static final Item KLEIN_STAR_DREI = simpleItem("stars/drei", new EmcItem("klein_star_drei", EEConfig.ITEM_ID++, 200_000));
