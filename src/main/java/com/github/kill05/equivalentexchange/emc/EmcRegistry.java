@@ -387,7 +387,6 @@ public class EmcRegistry {
 		addEntry(defaults, Item.dye, 0, 32);
 		addEntry(defaults, Item.cloth, 128);
 		addEntry(defaults, Item.bone, 144);
-		addEntry(defaults, Item.ammoArrow, 64);
 		addEntry(defaults, Item.string, 64);
 		addEntry(defaults, Item.sulphur, 192);
 		addEntry(defaults, Item.slimeball, 32);
