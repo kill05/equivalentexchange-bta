@@ -52,13 +52,22 @@ public class EnergyCollectorGui extends GuiContainer {
 			);
 		}
 
+		// Sunlight bar
+		int lightLevel = tile.getLightLevel();
+		RenderUtils.drawProgressBar(
+			lightLevel, 15,
+			-14, 155, 50,
+			215, 14, -14, true
+		);
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer() {
 		EnergyCollectorTile tile = getTile();
+		// Collector emc
 		fontRenderer.drawString(tile.getFormattedEmc(), 78, 32, 0x404040);
 
+		// Item emc
 		ItemStack itemStack = tile.getStackInSlot(0);
 		if(itemStack != null && itemStack.getItem() instanceof IItemEmcHolder emcHolder)
 			fontRenderer.drawString(emcHolder.getFormattedEmc(itemStack), 78, 47, 0x404040);

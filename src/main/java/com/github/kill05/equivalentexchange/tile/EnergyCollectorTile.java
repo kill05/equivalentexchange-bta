@@ -122,6 +122,11 @@ public class EnergyCollectorTile extends InventoryEmcTileEntity<EnergyCollectorT
 	}
 
 
+	public int getLightLevel() {
+		return worldObj.getBlockLightValue(x, y + 1, z);
+	}
+
+
 	@Override
 	public int getActiveItemSlotForSide(Direction direction) {
 		return 0;

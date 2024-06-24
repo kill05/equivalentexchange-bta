@@ -40,6 +40,11 @@ public class EnergyCollectorBlock extends BlockTileEntityRotatable {
 		return true;
 	}
 
+	@Override
+	public int getRenderBlockPass() {
+		return 1;
+	}
+
 	public int getTier() {
 		return tier;
 	}

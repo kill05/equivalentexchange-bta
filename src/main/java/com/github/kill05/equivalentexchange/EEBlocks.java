@@ -90,7 +90,7 @@ public final class EEBlocks {
 		.setBlockModel(BlockModelHorizontalRotation::new)
 		.setHardness(5f)
 		.setResistance(15f)
-		.setLuminance(5)
+		.setLuminance(7)
 		.setBlockSound(BlockSounds.STONE)
 		.setTags(BlockTags.MINEABLE_BY_PICKAXE)
 		.build(new EnergyCollectorBlock(1, 10000, 4, EEConfig.BLOCK_ID++));
