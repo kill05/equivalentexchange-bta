@@ -27,6 +27,12 @@
 		"afterGameStart": [
 			"com.github.kill05.equivalentexchange.EquivalentExchange"
 		],
+		"beforeClientStart": [
+			"com.github.kill05.equivalentexchange.EquivalentExchange"
+		],
+		"afterClientStart": [
+			"com.github.kill05.equivalentexchange.EquivalentExchange"
+		],
 		"recipesReady": [
 			"com.github.kill05.equivalentexchange.EquivalentExchange"
 		]

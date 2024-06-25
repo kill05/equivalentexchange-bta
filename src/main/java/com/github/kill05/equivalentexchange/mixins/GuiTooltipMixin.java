@@ -2,6 +2,7 @@ package com.github.kill05.equivalentexchange.mixins;
 
 import com.github.kill05.equivalentexchange.EquivalentExchange;
 import com.github.kill05.equivalentexchange.emc.holder.IItemEmcHolder;
+import com.github.kill05.equivalentexchange.items.tools.IMatterPickaxe;
 import com.github.kill05.equivalentexchange.utils.NumberUtils;
 import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.item.ItemStack;
@@ -31,16 +32,20 @@ public abstract class GuiTooltipMixin {
 	)
 	public void injectGetTooltipText(ItemStack itemStack, boolean showDescription, Slot slot, CallbackInfoReturnable<String> cir, I18n trans, StringBuilder text) {
 		Long emc = EquivalentExchange.getEmcValue(itemStack);
-		if (emc == null) return;
+		if (emc != null) {
+			text.append("\n§4EMC:§r ").append(NumberUtils.formatNumber(emc));
 
-		text.append("\n§4EMC:§r ").append(NumberUtils.formatNumber(emc));
+			if (itemStack.getItem() instanceof IItemEmcHolder holder) {
+				text.append("\n§4Stored EMC:§r ").append(NumberUtils.formatNumber(holder.getEmc(itemStack)));
+			}
 
-		if (itemStack.getItem() instanceof IItemEmcHolder holder) {
-			text.append("\n§4Stored EMC:§r ").append(NumberUtils.formatNumber(holder.getEmc(itemStack)));
+			if (itemStack.stackSize > 1) {
+				text.append("\n§4Stack EMC:§r ").append(NumberUtils.formatNumber(emc * itemStack.stackSize));
+			}
 		}
 
-		if (itemStack.stackSize > 1) {
-			text.append("\n§4Stack EMC:§r ").append(NumberUtils.formatNumber(emc * itemStack.stackSize));
+		if(itemStack.getItem() instanceof IMatterPickaxe pickaxe) {
+			text.append("\nmode: ").append(pickaxe.getMiningMode(itemStack));
 		}
 	}
 }

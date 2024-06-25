@@ -6,9 +6,12 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.render.RenderEngine;
 import net.minecraft.client.render.item.model.ItemModel;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.phys.AABB;
 import org.lwjgl.opengl.GL11;
+import org.spongepowered.asm.mixin.Unique;
 
 public final class RenderUtils {
 
@@ -63,6 +66,45 @@ public final class RenderUtils {
 			throw new IllegalStateException("Current gui must be a gui container!");
 
 		return gui;
+	}
+
+
+	@Unique
+	private void drawSolidBox(AABB aabb) {
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+
+		tessellator.addVertex(aabb.minX, aabb.minY, aabb.minZ);
+		tessellator.addVertex(aabb.minX, aabb.minY, aabb.maxZ);
+		tessellator.addVertex(aabb.minX, aabb.maxY, aabb.maxZ);
+		tessellator.addVertex(aabb.minX, aabb.maxY, aabb.minZ);
+
+		tessellator.addVertex(aabb.maxX, aabb.minY, aabb.minZ);
+		tessellator.addVertex(aabb.maxX, aabb.minY, aabb.maxZ);
+		tessellator.addVertex(aabb.minX, aabb.minY, aabb.maxZ);
+		tessellator.addVertex(aabb.minX, aabb.minY, aabb.minZ);
+
+		tessellator.addVertex(aabb.minX, aabb.minY, aabb.minZ);
+		tessellator.addVertex(aabb.minX, aabb.maxY, aabb.minZ);
+		tessellator.addVertex(aabb.maxX, aabb.maxY, aabb.minZ);
+		tessellator.addVertex(aabb.maxX, aabb.minY, aabb.minZ);
+
+		tessellator.addVertex(aabb.maxX, aabb.maxY, aabb.minZ);
+		tessellator.addVertex(aabb.maxX, aabb.maxY, aabb.maxZ);
+		tessellator.addVertex(aabb.maxX, aabb.minY, aabb.maxZ);
+		tessellator.addVertex(aabb.maxX, aabb.minY, aabb.minZ);
+
+		tessellator.addVertex(aabb.minX, aabb.maxY, aabb.minZ);
+		tessellator.addVertex(aabb.minX, aabb.maxY, aabb.maxZ);
+		tessellator.addVertex(aabb.maxX, aabb.maxY, aabb.maxZ);
+		tessellator.addVertex(aabb.maxX, aabb.maxY, aabb.minZ);
+
+		tessellator.addVertex(aabb.maxX, aabb.minY, aabb.maxZ);
+		tessellator.addVertex(aabb.maxX, aabb.maxY, aabb.maxZ);
+		tessellator.addVertex(aabb.minX, aabb.maxY, aabb.maxZ);
+		tessellator.addVertex(aabb.minX, aabb.minY, aabb.maxZ);
+
+		tessellator.draw();
 	}
 
 }

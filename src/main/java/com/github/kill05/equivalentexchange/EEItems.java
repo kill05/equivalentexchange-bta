@@ -3,6 +3,8 @@ package com.github.kill05.equivalentexchange;
 import com.github.kill05.equivalentexchange.config.EEConfig;
 import com.github.kill05.equivalentexchange.items.EmcItem;
 import com.github.kill05.equivalentexchange.items.PhilosopherStoneItem;
+import com.github.kill05.equivalentexchange.items.tools.EEPickaxeItem;
+import com.github.kill05.equivalentexchange.items.tools.MatterToolMaterial;
 import net.minecraft.core.item.Item;
 import turniplabs.halplibe.helper.ItemBuilder;
 
@@ -26,6 +28,8 @@ public final class EEItems {
 	public static final Item KLEIN_STAR_VIER = simpleItem("stars/vier", new EmcItem("klein_star_vier", EEConfig.ITEM_ID++, 3_200_000));
 	public static final Item KLEIN_STAR_SPHERE = simpleItem("stars/sphere", new EmcItem("klein_star_sphere", EEConfig.ITEM_ID++, 12_800_000));
 	public static final Item KLEIN_STAR_OMEGA = simpleItem("stars/omega", new EmcItem("klein_star_omega", EEConfig.ITEM_ID++, 51_200_000));
+
+	public static final EEPickaxeItem DARK_MATTER_PICKAXE = simpleItem("tools/dm/pickaxe", new EEPickaxeItem("dark_matter_pickaxe", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER));
 
 	private static Item simpleItem(String name, String texture) {
 		return simpleItem(texture, new Item(name, EEConfig.ITEM_ID++));

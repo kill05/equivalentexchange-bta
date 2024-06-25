@@ -9,7 +9,9 @@
   ],
   "client": [
     "GuiTooltipMixin",
-    "ItemModelStandardMixin"
+    "ItemModelStandardMixin",
+    "RenderGlobalMixin",
+    "MinecraftMixin"
   ],
   "injectors": {
     "defaultRequire": 1
