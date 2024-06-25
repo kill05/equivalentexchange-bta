@@ -24,8 +24,8 @@ public final class EEItems {
 
 	public static final Item PHILOSOPHER_STONE = simpleItem("philosopher_stone", new PhilosopherStoneItem(EEConfig.ITEM_ID++));
 	public static final Item KLEIN_STAR_EIN = simpleItem("stars/ein", new EmcItem("klein_star_ein", EEConfig.ITEM_ID++, 50_000));
-	public static final Item KLEIN_STAR_DREI = simpleItem("stars/drei", new EmcItem("klein_star_drei", EEConfig.ITEM_ID++, 200_000));
-	public static final Item KLEIN_STAR_ZWEI = simpleItem("stars/zwei", new EmcItem("klein_star_zwei", EEConfig.ITEM_ID++, 800_000));
+	public static final Item KLEIN_STAR_ZWEI = simpleItem("stars/zwei", new EmcItem("klein_star_zwei", EEConfig.ITEM_ID++, 200_000));
+	public static final Item KLEIN_STAR_DREI = simpleItem("stars/drei", new EmcItem("klein_star_drei", EEConfig.ITEM_ID++, 800_000));
 	public static final Item KLEIN_STAR_VIER = simpleItem("stars/vier", new EmcItem("klein_star_vier", EEConfig.ITEM_ID++, 3_200_000));
 	public static final Item KLEIN_STAR_SPHERE = simpleItem("stars/sphere", new EmcItem("klein_star_sphere", EEConfig.ITEM_ID++, 12_800_000));
 	public static final Item KLEIN_STAR_OMEGA = simpleItem("stars/omega", new EmcItem("klein_star_omega", EEConfig.ITEM_ID++, 51_200_000));
