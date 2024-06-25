@@ -38,6 +38,7 @@ public interface IEmcHolder {
 	}
 
 	default BurnResult burnItem(ItemStack itemStack) {
+		if(itemStack == null) return BurnResult.FAILURE_NO_VALUE;
 		EmcKey key = new EmcKey(itemStack);
 		Long emc = EquivalentExchange.getEmcValue(itemStack);
 		if(emc == null) return BurnResult.FAILURE_NO_VALUE;
