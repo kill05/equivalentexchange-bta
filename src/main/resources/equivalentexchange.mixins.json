@@ -4,14 +4,15 @@
   "package": "com.github.kill05.equivalentexchange.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "EntityMixin",
     "EntityPlayerMixin",
     "accessors.WorldAccessor"
   ],
   "client": [
     "GuiTooltipMixin",
     "ItemModelStandardMixin",
-    "RenderGlobalMixin",
-    "MinecraftMixin"
+    "MinecraftMixin",
+    "RenderGlobalMixin"
   ],
   "injectors": {
     "defaultRequire": 1

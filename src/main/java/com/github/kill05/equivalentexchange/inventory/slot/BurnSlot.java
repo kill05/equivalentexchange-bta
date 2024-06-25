@@ -15,7 +15,6 @@ public class BurnSlot extends Slot {
 		super(new InventoryImpl(holder), 0, x, y);
 	}
 
-
 	@Override
 	public boolean canPutStackInSlot(ItemStack itemstack) {
 		return EquivalentExchange.getEmcValue(itemstack) != null;

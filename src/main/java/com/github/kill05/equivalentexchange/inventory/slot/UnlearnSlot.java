@@ -19,6 +19,7 @@ public class UnlearnSlot extends Slot {
 	@Override
 	public void putStack(ItemStack itemstack) {
 		super.putStack(itemstack);
+		if(itemstack == null) return;
 
 		IPlayerEmcHolder player = (IPlayerEmcHolder) container.getPlayer();
 		if (player.unlearnItem(new EmcKey(itemstack))) {

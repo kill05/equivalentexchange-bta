@@ -1,5 +1,6 @@
 package com.github.kill05.equivalentexchange;
 
+import com.github.kill05.equivalentexchange.config.EEConfig;
 import com.github.kill05.equivalentexchange.emc.EmcKey;
 import com.github.kill05.equivalentexchange.emc.EmcRegistry;
 import com.github.kill05.equivalentexchange.tile.AlchemicalChestTile;
@@ -70,6 +71,9 @@ public final class EquivalentExchange implements ModInitializer, GameStartEntryp
 		SoundHelper.addSound(MOD_ID, "charge.wav");
 		SoundHelper.addSound(MOD_ID, "uncharge.wav");
 		SoundHelper.addSound(MOD_ID, "destroy.wav");
+
+		if(EEConfig.isSecretSettingEnabled())
+			SoundHelper.addSound(MOD_ID, "super_secret_sound.wav");
 	}
 
 	@Override
