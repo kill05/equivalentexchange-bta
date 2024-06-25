@@ -131,10 +131,10 @@ public final class EERecipes {
 		);
 
 		// Collectors
-		RecipeBuilderShaped collectorUpgradeRecipe = RecipeBuilder.Shaped("xmx", "xcx", "xxx")
+		RecipeBuilderShaped collectorUpgradeRecipe = RecipeBuilder.Shaped(EquivalentExchange.MOD_ID,"xmx", "xcx", "xxx")
 			.addInput('x', Block.glowstone);
 
-		RecipeBuilder.Shaped("xgx", "xdx", "xfx")
+		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xgx", "xdx", "xfx")
 			.addInput('x', Block.glowstone)
 			.addInput('g', Block.glass)
 			.addInput('d', Block.blockDiamond)
