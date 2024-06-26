@@ -1,13 +1,16 @@
 package com.github.kill05.equivalentexchange.mixins.client;
 
 import com.github.kill05.equivalentexchange.EquivalentExchange;
+import com.github.kill05.equivalentexchange.items.IAbilityItem;
 import com.github.kill05.equivalentexchange.items.IChargeableItem;
 import com.github.kill05.equivalentexchange.items.tools.EEPickaxeItem;
+import com.github.kill05.equivalentexchange.items.tools.MiningMode;
 import com.github.kill05.equivalentexchange.utils.KeyUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.option.InputDevice;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,17 +43,27 @@ public abstract class MinecraftMixin {
 
 			boolean shiftPressed = KeyUtils.isShiftPressed();
 			boolean charged = shiftPressed ? item.uncharge(itemStack) : item.charge(itemStack);
+
 			if(charged) {
 				String sound = EquivalentExchange.MOD_ID + "." + (shiftPressed ? "uncharge" : "charge");
 				float pitch = (item.getCharge(itemStack)) / (float) (item.getMaxCharge(itemStack) + 1);
 				if(shiftPressed) pitch = pitch / 2f + 0.5f;
-				theWorld.playSoundAtEntity(null, thePlayer,  sound, 0.7f, pitch);
+				theWorld.playSoundAtEntity(null, thePlayer, sound, 0.7f, pitch);
 			}
 		}
 
 		if(EquivalentExchange.CHANGE_MODE_KEY.isPressEvent(device)) {
 			if(itemStack == null || !(itemStack.getItem() instanceof EEPickaxeItem pickaxe)) return;
-			pickaxe.cycleMiningMode(itemStack);
+			MiningMode next = pickaxe.cycleMiningMode(itemStack);
+
+			I18n i18n = I18n.getInstance();
+			String key = "message." + EquivalentExchange.MOD_ID + ".changed_mining_mode";
+			thePlayer.sendMessage(i18n.translateKeyAndFormat(key, next.getTranslatedName()));
+		}
+
+		if(EquivalentExchange.ABILITY_KEY.isPressEvent(device)) {
+			if(itemStack == null || !(itemStack.getItem() instanceof IAbilityItem item)) return;
+			item.onAbilityUse(thePlayer, itemStack);
 		}
 	}
 }

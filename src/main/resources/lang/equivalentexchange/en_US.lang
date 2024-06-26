@@ -1,0 +1,6 @@
+message.equivalentexchange.changed_mining_mode = Switched to %s Mode
+
+mining_mode.equivalentexchange.NONE.name = Standard
+mining_mode.equivalentexchange.TALL.name = 3x Tallshot
+mining_mode.equivalentexchange.WIDE.name = 3x Wideshot
+mining_mode.equivalentexchange.LONG.name = 3x Longshot

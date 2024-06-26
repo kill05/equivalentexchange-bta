@@ -6,7 +6,9 @@ import com.github.kill05.equivalentexchange.items.PhilosopherStoneItem;
 import com.github.kill05.equivalentexchange.items.SuperSecretItem;
 import com.github.kill05.equivalentexchange.items.tools.EEPickaxeItem;
 import com.github.kill05.equivalentexchange.items.tools.EEShovelItem;
+import com.github.kill05.equivalentexchange.items.tools.EESwordItem;
 import com.github.kill05.equivalentexchange.items.tools.MatterToolMaterial;
+import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.core.item.Item;
 import turniplabs.halplibe.helper.ItemBuilder;
 
@@ -31,13 +33,33 @@ public final class EEItems {
 	public static final Item KLEIN_STAR_SPHERE = simpleItem("stars/sphere", new EmcItem("klein_star_sphere", EEConfig.ITEM_ID++, 12_800_000));
 	public static final Item KLEIN_STAR_OMEGA = simpleItem("stars/omega", new EmcItem("klein_star_omega", EEConfig.ITEM_ID++, 51_200_000));
 
-	public static final EEPickaxeItem DARK_MATTER_PICKAXE = simpleItem("tools/dm/pickaxe", new EEPickaxeItem("dark_matter_pickaxe", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER));
-	public static final EEShovelItem DARK_MATTER_SHOVEL = simpleItem("tools/dm/shovel", new EEShovelItem("dark_matter_shovel", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER));
+	// Dark matter tools
+	public static final EESwordItem DARK_MATTER_SWORD = toolItem("tools/dm/sword",
+		new EESwordItem("dark_matter_sword", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER)
+	);
+	public static final EEPickaxeItem DARK_MATTER_PICKAXE = toolItem("tools/dm/pickaxe",
+		new EEPickaxeItem("dark_matter_pickaxe", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER)
+	);
+	//public static final EESwordItem DARK_MATTER_AXE = toolItem("tools/dm/axe",
+	//	new EESwordItem("dark_matter_axe", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER)
+	//);
+	public static final EEShovelItem DARK_MATTER_SHOVEL = toolItem("tools/dm/shovel",
+		new EEShovelItem("dark_matter_shovel", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER)
+	);
 
-	public static final EEPickaxeItem RED_MATTER_PICKAXE = simpleItem("tools/rm/pickaxe", new EEPickaxeItem("red_matter_pickaxe", EEConfig.ITEM_ID++, MatterToolMaterial.RED_MATTER));
-	public static final EEShovelItem RED_MATTER_SHOVEL = simpleItem("tools/rm/shovel", new EEShovelItem("red_matter_shovel", EEConfig.ITEM_ID++, MatterToolMaterial.RED_MATTER));
+	// Red matter tools
+	public static final EESwordItem RED_MATTER_SWORD = toolItem("tools/rm/sword",
+		new EESwordItem("red_matter_sword", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER)
+	);
+	public static final EEPickaxeItem RED_MATTER_PICKAXE = toolItem("tools/rm/pickaxe",
+		new EEPickaxeItem("red_matter_pickaxe", EEConfig.ITEM_ID++, MatterToolMaterial.RED_MATTER)
+	);
+	public static final EEShovelItem RED_MATTER_SHOVEL = toolItem("tools/rm/shovel",
+		new EEShovelItem("red_matter_shovel", EEConfig.ITEM_ID++, MatterToolMaterial.RED_MATTER)
+	);
 
 	public static final Item SUPER_SECRET_ITEM = EEConfig.isSecretSettingEnabled() ? simpleItem("super_secret_item", new SuperSecretItem(EEConfig.ITEM_ID++)) : null;
+
 
 	private static Item simpleItem(String name, String texture) {
 		return simpleItem(texture, new Item(name, EEConfig.ITEM_ID++));
@@ -45,6 +67,13 @@ public final class EEItems {
 
 	private static <T extends Item> T simpleItem(String texture, T item) {
 		return new ItemBuilder(EquivalentExchange.MOD_ID)
+			.setIcon(EquivalentExchange.MOD_ID + ":item/" + texture)
+			.build(item);
+	}
+
+	private static <T extends Item> T toolItem(String texture, T item) {
+		return new ItemBuilder(EquivalentExchange.MOD_ID)
+			.setItemModel(item1 -> new ItemModelStandard(item, EquivalentExchange.MOD_ID).setFull3D())
 			.setIcon(EquivalentExchange.MOD_ID + ":item/" + texture)
 			.build(item);
 	}

@@ -4,15 +4,14 @@ import com.github.kill05.equivalentexchange.EquivalentExchange;
 import com.github.kill05.equivalentexchange.emc.holder.IItemEmcHolder;
 import com.github.kill05.equivalentexchange.items.tools.EEPickaxeItem;
 import com.github.kill05.equivalentexchange.utils.NumberUtils;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.slot.Slot;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(
 	value = GuiTooltip.class,
@@ -21,16 +20,14 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public abstract class GuiTooltipMixin {
 
 	@Inject(
-		method = "getTooltipText(Lnet/minecraft/core/item/ItemStack;ZLnet/minecraft/core/player/inventory/slot/Slot;)Ljava/lang/String;",
+		method = {"getTooltipText(Lnet/minecraft/core/item/ItemStack;ZLnet/minecraft/core/player/inventory/slot/Slot;)Ljava/lang/String;"},
 		at = @At(
-			value = "INVOKE",
-			target = "Ljava/lang/StringBuilder;append(Ljava/lang/String;)Ljava/lang/StringBuilder;",
-			ordinal = 0,
-			shift = At.Shift.AFTER
-		),
-		locals = LocalCapture.CAPTURE_FAILHARD
+			value = "JUMP",
+			opcode = 153,
+			ordinal = 12
+		)
 	)
-	public void injectGetTooltipText(ItemStack itemStack, boolean showDescription, Slot slot, CallbackInfoReturnable<String> cir, I18n trans, StringBuilder text) {
+	public void injectGetTooltipText(ItemStack itemStack, boolean showDescription, Slot slot, CallbackInfoReturnable<String> cir, @Local StringBuilder text) {
 		Long emc = EquivalentExchange.getEmcValue(itemStack);
 		if (emc != null) {
 			text.append("\n§4EMC:§r ").append(NumberUtils.formatNumber(emc));
@@ -44,8 +41,8 @@ public abstract class GuiTooltipMixin {
 			}
 		}
 
-		if(itemStack.getItem() instanceof EEPickaxeItem pickaxe) {
-			text.append("\nmode: ").append(pickaxe.getMiningMode(itemStack));
+		if(itemStack.getItem() instanceof EEPickaxeItem item) {
+			text.append("Mining mode: ").append(item.getMiningMode(itemStack).getTranslatedName());
 		}
 	}
 }

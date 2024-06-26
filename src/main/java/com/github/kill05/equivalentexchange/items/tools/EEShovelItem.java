@@ -35,6 +35,11 @@ public class EEShovelItem extends ItemToolShovel implements IMatterTool {
 	}
 
 	@Override
+	public void onAbilityUse(EntityPlayer player, ItemStack itemStack) {
+
+	}
+
+	@Override
 	public float getStrVsBlock(ItemStack itemStack, Block block) {
 		return super.getStrVsBlock(itemStack, block) * getDamageModifier(itemStack);
 	}

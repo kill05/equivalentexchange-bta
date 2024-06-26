@@ -5,6 +5,7 @@ import net.minecraft.core.HitResult;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.util.helper.Direction;
@@ -46,6 +47,11 @@ public class EEPickaxeItem extends ItemToolPickaxe implements IMatterTool {
 		return true;
 	}
 
+	@Override
+	public void onAbilityUse(EntityPlayer player, ItemStack itemStack) {
+
+	}
+
 	public AABB getMiningBox(ItemStack itemStack, EntityLiving entity, Side side, int x, int y, int z) {
 		MiningMode mode = getMiningMode(itemStack);
 
@@ -83,10 +89,11 @@ public class EEPickaxeItem extends ItemToolPickaxe implements IMatterTool {
 		NbtUtils.getMainCompound(itemStack.getData(), true).putInt("mode", mode.ordinal());
 	}
 
-	public void cycleMiningMode(ItemStack itemStack) {
+	public MiningMode cycleMiningMode(ItemStack itemStack) {
 		MiningMode[] values = MiningMode.values();
 		MiningMode next = values[(getMiningMode(itemStack).ordinal() + 1) % values.length];
 		setMiningMode(itemStack, next);
+		return next;
 	}
 
 	@Override

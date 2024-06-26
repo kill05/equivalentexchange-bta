@@ -1,5 +1,8 @@
 package com.github.kill05.equivalentexchange.items.tools;
 
+import com.github.kill05.equivalentexchange.EquivalentExchange;
+import net.minecraft.core.lang.I18n;
+
 public enum MiningMode {
 	NONE(0,  0,  0, 0, 0, 0),
 	TALL(1,  1,  0, 0, 0, 0),
@@ -44,5 +47,9 @@ public enum MiningMode {
 
 	public int getForwards() {
 		return forwards;
+	}
+
+	public String getTranslatedName() {
+		return I18n.getInstance().translateNameKey("mining_mode." + EquivalentExchange.MOD_ID + "." + this);
 	}
 }

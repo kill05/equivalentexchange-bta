@@ -1,5 +1,6 @@
 package com.github.kill05.equivalentexchange.items.tools;
 
+import com.github.kill05.equivalentexchange.items.IAbilityItem;
 import com.github.kill05.equivalentexchange.items.IChargeableItem;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
@@ -10,7 +11,7 @@ import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 
-public interface IMatterTool extends IChargeableItem {
+public interface IMatterTool extends IChargeableItem, IAbilityItem {
 
 	MatterToolMaterial getMatterMaterial();
 

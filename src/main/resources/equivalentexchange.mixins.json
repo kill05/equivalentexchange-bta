@@ -10,9 +10,9 @@
   ],
   "client": [
     "accessors.client.MinecraftAccessor",
-    "client.GuiTooltipMixin",
     "client.ItemModelStandardMixin",
     "client.MinecraftMixin",
+    "client.GuiTooltipMixin",
     "client.RenderGlobalMixin"
   ],
   "server": [
