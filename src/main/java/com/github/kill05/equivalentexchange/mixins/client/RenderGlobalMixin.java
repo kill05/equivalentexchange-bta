@@ -1,6 +1,6 @@
 package com.github.kill05.equivalentexchange.mixins.client;
 
-import com.github.kill05.equivalentexchange.items.tools.IMatterPickaxe;
+import com.github.kill05.equivalentexchange.items.tools.EEPickaxeItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.render.RenderGlobal;
@@ -36,7 +36,7 @@ public abstract class RenderGlobalMixin {
 	public void injectDrawBox(ICamera camera, HitResult hitResult, float partialTick, CallbackInfo ci) {
 		EntityPlayerSP player = Minecraft.getMinecraft(RenderGlobalMixin.class).thePlayer;
 		ItemStack itemStack = player.getCurrentEquippedItem();
-		if(itemStack == null || !(itemStack.getItem() instanceof IMatterPickaxe pickaxe)) return;
+		if(itemStack == null || !(itemStack.getItem() instanceof EEPickaxeItem pickaxe)) return;
 
 		double offsetX = camera.getX(partialTick);
 		double offsetY = camera.getY(partialTick);

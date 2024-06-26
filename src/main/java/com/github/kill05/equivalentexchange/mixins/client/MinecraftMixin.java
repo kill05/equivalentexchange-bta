@@ -2,7 +2,7 @@ package com.github.kill05.equivalentexchange.mixins.client;
 
 import com.github.kill05.equivalentexchange.EquivalentExchange;
 import com.github.kill05.equivalentexchange.items.IChargeableItem;
-import com.github.kill05.equivalentexchange.items.tools.IMatterPickaxe;
+import com.github.kill05.equivalentexchange.items.tools.EEPickaxeItem;
 import com.github.kill05.equivalentexchange.utils.KeyUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.EntityPlayerSP;
@@ -42,13 +42,14 @@ public abstract class MinecraftMixin {
 			boolean charged = shiftPressed ? item.uncharge(itemStack) : item.charge(itemStack);
 			if(charged) {
 				String sound = EquivalentExchange.MOD_ID + "." + (shiftPressed ? "uncharge" : "charge");
-				float pitch = shiftPressed ? 1f : item.getCharge(itemStack) / (float) (item.getMaxCharge(itemStack) + 1);
+				float pitch = (item.getCharge(itemStack)) / (float) (item.getMaxCharge(itemStack) + 1);
+				if(shiftPressed) pitch = pitch / 2f + 0.5f;
 				theWorld.playSoundAtEntity(null, thePlayer,  sound, 0.7f, pitch);
 			}
 		}
 
 		if(EquivalentExchange.CHANGE_MODE_KEY.isPressEvent(device)) {
-			if(itemStack == null || !(itemStack.getItem() instanceof IMatterPickaxe pickaxe)) return;
+			if(itemStack == null || !(itemStack.getItem() instanceof EEPickaxeItem pickaxe)) return;
 			pickaxe.cycleMiningMode(itemStack);
 		}
 	}

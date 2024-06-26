@@ -2,29 +2,46 @@ package com.github.kill05.equivalentexchange.items.tools;
 
 import net.minecraft.core.item.material.ToolMaterial;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MatterToolMaterial extends ToolMaterial {
 
-	private int maxCharge;
+	// key is the item id, value is max charge
+	private final Map<Class<? extends IMatterTool>, Integer> maxChargeMap;
+	private int defaultMaxCharge;
 
 	public static final MatterToolMaterial DARK_MATTER = new MatterToolMaterial()
-		.setMaxCharge(2)
-		.setDurability(0)
-		.setEfficiency(15f, 45f)
+		.setDefaultMaxCharge(2)
+		.setMaxCharge(EEShovelItem.class, 1)
+		.setEfficiency(15f, 50f)
 		.setMiningLevel(4);
 
 
-	public static final ToolMaterial RED_MATTER = new MatterToolMaterial()
-		.setMaxCharge(3)
-		.setDurability(0)
-		.setEfficiency(20f, 45f)
+	public static final MatterToolMaterial RED_MATTER = new MatterToolMaterial()
+		.setDefaultMaxCharge(3)
+		.setEfficiency(25f, 75f)
 		.setMiningLevel(5);
 
-	public int getMaxCharge() {
-		return maxCharge;
+
+	public MatterToolMaterial() {
+		maxChargeMap = new HashMap<>();
+		setDurability(0);
 	}
 
-	public MatterToolMaterial setMaxCharge(int maxCharge) {
-		this.maxCharge = maxCharge;
+
+	public int getMaxCharge(IMatterTool item) {
+		Integer maxCharge = maxChargeMap.get(item.getClass());
+		return maxCharge != null ? maxCharge : defaultMaxCharge;
+	}
+
+	public MatterToolMaterial setDefaultMaxCharge(int maxCharge) {
+		this.defaultMaxCharge = maxCharge;
+		return this;
+	}
+
+	public MatterToolMaterial setMaxCharge(Class<? extends IMatterTool> clazz, int maxCharge) {
+		maxChargeMap.put(clazz, maxCharge);
 		return this;
 	}
 

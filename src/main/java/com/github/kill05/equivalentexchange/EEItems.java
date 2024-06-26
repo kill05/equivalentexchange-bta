@@ -5,6 +5,7 @@ import com.github.kill05.equivalentexchange.items.EmcItem;
 import com.github.kill05.equivalentexchange.items.PhilosopherStoneItem;
 import com.github.kill05.equivalentexchange.items.SuperSecretItem;
 import com.github.kill05.equivalentexchange.items.tools.EEPickaxeItem;
+import com.github.kill05.equivalentexchange.items.tools.EEShovelItem;
 import com.github.kill05.equivalentexchange.items.tools.MatterToolMaterial;
 import net.minecraft.core.item.Item;
 import turniplabs.halplibe.helper.ItemBuilder;
@@ -31,6 +32,10 @@ public final class EEItems {
 	public static final Item KLEIN_STAR_OMEGA = simpleItem("stars/omega", new EmcItem("klein_star_omega", EEConfig.ITEM_ID++, 51_200_000));
 
 	public static final EEPickaxeItem DARK_MATTER_PICKAXE = simpleItem("tools/dm/pickaxe", new EEPickaxeItem("dark_matter_pickaxe", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER));
+	public static final EEShovelItem DARK_MATTER_SHOVEL = simpleItem("tools/dm/shovel", new EEShovelItem("dark_matter_shovel", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER));
+
+	public static final EEPickaxeItem RED_MATTER_PICKAXE = simpleItem("tools/rm/pickaxe", new EEPickaxeItem("red_matter_pickaxe", EEConfig.ITEM_ID++, MatterToolMaterial.RED_MATTER));
+	public static final EEShovelItem RED_MATTER_SHOVEL = simpleItem("tools/rm/shovel", new EEShovelItem("red_matter_shovel", EEConfig.ITEM_ID++, MatterToolMaterial.RED_MATTER));
 
 	public static final Item SUPER_SECRET_ITEM = EEConfig.isSecretSettingEnabled() ? simpleItem("super_secret_item", new SuperSecretItem(EEConfig.ITEM_ID++)) : null;
 

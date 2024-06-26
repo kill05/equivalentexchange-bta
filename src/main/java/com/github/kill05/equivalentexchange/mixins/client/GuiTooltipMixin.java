@@ -2,7 +2,7 @@ package com.github.kill05.equivalentexchange.mixins.client;
 
 import com.github.kill05.equivalentexchange.EquivalentExchange;
 import com.github.kill05.equivalentexchange.emc.holder.IItemEmcHolder;
-import com.github.kill05.equivalentexchange.items.tools.IMatterPickaxe;
+import com.github.kill05.equivalentexchange.items.tools.EEPickaxeItem;
 import com.github.kill05.equivalentexchange.utils.NumberUtils;
 import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.item.ItemStack;
@@ -44,7 +44,7 @@ public abstract class GuiTooltipMixin {
 			}
 		}
 
-		if(itemStack.getItem() instanceof IMatterPickaxe pickaxe) {
+		if(itemStack.getItem() instanceof EEPickaxeItem pickaxe) {
 			text.append("\nmode: ").append(pickaxe.getMiningMode(itemStack));
 		}
 	}

@@ -11,7 +11,7 @@ import net.minecraft.core.world.World;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PhilosopherStoneItem extends Item {
+public class PhilosopherStoneItem extends Item implements IChargeableItem {
 
 	private static final Map<Block, Block> TRANSMUTATION_MAP = new HashMap<>();
 
@@ -43,6 +43,11 @@ public class PhilosopherStoneItem extends Item {
 		}
 
 		return true;
+	}
+
+	@Override
+	public int getMaxCharge(ItemStack itemStack) {
+		return 4;
 	}
 
 	static {
