@@ -30,6 +30,11 @@ public abstract class SelectItemSlot extends Slot {
 	}
 
 	@Override
+	public void putStack(ItemStack itemstack) {
+
+	}
+
+	@Override
 	public ItemStack getStack() {
 		return getSelectedItem();
 	}
