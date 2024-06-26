@@ -1,5 +1,6 @@
 package com.github.kill05.equivalentexchange;
 
+import com.github.kill05.equivalentexchange.config.EEConfig;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
@@ -148,6 +149,13 @@ public final class EERecipes {
 		collectorUpgradeRecipe.addInput('m', EEItems.RED_MATTER)
 			.addInput('c', EEBlocks.COLLECTOR_MK2)
 			.create("collector_mk3", EEBlocks.COLLECTOR_MK3.getDefaultStack());
+
+		// Super secret recipe
+		if(EEConfig.isSecretSettingEnabled()) {
+			RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xxx")
+				.addInput('x', Block.blockIron)
+				.create("super_secret_item", EEItems.SUPER_SECRET_ITEM.getDefaultStack());
+		}
 	}
 
 
