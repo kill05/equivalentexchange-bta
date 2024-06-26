@@ -154,7 +154,7 @@ public final class EERecipes {
 		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "m", "m", "d")
 			.addInput('m', EEItems.DARK_MATTER)
 			.addInput('d', Item.diamond)
-			.create("dark_matter_pickaxe", EEItems.DARK_MATTER_SWORD.getDefaultStack());
+			.create("dark_matter_sword", EEItems.DARK_MATTER_SWORD.getDefaultStack());
 
 		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "mmm", "0d0", "0d0")
 			.addInput('m', EEItems.DARK_MATTER)
@@ -164,12 +164,30 @@ public final class EERecipes {
 		//RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "mm", "md", "0d")
 		//	.addInput('m', EEItems.DARK_MATTER)
 		//	.addInput('d', Item.diamond)
-		//	.create("dark_matter_pickaxe", EEItems.DARK_MATTER_AXE.getDefaultStack());
+		//	.create("dark_matter_axe", EEItems.DARK_MATTER_AXE.getDefaultStack());
 
 		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "m", "d", "d")
 			.addInput('m', EEItems.DARK_MATTER)
 			.addInput('d', Item.diamond)
-			.create("dark_matter_pickaxe", EEItems.DARK_MATTER_SHOVEL.getDefaultStack());
+			.create("dark_matter_shovel", EEItems.DARK_MATTER_SHOVEL.getDefaultStack());
+
+		// Red matter tools
+		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "m", "m", "t")
+			.addInput('m', EEItems.RED_MATTER)
+			.addInput('t', EEItems.DARK_MATTER_SWORD)
+			.create("red_matter_sword", EEItems.RED_MATTER_SWORD.getDefaultStack());
+
+		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "mmm", "0t0", "0d0")
+			.addInput('m', EEItems.RED_MATTER)
+			.addInput('t', EEItems.DARK_MATTER_PICKAXE)
+			.addInput('d', EEItems.DARK_MATTER)
+			.create("red_matter_pickaxe", EEItems.RED_MATTER_PICKAXE.getDefaultStack());
+
+		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "m", "t", "d")
+			.addInput('m', EEItems.RED_MATTER)
+			.addInput('t', EEItems.DARK_MATTER_SHOVEL)
+			.addInput('d', EEItems.DARK_MATTER)
+			.create("red_matter_shovel", EEItems.RED_MATTER_SHOVEL.getDefaultStack());
 
 		// Super secret recipe
 		if(EEConfig.isSecretSettingEnabled()) {
