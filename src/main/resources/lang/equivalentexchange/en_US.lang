@@ -4,3 +4,34 @@ mining_mode.equivalentexchange.NONE.name = Standard
 mining_mode.equivalentexchange.TALL.name = 3x Tallshot
 mining_mode.equivalentexchange.WIDE.name = 3x Wideshot
 mining_mode.equivalentexchange.LONG.name = 3x Longshot
+
+item.equivalentexchange.covalence_dust_low.name = Low Covalence Dust
+item.equivalentexchange.covalence_dust_medium.name = Medium Covalence Dust
+item.equivalentexchange.covalence_dust_high.name = High Covalence Dust
+item.equivalentexchange.alchemical_coal.name = Alchemical Coal
+item.equivalentexchange.mobius_fuel.name = Mobius Fuel
+item.equivalentexchange.aeternalis_fuel.name = Aeternalis Fuel
+item.equivalentexchange.dark_matter.name = Dark Matter
+item.equivalentexchange.red_matter.name = Red Matter
+
+item.equivalentexchange.philosopher_stone.name = Philosopher's Stone
+item.equivalentexchange.klein_star_ein.name = Klein Star Ein
+item.equivalentexchange.klein_star_zwei.name = Klein Star Zwei
+item.equivalentexchange.klein_star_drei.name = Klein Star Drei
+item.equivalentexchange.klein_star_vier.name = Klein Star Vier
+item.equivalentexchange.klein_star_sphere.name = Klein Star Sphere
+item.equivalentexchange.klein_star_omega.name = Klein Star Omega
+
+item.equivalentexchange.dark_matter_sword.name = Dark Matter Sword
+item.equivalentexchange.dark_matter_pickaxe.name = Dark Matter
+item.equivalentexchange.dark_matter_axe.name = Dark Matter
+item.equivalentexchange.dark_matter_shovel.name = Dark Matter
+item.equivalentexchange.red_matter_sword.name = Red Matter
+item.equivalentexchange.red_matter_pickaxe.name = Red Matter
+item.equivalentexchange.red_matter_axe.name = Red Matter
+item.equivalentexchange.red_matter_shovel.name = Red Matter
+
+item.equivalentexchange.super_secret_item.name = Super Secret Item
+item.equivalentexchange.super_secret_item.desc = What is this? Looks like a galvanized steel metal pipe... I better not drop this on the ground, it seems quite heavy...
+
+
