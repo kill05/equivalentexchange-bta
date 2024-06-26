@@ -14,6 +14,7 @@ public class MatterToolMaterial extends ToolMaterial {
 
 
 	public static final ToolMaterial RED_MATTER = new MatterToolMaterial()
+		.setMaxCharge(3)
 		.setDurability(0)
 		.setEfficiency(20f, 45f)
 		.setMiningLevel(5);

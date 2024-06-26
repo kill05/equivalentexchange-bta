@@ -1,9 +1,9 @@
-package com.github.kill05.equivalentexchange.items.tools;
+package com.github.kill05.equivalentexchange.items;
 
 import com.github.kill05.equivalentexchange.utils.NbtUtils;
 import net.minecraft.core.item.ItemStack;
 
-public interface IMatterTool {
+public interface IChargeableItem extends ICustomDurabilityBar {
 
 	int getMaxCharge(ItemStack itemStack);
 
@@ -13,7 +13,7 @@ public interface IMatterTool {
 	}
 
 	default boolean setCharge(ItemStack itemStack, int amount) {
-		if(amount < 0 || amount >= getMaxCharge(itemStack)) return false;
+		if(amount < 0 || amount > getMaxCharge(itemStack)) return false;
 		NbtUtils.getMainCompound(itemStack.getData(), true).putInt("charge", amount);
 		return true;
 	}
@@ -27,4 +27,13 @@ public interface IMatterTool {
 		return setCharge(itemStack, getCharge(itemStack) - 1);
 	}
 
+	@Override
+	default double getMaxDisplayDurability(ItemStack itemStack) {
+		return getMaxCharge(itemStack);
+	}
+
+	@Override
+	default double getDisplayDurability(ItemStack itemStack) {
+		return getCharge(itemStack);
+	}
 }

@@ -51,7 +51,6 @@ public interface IEmcHolder {
 			: BurnResult.SUCCESS;
 	}
 
-
 	default String getFormattedEmc() {
 		return NumberUtils.formatNumber(getEmc());
 	}

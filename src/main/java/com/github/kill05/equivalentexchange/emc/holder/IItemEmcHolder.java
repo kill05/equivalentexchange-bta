@@ -1,10 +1,11 @@
 package com.github.kill05.equivalentexchange.emc.holder;
 
 import com.github.kill05.equivalentexchange.emc.EmcTransaction;
+import com.github.kill05.equivalentexchange.items.ICustomDurabilityBar;
 import com.github.kill05.equivalentexchange.utils.NumberUtils;
 import net.minecraft.core.item.ItemStack;
 
-public interface IItemEmcHolder {
+public interface IItemEmcHolder extends ICustomDurabilityBar {
 
 	long getMaxEmc(ItemStack itemStack);
 
@@ -42,4 +43,14 @@ public interface IItemEmcHolder {
 		return NumberUtils.formatNumber(getEmc(itemStack));
 	}
 
+
+	@Override
+	default double getMaxDisplayDurability(ItemStack itemStack) {
+		return getMaxEmc(itemStack);
+	}
+
+	@Override
+	default double getDisplayDurability(ItemStack itemStack) {
+		return getEmc(itemStack);
+	}
 }

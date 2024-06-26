@@ -1,5 +1,6 @@
 package com.github.kill05.equivalentexchange.items.tools;
 
+import com.github.kill05.equivalentexchange.items.IChargeableItem;
 import com.github.kill05.equivalentexchange.utils.NbtUtils;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.item.ItemStack;
@@ -7,7 +8,7 @@ import net.minecraft.core.util.helper.Direction;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.phys.AABB;
 
-public interface IMatterPickaxe extends IMatterTool {
+public interface IMatterPickaxe extends IChargeableItem {
 
 	default MiningMode getMiningMode(ItemStack itemStack) {
 		MiningMode[] values = MiningMode.values();

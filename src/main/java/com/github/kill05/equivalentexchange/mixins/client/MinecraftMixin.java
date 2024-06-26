@@ -1,6 +1,7 @@
 package com.github.kill05.equivalentexchange.mixins.client;
 
 import com.github.kill05.equivalentexchange.EquivalentExchange;
+import com.github.kill05.equivalentexchange.items.IChargeableItem;
 import com.github.kill05.equivalentexchange.items.tools.IMatterPickaxe;
 import com.github.kill05.equivalentexchange.utils.KeyUtils;
 import net.minecraft.client.Minecraft;
@@ -28,23 +29,26 @@ public abstract class MinecraftMixin {
 
 	@Inject(
 		method = "checkBoundInputs",
-		at = @At("TAIL")
+		at = @At(value = "TAIL")
 	)
 	public void injectCheckBoundInputs(InputDevice device, CallbackInfoReturnable<Boolean> cir) {
 		if(thePlayer == null) return;
 		ItemStack itemStack = thePlayer.getCurrentEquippedItem();
-		if(itemStack == null || !(itemStack.getItem() instanceof IMatterPickaxe pickaxe)) return;
 
 		if(EquivalentExchange.CHARGE_KEY.isPressEvent(device)) {
+			if(itemStack == null || !(itemStack.getItem() instanceof IChargeableItem item)) return;
+
 			boolean shiftPressed = KeyUtils.isShiftPressed();
-			boolean charged = shiftPressed ? pickaxe.uncharge(itemStack) : pickaxe.charge(itemStack);
+			boolean charged = shiftPressed ? item.uncharge(itemStack) : item.charge(itemStack);
 			if(charged) {
 				String sound = EquivalentExchange.MOD_ID + "." + (shiftPressed ? "uncharge" : "charge");
-				theWorld.playSoundAtEntity(null, thePlayer,  sound, 0.7f, 1f);
+				float pitch = shiftPressed ? 1f : item.getCharge(itemStack) / (float) (item.getMaxCharge(itemStack) + 1);
+				theWorld.playSoundAtEntity(null, thePlayer,  sound, 0.7f, pitch);
 			}
 		}
 
 		if(EquivalentExchange.CHANGE_MODE_KEY.isPressEvent(device)) {
+			if(itemStack == null || !(itemStack.getItem() instanceof IMatterPickaxe pickaxe)) return;
 			pickaxe.cycleMiningMode(itemStack);
 		}
 	}
