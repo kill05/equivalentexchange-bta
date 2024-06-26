@@ -3,6 +3,7 @@ package com.github.kill05.equivalentexchange.items.tools;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.tag.ItemTags;
 import net.minecraft.core.item.tool.ItemToolSword;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
@@ -13,9 +14,11 @@ public class EESwordItem extends ItemToolSword implements IMatterTool {
 
 	private final MatterToolMaterial material;
 
+	@SuppressWarnings("unchecked")
 	public EESwordItem(String name, int id, MatterToolMaterial material) {
 		super(name, id, material);
 		this.material = material;
+		withTags(ItemTags.PREVENT_CREATIVE_MINING);
 	}
 
 	@Override

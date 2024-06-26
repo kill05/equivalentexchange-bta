@@ -4,10 +4,7 @@ import com.github.kill05.equivalentexchange.config.EEConfig;
 import com.github.kill05.equivalentexchange.items.EmcItem;
 import com.github.kill05.equivalentexchange.items.PhilosopherStoneItem;
 import com.github.kill05.equivalentexchange.items.SuperSecretItem;
-import com.github.kill05.equivalentexchange.items.tools.EEPickaxeItem;
-import com.github.kill05.equivalentexchange.items.tools.EEShovelItem;
-import com.github.kill05.equivalentexchange.items.tools.EESwordItem;
-import com.github.kill05.equivalentexchange.items.tools.MatterToolMaterial;
+import com.github.kill05.equivalentexchange.items.tools.*;
 import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.core.item.Item;
 import turniplabs.halplibe.helper.ItemBuilder;
@@ -40,9 +37,9 @@ public final class EEItems {
 	public static final EEPickaxeItem DARK_MATTER_PICKAXE = toolItem("tools/dm/pickaxe",
 		new EEPickaxeItem("dark_matter_pickaxe", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER)
 	);
-	//public static final EESwordItem DARK_MATTER_AXE = toolItem("tools/dm/axe",
-	//	new EESwordItem("dark_matter_axe", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER)
-	//);
+	public static final EEAxeItem DARK_MATTER_AXE = toolItem("tools/dm/axe",
+		new EEAxeItem("dark_matter_axe", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER)
+	);
 	public static final EEShovelItem DARK_MATTER_SHOVEL = toolItem("tools/dm/shovel",
 		new EEShovelItem("dark_matter_shovel", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER)
 	);
@@ -53,6 +50,9 @@ public final class EEItems {
 	);
 	public static final EEPickaxeItem RED_MATTER_PICKAXE = toolItem("tools/rm/pickaxe",
 		new EEPickaxeItem("red_matter_pickaxe", EEConfig.ITEM_ID++, MatterToolMaterial.RED_MATTER)
+	);
+	public static final EEAxeItem RED_MATTER_AXE = toolItem("tools/rm/axe",
+		new EEAxeItem("red_matter_axe", EEConfig.ITEM_ID++, MatterToolMaterial.RED_MATTER)
 	);
 	public static final EEShovelItem RED_MATTER_SHOVEL = toolItem("tools/rm/shovel",
 		new EEShovelItem("red_matter_shovel", EEConfig.ITEM_ID++, MatterToolMaterial.RED_MATTER)

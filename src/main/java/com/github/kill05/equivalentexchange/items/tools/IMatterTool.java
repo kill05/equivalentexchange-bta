@@ -10,6 +10,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public interface IMatterTool extends IChargeableItem, IAbilityItem {
 
@@ -20,9 +21,9 @@ public interface IMatterTool extends IChargeableItem, IAbilityItem {
 		return getMatterMaterial().getMaxCharge(this);
 	}
 
-	default void breakBlock(World world, EntityLiving entity, int x, int y, int z, Tag<Block> requiredTag) {
+	default void breakBlock(World world, EntityLiving entity, int x, int y, int z, @Nullable Tag<Block> requiredTag) {
 		Block block = world.getBlock(x, y, z);
-		if(block == null || !block.hasTag(requiredTag)) return;
+		if(block == null || (requiredTag != null && !block.hasTag(requiredTag))) return;
 
 		int meta = world.getBlockMetadata(x, y, z);
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
