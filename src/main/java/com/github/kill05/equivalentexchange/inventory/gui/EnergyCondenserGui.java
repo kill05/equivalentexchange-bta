@@ -2,7 +2,6 @@ package com.github.kill05.equivalentexchange.inventory.gui;
 
 import com.github.kill05.equivalentexchange.emc.EmcKey;
 import com.github.kill05.equivalentexchange.inventory.container.EnergyCondenserContainer;
-import com.github.kill05.equivalentexchange.tile.EnergyCondenserMK2Tile;
 import com.github.kill05.equivalentexchange.tile.EnergyCondenserTile;
 import com.github.kill05.equivalentexchange.utils.NumberUtils;
 import com.github.kill05.equivalentexchange.utils.RenderUtils;
@@ -20,7 +19,7 @@ public class EnergyCondenserGui extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f) {
 		EnergyCondenserTile tile = getTile();
-		RenderUtils.drawGui(tile instanceof EnergyCondenserMK2Tile ? "gui/condenser_mk2" : "gui/condenser.png");
+		RenderUtils.drawGui("gui/condenser.png");
 
 		EmcKey output = tile.getOutput();
 		if(output != null)

@@ -6,6 +6,8 @@ import com.github.kill05.equivalentexchange.emc.holder.ITileEmcHolder;
 import com.github.kill05.equivalentexchange.utils.InventoryUtils;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.packet.Packet;
+import net.minecraft.core.net.packet.Packet140TileEntityData;
 import net.minecraft.core.player.inventory.IInventory;
 
 public class EnergyCondenserTile extends AlchemicalChestTile implements ITileEmcHolder<EnergyCondenserTile> {
@@ -58,17 +60,22 @@ public class EnergyCondenserTile extends AlchemicalChestTile implements ITileEmc
 	}
 
 	@Override
-	public void readFromNBT(CompoundTag compound) {
-		super.readFromNBT(compound);
-		emc = compound.getLong("emc");
-		output = EmcKey.deserialize(compound.getCompound("output"));
+	public void readFromNBT(CompoundTag tag) {
+		super.readFromNBT(tag);
+		readEmc(tag);
+		output = EmcKey.deserialize(tag.getCompound("output"));
 	}
 
 	@Override
 	public void writeToNBT(CompoundTag tag) {
 		super.writeToNBT(tag);
-		tag.putLong("emc", emc);
-		tag.putCompound("output", output != null ? output.serialize() : null);
+		writeEmc(tag);
+		if(output != null) tag.putCompound("output", output.serialize());
+	}
+
+	@Override
+	public Packet getDescriptionPacket() {
+		return new Packet140TileEntityData(this);
 	}
 
 	@Override
