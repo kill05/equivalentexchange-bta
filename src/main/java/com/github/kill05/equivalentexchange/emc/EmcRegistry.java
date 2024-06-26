@@ -122,7 +122,7 @@ public class EmcRegistry {
 			}
 
 			amount += registeredInIteration;
-			LOGGER.info(String.format("Computed %s values in iteration %s.", registeredInIteration, i));
+			LOGGER.debug(String.format("Computed %s values in iteration %s.", registeredInIteration, i));
 		}
 
 		LOGGER.info(String.format("Computed %s EMC values. (took %sms)", amount, System.currentTimeMillis() - millis));
