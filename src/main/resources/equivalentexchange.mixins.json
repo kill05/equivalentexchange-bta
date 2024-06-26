@@ -11,6 +11,7 @@
   "client": [
     "GuiTooltipMixin",
     "ItemModelStandardMixin",
+    "accessors.MinecraftAccessor",
     "MinecraftMixin",
     "RenderGlobalMixin"
   ],

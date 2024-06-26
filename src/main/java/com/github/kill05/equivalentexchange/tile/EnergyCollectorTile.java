@@ -7,14 +7,20 @@ import com.github.kill05.equivalentexchange.blocks.EnergyCollectorBlock;
 import com.github.kill05.equivalentexchange.emc.EmcKey;
 import com.github.kill05.equivalentexchange.emc.EmcTransaction;
 import com.github.kill05.equivalentexchange.emc.holder.IItemEmcHolder;
+import com.github.kill05.equivalentexchange.mixins.accessors.MinecraftAccessor;
 import com.github.kill05.equivalentexchange.mixins.accessors.WorldAccessor;
 import com.github.kill05.equivalentexchange.tile.emc.InventoryEmcTileEntity;
 import com.github.kill05.equivalentexchange.utils.InventoryUtils;
 import com.github.kill05.equivalentexchange.utils.NumberUtils;
 import com.mojang.nbt.CompoundTag;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.packet.Packet;
+import net.minecraft.core.net.packet.Packet140TileEntityData;
 import net.minecraft.core.player.inventory.InventoryBasic;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -42,13 +48,18 @@ public class EnergyCollectorTile extends InventoryEmcTileEntity<EnergyCollectorT
 
 	@Override
 	public void tick() {
-		long genPerSec = (long) (getGeneration() * ((float) getLightLevel() / 15));
+		long genPerSec = getGeneration();
 		long gcd = NumberUtils.gcd(genPerSec, 20);
 		long genPerTick = genPerSec / gcd;
 
 		// Generate EMC
-		if (((WorldAccessor) worldObj).getRuntime() % (20 / gcd) == 0) {
-			addEmc(genPerTick);
+		//todo: change when client world runtime ticking is fixed
+		long runtime = FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT
+			? ((MinecraftAccessor) Minecraft.getMinecraft(this)).getTicksRan()
+			: ((WorldAccessor) worldObj).getRuntime();
+
+		if (runtime % (20 / gcd) == 0) {
+			addEmc((long) (genPerTick * ((float) getLightLevel() / 15)));
 		}
 
 		ItemStack itemStack = getStackInSlot(0);
@@ -121,6 +132,10 @@ public class EnergyCollectorTile extends InventoryEmcTileEntity<EnergyCollectorT
 		super.writeToNBT(tag);
 	}
 
+	@Override
+	public Packet getDescriptionPacket() {
+		return new Packet140TileEntityData(this);
+	}
 
 	public int getLightLevel() {
 		return worldObj.getBlockLightValue(x, y + 1, z);
