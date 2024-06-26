@@ -42,7 +42,7 @@ public abstract class GuiTooltipMixin {
 		}
 
 		if(itemStack.getItem() instanceof EEPickaxeItem item) {
-			text.append("Mining mode: ").append(item.getMiningMode(itemStack).getTranslatedName());
+			text.append("\nMining mode: ").append(item.getMiningMode(itemStack).getTranslatedName());
 		}
 	}
 }
