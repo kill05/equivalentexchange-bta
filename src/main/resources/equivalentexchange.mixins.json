@@ -9,11 +9,14 @@
     "accessors.WorldAccessor"
   ],
   "client": [
-    "GuiTooltipMixin",
-    "ItemModelStandardMixin",
-    "accessors.MinecraftAccessor",
-    "MinecraftMixin",
-    "RenderGlobalMixin"
+    "accessors.client.MinecraftAccessor",
+    "client.GuiTooltipMixin",
+    "client.ItemModelStandardMixin",
+    "client.MinecraftMixin",
+    "client.RenderGlobalMixin"
+  ],
+  "server": [
+    "server.PlayerListMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,4 +1,4 @@
-package com.github.kill05.equivalentexchange.mixins;
+package com.github.kill05.equivalentexchange.mixins.client;
 
 import com.github.kill05.equivalentexchange.EquivalentExchange;
 import com.github.kill05.equivalentexchange.items.tools.IMatterPickaxe;

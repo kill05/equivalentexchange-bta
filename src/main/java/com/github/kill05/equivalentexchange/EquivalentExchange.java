@@ -3,6 +3,7 @@ package com.github.kill05.equivalentexchange;
 import com.github.kill05.equivalentexchange.config.EEConfig;
 import com.github.kill05.equivalentexchange.emc.EmcKey;
 import com.github.kill05.equivalentexchange.emc.EmcRegistry;
+import com.github.kill05.equivalentexchange.packet.PacketPlayerEmcInfo;
 import com.github.kill05.equivalentexchange.tile.AlchemicalChestTile;
 import com.github.kill05.equivalentexchange.tile.EnergyCollectorTile;
 import com.github.kill05.equivalentexchange.tile.EnergyCondenserTile;
@@ -18,6 +19,7 @@ import org.lwjgl.input.Keyboard;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.EntityHelper;
+import turniplabs.halplibe.helper.NetworkHelper;
 import turniplabs.halplibe.helper.SoundHelper;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.GameStartEntrypoint;
@@ -60,6 +62,8 @@ public final class EquivalentExchange implements ModInitializer, GameStartEntryp
 		EntityHelper.createTileEntity(AlchemicalChestTile.class, "alchemical_chest");
 		EntityHelper.createTileEntity(EnergyCondenserTile.class, "energy_condenser");
 		EntityHelper.createTileEntity(EnergyCollectorTile.class, "energy_collector");
+
+		NetworkHelper.register(PacketPlayerEmcInfo.class, false, true);
 
 		EmcRegistry.getInstance().reloadConfig();
         LOGGER.info("Equivalent Exchange (BTA!) initialized.");

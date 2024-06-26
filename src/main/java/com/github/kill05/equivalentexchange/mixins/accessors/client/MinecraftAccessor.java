@@ -1,4 +1,4 @@
-package com.github.kill05.equivalentexchange.mixins.accessors;
+package com.github.kill05.equivalentexchange.mixins.accessors.client;
 
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;

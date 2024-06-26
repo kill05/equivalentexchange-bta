@@ -8,6 +8,8 @@ public interface IPlayerEmcHolder extends IEmcHolder {
 
 	List<EmcKey> getKnownItems();
 
+	void learnItems(List<EmcKey> items);
+
 	boolean knowsItem(EmcKey key);
 
 	boolean learnItem(EmcKey key);
@@ -15,6 +17,8 @@ public interface IPlayerEmcHolder extends IEmcHolder {
 	boolean unlearnItem(EmcKey key);
 
 	boolean hasTome();
+
+	void setTome(boolean tome);
 
 
 	@Override

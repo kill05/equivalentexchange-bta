@@ -82,6 +82,12 @@ public abstract class EntityPlayerMixin implements IPlayerEmcHolder {
 	}
 
 	@Override
+	public void learnItems(List<EmcKey> items) {
+		this.knownItems.addAll(items);
+		knownItems.sort(EmcRegistry.KEY_COMPARATOR);
+	}
+
+	@Override
 	public boolean knowsItem(EmcKey key) {
 		return knownItems.contains(key);
 	}
@@ -112,4 +118,8 @@ public abstract class EntityPlayerMixin implements IPlayerEmcHolder {
 		return hasTome;
 	}
 
+	@Override
+	public void setTome(boolean tome) {
+		this.hasTome = tome;
+	}
 }

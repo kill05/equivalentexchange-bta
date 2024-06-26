@@ -7,7 +7,7 @@ import com.github.kill05.equivalentexchange.blocks.EnergyCollectorBlock;
 import com.github.kill05.equivalentexchange.emc.EmcKey;
 import com.github.kill05.equivalentexchange.emc.EmcTransaction;
 import com.github.kill05.equivalentexchange.emc.holder.IItemEmcHolder;
-import com.github.kill05.equivalentexchange.mixins.accessors.MinecraftAccessor;
+import com.github.kill05.equivalentexchange.mixins.accessors.client.MinecraftAccessor;
 import com.github.kill05.equivalentexchange.mixins.accessors.WorldAccessor;
 import com.github.kill05.equivalentexchange.tile.emc.InventoryEmcTileEntity;
 import com.github.kill05.equivalentexchange.utils.InventoryUtils;
