@@ -17,6 +17,7 @@ import net.minecraft.core.item.ItemStack;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.util.toml.Toml;
@@ -40,7 +41,6 @@ public class EmcRegistry {
 	private final Map<EmcKey, Long> itemEmcMap;
 	private final Map<String, Long> itemGroupEmcMap;
 	private final List<EmcKey> sortedKeys;
-	private boolean initValues;
 
 	private EmcRegistry() {
 		this.itemEmcMap = new HashMap<>();
@@ -49,9 +49,22 @@ public class EmcRegistry {
 	}
 
 
-	public void reloadConfig() {
+	public void reloadValues() {
+		long millis = System.currentTimeMillis();
+		LOGGER.info("Registering EMC values...");
+
+		reloadConfig();
+		initGroupValues();
+		computeRecipeCosts();
+		sortKeys();
+
+		LOGGER.info(String.format("Successfully registered %s EMC value(s) (took %sms)", itemEmcMap.size(), (System.currentTimeMillis() - millis)));
+	}
+
+	protected void reloadConfig() {
 		this.itemEmcMap.clear();
 		this.itemGroupEmcMap.clear();
+		this.sortedKeys.clear();
 
 		Toml toml;
 		try {
@@ -64,10 +77,16 @@ public class EmcRegistry {
 
 		int loaded = 0;
 		for (String key : emcValues.getOrderedKeys()) {
-			if (loadConfigEntry(key, emcValues.get(key))) loaded++;
+			Object value = emcValues.get(key);
+			if (!loadConfigEntry(key, value)) {
+				LOGGER.warn(String.format("Failed to load emc config entry '%s = %s'. Skipping...", key, value));
+				continue;
+			}
+
+			loaded++;
 		}
 
-		LOGGER.info(String.format("Loaded %s EMC value(s).", loaded));
+		LOGGER.info(String.format("Loaded %s EMC value(s) from configs.", loaded));
 	}
 
 	private boolean loadConfigEntry(String key, Object value) {
@@ -108,9 +127,6 @@ public class EmcRegistry {
 		Map<EmcKey, Long> originalValues = new HashMap<>(itemEmcMap);
 		RecipeRegistry registry = Registries.RECIPES;
 
-		LOGGER.info("Computing EMC values...");
-		long millis = System.currentTimeMillis();
-
 		int amount = 0;
 		int registeredInIteration = 1;
 		for (int i = 0; registeredInIteration > 0; i++) {
@@ -122,10 +138,36 @@ public class EmcRegistry {
 			}
 
 			amount += registeredInIteration;
-			LOGGER.debug(String.format("Computed %s values in iteration %s.", registeredInIteration, i));
+			LOGGER.debug(String.format("Computed %s value(s) in iteration %s.", registeredInIteration, i));
 		}
 
-		LOGGER.info(String.format("Computed %s EMC values. (took %sms)", amount, System.currentTimeMillis() - millis));
+		LOGGER.info(String.format("Computed %s EMC value(s) from recipes.", amount));
+	}
+
+	protected void initGroupValues() {
+		int initialized = 0;
+
+		for (Map.Entry<String, Long> entry : itemGroupEmcMap.entrySet()) {
+			if (entry.getValue() == null) continue;
+			if(initGroupValue(entry.getKey(), entry.getValue())) initialized++;
+		}
+
+		LOGGER.info(String.format("Initialized %s EMC value(s) of item groups.", initialized));
+	}
+
+	protected boolean initGroupValue(String group, long value) {
+		List<ItemStack> items = Registries.ITEM_GROUPS.getItem(group);
+		if (items == null) {
+			LOGGER.warn(String.format("Failed to find group '%s' while loading EMC values! Skipping...", group));
+			return false;
+		}
+
+		for (ItemStack itemStack : items) {
+			if (itemStack == null) continue;
+			setEmcValue(itemStack, value);
+		}
+
+		return true;
 	}
 
 	private boolean computeRecipeCostAndRegister(RecipeEntryBase<?, ?, ?> recipe, Map<EmcKey, Long> originalValues) {
@@ -198,32 +240,6 @@ public class EmcRegistry {
 		return true;
 	}
 
-
-	public void initValues() {
-		if (initValues) throw new IllegalStateException("Registries have already been initialized!");
-		for (Map.Entry<String, Long> entry : itemGroupEmcMap.entrySet()) {
-			if (entry.getValue() == null) continue;
-			initGroupValue(entry.getKey(), entry.getValue());
-		}
-
-		computeRecipeCosts();
-		sortKeys();
-		initValues = true;
-	}
-
-	protected void initGroupValue(String group, long value) {
-		List<ItemStack> items = Registries.ITEM_GROUPS.getItem(group);
-		if (items == null) {
-			LOGGER.warn(String.format("Failed to find group '%s' while loading EMC values! Skipping...", group));
-			return;
-		}
-
-		for (ItemStack itemStack : items) {
-			if (itemStack == null) continue;
-			setEmcValue(itemStack, value);
-		}
-	}
-
 	public void sortKeys() {
 		sortedKeys.clear();
 		itemEmcMap.entrySet()
@@ -244,9 +260,9 @@ public class EmcRegistry {
 		return value;
 	}
 
-	public void setEmcValue(@NotNull EmcKey key, long value) {
+	public void setEmcValue(@NotNull EmcKey key, @Range(from = 1, to = Long.MAX_VALUE) long value) {
 		itemEmcMap.put(key, value);
-		if (initValues) sortKeys();
+		sortKeys();
 	}
 
 	public void removeEmcValue(@NotNull EmcKey key) {
@@ -293,7 +309,7 @@ public class EmcRegistry {
 
 	public void setEmcValue(String group, long value) {
 		itemGroupEmcMap.put(group, value);
-		if (initValues) initGroupValue(group, value);
+		initGroupValue(group, value);
 	}
 
 
@@ -437,6 +453,7 @@ public class EmcRegistry {
 		defaults.addEntry(EEConfig.EMC_CONFIG_KEY + "." + group, value);
 	}
 
+	// This is required because getting the item id of a block onInitialize causes an NPE
 	private static int getId(IItemConvertible item) {
 		return (item instanceof Block block) ? block.id : item.asItem().id;
 	}

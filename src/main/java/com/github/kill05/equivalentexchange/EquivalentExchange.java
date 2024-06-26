@@ -67,7 +67,6 @@ public final class EquivalentExchange implements ModInitializer, GameStartEntryp
 
 		NetworkHelper.register(PacketPlayerEmcInfo.class, false, true);
 
-		EmcRegistry.getInstance().reloadConfig();
         LOGGER.info("Equivalent Exchange (BTA!) initialized.");
     }
 
@@ -84,7 +83,7 @@ public final class EquivalentExchange implements ModInitializer, GameStartEntryp
 
 	@Override
 	public void afterGameStart() {
-		EmcRegistry.getInstance().initValues();
+		EmcRegistry.getInstance().reloadValues();
 	}
 
 	@Override
