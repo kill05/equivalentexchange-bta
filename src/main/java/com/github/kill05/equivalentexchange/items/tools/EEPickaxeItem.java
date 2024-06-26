@@ -3,6 +3,7 @@ package com.github.kill05.equivalentexchange.items.tools;
 import com.github.kill05.equivalentexchange.utils.NbtUtils;
 import net.minecraft.core.HitResult;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
@@ -37,7 +38,7 @@ public class EEPickaxeItem extends ItemToolPickaxe implements IMatterTool {
 			for(int breakY = (int) box.minY; breakY < (int) box.maxY; breakY++) {
 				for(int breakZ = (int) box.minZ; breakZ < (int) box.maxZ; breakZ++) {
 					if(breakX == 0 && breakY == 0 && breakZ == 0) continue;
-					breakBlock(world, entity, breakX, breakY, breakZ);
+					breakBlock(world, entity, breakX, breakY, breakZ, BlockTags.MINEABLE_BY_PICKAXE);
 				}
 			}
 		}

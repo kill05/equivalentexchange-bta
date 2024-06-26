@@ -3,6 +3,7 @@ package com.github.kill05.equivalentexchange.items.tools;
 import com.github.kill05.equivalentexchange.items.IChargeableItem;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.data.tag.Tag;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.enums.EnumDropCause;
@@ -18,9 +19,9 @@ public interface IMatterTool extends IChargeableItem {
 		return getMatterMaterial().getMaxCharge(this);
 	}
 
-	default void breakBlock(World world, EntityLiving entity, int x, int y, int z) {
+	default void breakBlock(World world, EntityLiving entity, int x, int y, int z, Tag<Block> requiredTag) {
 		Block block = world.getBlock(x, y, z);
-		if(block == null) return;
+		if(block == null || !block.hasTag(requiredTag)) return;
 
 		int meta = world.getBlockMetadata(x, y, z);
 		TileEntity tile = world.getBlockTileEntity(x, y, z);

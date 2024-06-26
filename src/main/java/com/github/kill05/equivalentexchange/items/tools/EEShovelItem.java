@@ -27,10 +27,7 @@ public class EEShovelItem extends ItemToolShovel implements IMatterTool {
 		int charge = getCharge(itemstack);
 		for(int x = -charge; x <= charge; x++) {
 			for(int z = -charge; z <= charge; z++) {
-				Block block = world.getBlock(blockX + x, blockY, blockZ + z);
-				if(block == null || !block.hasTag(BlockTags.MINEABLE_BY_SHOVEL)) continue;
-
-				breakBlock(world, player, blockX + x, blockY, blockZ + z);
+				breakBlock(world, player, blockX + x, blockY, blockZ + z, BlockTags.MINEABLE_BY_SHOVEL);
 			}
 		}
 
