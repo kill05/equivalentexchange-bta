@@ -22,7 +22,7 @@ public class EESwordItem extends ItemToolSword implements IMatterTool {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+	public ItemStack onUseItem(ItemStack itemStack, World world, EntityPlayer player) {
 		onAbilityUse(player, itemStack);
 		return itemStack;
 	}

@@ -6,6 +6,7 @@ import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 
 public class EnergyCondenserBlock extends BlockTileEntityRotatable {
@@ -14,8 +15,9 @@ public class EnergyCondenserBlock extends BlockTileEntityRotatable {
 		super(key, id, Material.stone);
 	}
 
+
 	@Override
-	public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player) {
+	public boolean onBlockRightClicked(World world, int x, int y, int z, EntityPlayer player, Side side, double xHit, double yHit) {
 		if(player.isSneaking()) return false;
 		EEGuis.ENERGY_CONDENSER.open(player, x, y, z);
 		return true;

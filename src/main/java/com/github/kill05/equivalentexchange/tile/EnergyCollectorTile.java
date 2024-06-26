@@ -157,6 +157,11 @@ public class EnergyCollectorTile extends InventoryEmcTileEntity<EnergyCollectorT
 		return null;
 	}
 
+	@Override
+	public void setItemIOForSide(Direction direction, Connection connection) {
+
+	}
+
 
 	public EnergyCollectorBlock getCollector() {
 		return EnergyCollectorBlock.TIER_MAP.get(tier);

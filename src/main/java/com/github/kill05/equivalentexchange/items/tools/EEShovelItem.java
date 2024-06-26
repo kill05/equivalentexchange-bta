@@ -16,23 +16,23 @@ public class EEShovelItem extends ItemToolShovel implements IMatterTool {
 		setMaxDamage(0);
 	}
 
+
 	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
-		if(world.isClientSide || getCharge(itemstack) == 0) {
-			return super.onItemUse(itemstack, player, world, blockX, blockY, blockZ, side, xPlaced, yPlaced);
+	public boolean onUseItemOnBlock(ItemStack itemStack, EntityPlayer player, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
+		if(world.isClientSide || getCharge(itemStack) == 0) {
+			return super.onUseItemOnBlock(itemStack, player, world, blockX, blockY, blockZ, side, xPlaced, yPlaced);
 		}
 
 		world.playSoundAtEntity(null, player, EquivalentExchange.MOD_ID + ".destroy", 0.5f, 1f);
 
-		int charge = getCharge(itemstack);
+		int charge = getCharge(itemStack);
 		for(int x = -charge; x <= charge; x++) {
 			for(int z = -charge; z <= charge; z++) {
 				breakBlock(world, player, blockX + x, blockY, blockZ + z, BlockTags.MINEABLE_BY_SHOVEL);
 			}
 		}
 
-		return true;
-	}
+		return true;	}
 
 	@Override
 	public void onAbilityUse(EntityPlayer player, ItemStack itemStack) {

@@ -20,7 +20,7 @@ public class EEAxeItem extends ItemToolAxe implements IMatterTool {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
+	public boolean onUseItemOnBlock(ItemStack itemStack, EntityPlayer player, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
 		if (world.isClientSide || player.isSwinging || getCharge(itemStack) <= 0) return false;
 
 		if(harvestTree(player, world, blockX, blockY, blockZ)) {

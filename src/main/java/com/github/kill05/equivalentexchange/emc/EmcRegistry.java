@@ -377,7 +377,7 @@ public class EmcRegistry {
 		addEntry(defaults, Block.cactus, 64);
 		addEntry(defaults, Item.dye, 3, 64); // Cocoa beans
 		addEntry(defaults, Item.foodApple, 128);
-		addEntry(defaults, Item.cherry, 64);
+		addEntry(defaults, Item.foodCherry, 64);
 
 		addEntry(defaults, Item.featherChicken, 48);
 		addEntry(defaults, Item.eggChicken, 64);
@@ -426,15 +426,19 @@ public class EmcRegistry {
 	}
 
 	private static void addEntry(Toml defaults, IItemConvertible item, long value) {
-		defaults.addEntry(EEConfig.EMC_CONFIG_KEY + "." + item.asItem().id, value);
+		defaults.addEntry(EEConfig.EMC_CONFIG_KEY + "." + getId(item), value);
 	}
 
 	private static void addEntry(Toml defaults, IItemConvertible item, int meta, long value) {
-		defaults.addEntry(EEConfig.EMC_CONFIG_KEY + "." + item.asItem().id + ":" + meta, value);
+		defaults.addEntry(EEConfig.EMC_CONFIG_KEY + "." + getId(item) + ":" + meta, value);
 	}
 
 	private static void addEntry(Toml defaults, String group, long value) {
 		defaults.addEntry(EEConfig.EMC_CONFIG_KEY + "." + group, value);
+	}
+
+	private static int getId(IItemConvertible item) {
+		return (item instanceof Block block) ? block.id : item.asItem().id;
 	}
 
 }

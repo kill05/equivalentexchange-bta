@@ -22,7 +22,7 @@ public class PhilosopherStoneItem extends Item implements IChargeableItem {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
+	public boolean onUseItemOnBlock(ItemStack itemStack, EntityPlayer player, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
 		Block block = world.getBlock(blockX, blockY, blockZ);
 		Block newBlock = TRANSMUTATION_MAP.get(block);
 		if(block == null) return false;

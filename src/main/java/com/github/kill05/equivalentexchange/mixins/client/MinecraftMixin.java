@@ -8,7 +8,7 @@ import com.github.kill05.equivalentexchange.items.tools.MiningMode;
 import com.github.kill05.equivalentexchange.utils.KeyUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.EntityPlayerSP;
-import net.minecraft.client.option.InputDevice;
+import net.minecraft.client.input.InputDevice;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.world.World;

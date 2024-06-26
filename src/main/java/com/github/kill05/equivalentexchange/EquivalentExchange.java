@@ -11,6 +11,7 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.gui.options.components.KeyBindingComponent;
 import net.minecraft.client.gui.options.components.OptionsCategory;
 import net.minecraft.client.gui.options.data.OptionsPages;
+import net.minecraft.client.input.InputDevice;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.item.IItemConvertible;
@@ -31,9 +32,9 @@ public final class EquivalentExchange implements ModInitializer, GameStartEntryp
     public static final String MOD_ID = "equivalentexchange";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static final KeyBinding CHARGE_KEY = new KeyBinding(MOD_ID + ".key.charge").bindKeyboard(Keyboard.KEY_V);
-	public static final KeyBinding CHANGE_MODE_KEY = new KeyBinding(MOD_ID + ".key.change_mode").bindKeyboard(Keyboard.KEY_B);
-	public static final KeyBinding ABILITY_KEY = new KeyBinding(MOD_ID + ".key.ability").bindKeyboard(Keyboard.KEY_X);
+	public static final KeyBinding CHARGE_KEY = new KeyBinding(MOD_ID + ".key.charge").bind(InputDevice.keyboard, Keyboard.KEY_V);
+	public static final KeyBinding CHANGE_MODE_KEY = new KeyBinding(MOD_ID + ".key.change_mode").bind(InputDevice.keyboard, Keyboard.KEY_B);
+	public static final KeyBinding ABILITY_KEY = new KeyBinding(MOD_ID + ".key.ability").bind(InputDevice.keyboard, Keyboard.KEY_X);
 
 
 	public static Long getEmcValue(EmcKey key) {

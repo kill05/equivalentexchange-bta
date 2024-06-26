@@ -13,8 +13,8 @@ public class SuperSecretItem extends Item {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
+	public ItemStack onUseItem(ItemStack itemStack, World world, EntityPlayer player) {
 		world.playSoundAtEntity(null, player, EquivalentExchange.MOD_ID + ".super_secret_sound", 2.0f, 1.0f);
-		return itemstack;
+		return itemStack;
 	}
 }
