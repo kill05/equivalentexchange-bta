@@ -49,7 +49,7 @@ public final class EEItems {
 
 	// Red matter tools
 	public static final EESwordItem RED_MATTER_SWORD = toolItem("tools/rm/sword",
-		new EESwordItem("red_matter_sword", EEConfig.ITEM_ID++, MatterToolMaterial.DARK_MATTER)
+		new EESwordItem("red_matter_sword", EEConfig.ITEM_ID++, MatterToolMaterial.RED_MATTER)
 	);
 	public static final EEPickaxeItem RED_MATTER_PICKAXE = toolItem("tools/rm/pickaxe",
 		new EEPickaxeItem("red_matter_pickaxe", EEConfig.ITEM_ID++, MatterToolMaterial.RED_MATTER)
