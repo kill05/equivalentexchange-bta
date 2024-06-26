@@ -150,6 +150,27 @@ public final class EERecipes {
 			.addInput('c', EEBlocks.COLLECTOR_MK2)
 			.create("collector_mk3", EEBlocks.COLLECTOR_MK3.getDefaultStack());
 
+		// Dark matter tools
+		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "m", "m", "d")
+			.addInput('m', EEItems.DARK_MATTER)
+			.addInput('d', Item.diamond)
+			.create("dark_matter_pickaxe", EEItems.DARK_MATTER_SWORD.getDefaultStack());
+
+		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "mmm", "0d0", "0d0")
+			.addInput('m', EEItems.DARK_MATTER)
+			.addInput('d', Item.diamond)
+			.create("dark_matter_pickaxe", EEItems.DARK_MATTER_PICKAXE.getDefaultStack());
+
+		//RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "mm", "md", "0d")
+		//	.addInput('m', EEItems.DARK_MATTER)
+		//	.addInput('d', Item.diamond)
+		//	.create("dark_matter_pickaxe", EEItems.DARK_MATTER_AXE.getDefaultStack());
+
+		RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "m", "d", "d")
+			.addInput('m', EEItems.DARK_MATTER)
+			.addInput('d', Item.diamond)
+			.create("dark_matter_pickaxe", EEItems.DARK_MATTER_SHOVEL.getDefaultStack());
+
 		// Super secret recipe
 		if(EEConfig.isSecretSettingEnabled()) {
 			RecipeBuilder.Shaped(EquivalentExchange.MOD_ID, "xxx")
