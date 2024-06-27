@@ -5,6 +5,7 @@ mining_mode.equivalentexchange.TALL.name = 3x Tallshot
 mining_mode.equivalentexchange.WIDE.name = 3x Wideshot
 mining_mode.equivalentexchange.LONG.name = 3x Longshot
 
+# Item names
 item.equivalentexchange.covalence_dust_low.name = Low Covalence Dust
 item.equivalentexchange.covalence_dust_medium.name = Medium Covalence Dust
 item.equivalentexchange.covalence_dust_high.name = High Covalence Dust
@@ -23,15 +24,71 @@ item.equivalentexchange.klein_star_sphere.name = Klein Star Sphere
 item.equivalentexchange.klein_star_omega.name = Klein Star Omega
 
 item.equivalentexchange.dark_matter_sword.name = Dark Matter Sword
-item.equivalentexchange.dark_matter_pickaxe.name = Dark Matter
-item.equivalentexchange.dark_matter_axe.name = Dark Matter
-item.equivalentexchange.dark_matter_shovel.name = Dark Matter
-item.equivalentexchange.red_matter_sword.name = Red Matter
-item.equivalentexchange.red_matter_pickaxe.name = Red Matter
-item.equivalentexchange.red_matter_axe.name = Red Matter
-item.equivalentexchange.red_matter_shovel.name = Red Matter
+item.equivalentexchange.dark_matter_pickaxe.name = Dark Matter Pickaxe
+item.equivalentexchange.dark_matter_axe.name = Dark Matter Axe
+item.equivalentexchange.dark_matter_shovel.name = Dark Matter Shovel
+
+item.equivalentexchange.red_matter_sword.name = Red Matter Sword
+item.equivalentexchange.red_matter_pickaxe.name = Red Matter Pickaxe
+item.equivalentexchange.red_matter_axe.name = Red Matter Axe
+item.equivalentexchange.red_matter_shovel.name = Red Matter Shovel
 
 item.equivalentexchange.super_secret_item.name = Super Secret Item
+
+# Item descriptions
+item.equivalentexchange.covalence_dust_low.desc = A low tier alchemical dust
+item.equivalentexchange.covalence_dust_medium.desc = A medium tier alchemical dust
+item.equivalentexchange.covalence_dust_high.desc = A high tier alchemical dust
+item.equivalentexchange.alchemical_coal.desc = A piece of coal with magical properties
+item.equivalentexchange.mobius_fuel.desc = A piece of fuel with magical properties
+item.equivalentexchange.aeternalis_fuel.desc = A very dense piece of fuel with magical properties
+item.equivalentexchange.dark_matter.desc = A compressed ball of matter
+item.equivalentexchange.red_matter.desc = An extremely compressed ball of matter
+
+item.equivalentexchange.philosopher_stone.desc = An alchemist's best friend!
+item.equivalentexchange.klein_star_ein.desc = An item used to hold EMC
+item.equivalentexchange.klein_star_zwei.desc = An item used to hold EMC
+item.equivalentexchange.klein_star_drei.desc = An item used to hold EMC
+item.equivalentexchange.klein_star_vier.desc = An item used to hold EMC
+item.equivalentexchange.klein_star_sphere.desc = An item used to hold EMC
+item.equivalentexchange.klein_star_omega.desc = An item used to hold EMC
+
+item.equivalentexchange.dark_matter_sword.desc = A sword made out of compressed matter
+item.equivalentexchange.dark_matter_pickaxe.desc = A pickaxe made out of compressed matter
+item.equivalentexchange.dark_matter_axe.desc = An axe made out of compressed matter
+item.equivalentexchange.dark_matter_shovel.desc = A shovel made out of compressed matter
+
+item.equivalentexchange.red_matter_sword.desc = A sword made out of extremely compressed matter
+item.equivalentexchange.red_matter_pickaxe.desc = A pickaxe made out of extremely compressed matter
+item.equivalentexchange.red_matter_axe.desc = An axe made out of extremely compressed matter
+item.equivalentexchange.red_matter_shovel.desc = A shovel made out of extremely compressed matter
+
 item.equivalentexchange.super_secret_item.desc = What is this? Looks like a galvanized steel metal pipe... I better not drop this on the ground, it seems quite heavy...
 
+# Block names
+tile.equivalentexchange.alchemical_coal_block.name = Alchemical Coal Block
+tile.equivalentexchange.mobius_fuel_block.name = Mobius Fuel Block
+tile.equivalentexchange.aeternalis_fuel_block.name = Aeternalis Fuel Block
+tile.equivalentexchange.dark_matter_block.name = Dark Matter Block
+tile.equivalentexchange.red_matter_block.name = Red Matter Block
 
+tile.equivalentexchange.transmutation_table.name = Transmutation Table
+tile.equivalentexchange.alchemical_chest.name = Alchemical Chest
+tile.equivalentexchange.energy_condenser.name = Energy Condenser
+tile.equivalentexchange.collector_mk1.name = Energy Collector MK1
+tile.equivalentexchange.collector_mk2.name = Energy Collector MK2
+tile.equivalentexchange.collector_mk3.name = Energy Collector MK3
+
+# Block descriptions
+tile.equivalentexchange.alchemical_coal_block.desc = A block of coal with magical properties
+tile.equivalentexchange.mobius_fuel_block.desc = A block of fuel with magical properties
+tile.equivalentexchange.aeternalis_fuel_block.desc = A very dense block of fuel with magical properties
+tile.equivalentexchange.dark_matter_block.desc = A compressed block of matter
+tile.equivalentexchange.red_matter_block.desc = An extremely compressed block of matter
+
+tile.equivalentexchange.transmutation_table.desc = A block used to transmute items
+tile.equivalentexchange.alchemical_chest.desc = A very big chest
+tile.equivalentexchange.energy_condenser.desc = A block used to automatically transmute items
+tile.equivalentexchange.collector_mk1.desc = A block that uses the energy emitted from light sources and condenses it into EMC
+tile.equivalentexchange.collector_mk2.desc = A block that uses the energy emitted from light sources and condenses it into EMC
+tile.equivalentexchange.collector_mk3.desc = A block that uses the energy emitted from light sources and condenses it into EMC
