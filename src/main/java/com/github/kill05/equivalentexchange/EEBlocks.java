@@ -69,6 +69,11 @@ public final class EEBlocks {
 		.build(new TransmutationTableBlock(EEConfig.BLOCK_ID++));
 
 	public static final Block ALCHEMICAL_CHEST = new BlockBuilder(EquivalentExchange.MOD_ID)
+		.setTopTexture(EquivalentExchange.MOD_ID + ":block/chest/top")
+		.setSideTextures(EquivalentExchange.MOD_ID + ":block/chest/side")
+		.setNorthTexture(EquivalentExchange.MOD_ID + ":block/chest/front")
+		.setBottomTexture(EquivalentExchange.MOD_ID + ":block/chest/bottom")
+		.setBlockModel(BlockModelHorizontalRotation::new)
 		.setHardness(2.5f)
 		.setResistance(10f)
 		.setBlockSound(BlockSounds.STONE)
@@ -76,6 +81,11 @@ public final class EEBlocks {
 		.build(new AlchemicalChestBlock(EEConfig.BLOCK_ID++));
 
 	public static final Block ENERGY_CONDENSER = new BlockBuilder(EquivalentExchange.MOD_ID)
+		.setTopTexture(EquivalentExchange.MOD_ID + ":block/condenser/top")
+		.setSideTextures(EquivalentExchange.MOD_ID + ":block/condenser/side")
+		.setNorthTexture(EquivalentExchange.MOD_ID + ":block/condenser/front")
+		.setBottomTexture(EquivalentExchange.MOD_ID + ":block/condenser/bottom")
+		.setBlockModel(BlockModelHorizontalRotation::new)
 		.setHardness(2.5f)
 		.setResistance(10f)
 		.setBlockSound(BlockSounds.STONE)
