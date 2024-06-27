@@ -37,10 +37,10 @@ public class EmcRegistry {
 		return INSTANCE != null ? INSTANCE : (INSTANCE = new EmcRegistry());
 	}
 
-	// the key is an ItemStack to string because itemstack doesn't have equals or hashcode
 	private final Map<EmcKey, Long> itemEmcMap;
 	private final Map<String, Long> itemGroupEmcMap;
 	private final List<EmcKey> sortedKeys;
+	private boolean initValues;
 
 	private EmcRegistry() {
 		this.itemEmcMap = new HashMap<>();
@@ -58,6 +58,7 @@ public class EmcRegistry {
 		computeRecipeCosts();
 		sortKeys();
 
+		initValues = true;
 		LOGGER.info(String.format("Successfully registered %s EMC value(s) (took %sms)", itemEmcMap.size(), (System.currentTimeMillis() - millis)));
 	}
 
@@ -262,7 +263,7 @@ public class EmcRegistry {
 
 	public void setEmcValue(@NotNull EmcKey key, @Range(from = 1, to = Long.MAX_VALUE) long value) {
 		itemEmcMap.put(key, value);
-		sortKeys();
+		if(initValues) sortKeys();
 	}
 
 	public void removeEmcValue(@NotNull EmcKey key) {
@@ -309,7 +310,7 @@ public class EmcRegistry {
 
 	public void setEmcValue(String group, long value) {
 		itemGroupEmcMap.put(group, value);
-		initGroupValue(group, value);
+		if(initValues) initGroupValue(group, value);
 	}
 
 
