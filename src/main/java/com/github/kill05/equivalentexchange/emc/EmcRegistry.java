@@ -326,10 +326,6 @@ public class EmcRegistry {
 		return itemGroupEmcMap;
 	}
 
-	public boolean hasInitValues() {
-		return initValues;
-	}
-
 
 	@ApiStatus.Internal
 	public static Toml addDefaults(Toml defaults) {
