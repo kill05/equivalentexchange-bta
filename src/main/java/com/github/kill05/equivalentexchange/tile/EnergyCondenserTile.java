@@ -32,25 +32,26 @@ public class EnergyCondenserTile extends AlchemicalChestTile implements ITileEmc
 		if (output == null) return;
 		IInventory inv = getInputInventory();
 
-		// Burn first available item
-		for (int i = 0; i < inv.getSizeInventory(); i++) {
-			ItemStack itemStack = inv.getStackInSlot(i);
-			if (itemStack == null || output.matches(itemStack)) continue;
+		// Burn the first available item if no enough emc
+		if (getEmc() <= output.emcValue()) {
+			for (int i = 0; i < inv.getSizeInventory(); i++) {
+				ItemStack itemStack = inv.getStackInSlot(i);
+				if (itemStack == null || output.matches(itemStack)) continue;
 
-			ItemStack burnStack = itemStack.copy();
-			burnStack.stackSize = BURN_SPEED;
-			if (!burnItem(burnStack).isSuccessful()) continue;
+				ItemStack burnStack = itemStack.copy();
+				burnStack.stackSize = BURN_SPEED;
+				if (!burnItem(burnStack).isSuccessful()) continue;
 
-			itemStack.stackSize -= BURN_SPEED;
-			if (itemStack.stackSize <= 0) inv.setInventorySlotContents(i, null);
-			break;
+				InventoryUtils.removeItem(inv, BURN_SPEED, i);
+				break;
+			}
 		}
 
 		// Produce item if there's enough emc
 		Long value = output.emcValue();
 		if (value == null || value > emc) return;
 
-		if(InventoryUtils.addItem(inv, output.itemStack()) == null)
+		if (InventoryUtils.addItem(inv, output.itemStack()) == null)
 			removeEmc(value);
 	}
 
@@ -70,7 +71,7 @@ public class EnergyCondenserTile extends AlchemicalChestTile implements ITileEmc
 	public void writeToNBT(CompoundTag tag) {
 		super.writeToNBT(tag);
 		writeEmc(tag);
-		if(output != null) tag.putCompound("output", output.serialize());
+		if (output != null) tag.putCompound("output", output.serialize());
 	}
 
 	@Override
@@ -99,7 +100,7 @@ public class EnergyCondenserTile extends AlchemicalChestTile implements ITileEmc
 	}
 
 	public void setOutput(EmcKey output) {
-		if(output != null && output.emcValue() == null) return;
+		if (output != null && output.emcValue() == null) return;
 		this.output = output;
 	}
 

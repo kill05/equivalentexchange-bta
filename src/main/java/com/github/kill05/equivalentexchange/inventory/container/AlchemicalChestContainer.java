@@ -34,6 +34,7 @@ public class AlchemicalChestContainer extends EEContainer {
 
 	@Override
 	public List<Integer> getMoveSlots(InventoryAction action, Slot slot, int i, EntityPlayer entityPlayer) {
+		//todo: check impl
 		int size = inventory.getSizeInventory();
 		if (slot.id >= 0 && slot.id < size) {
 			return this.getSlots(0, size, false);

@@ -81,5 +81,4 @@ public abstract class InventoryTileEntity extends TileEntity implements IInvento
 		inventory.sortInventory();
 	}
 
-
 }

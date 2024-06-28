@@ -30,7 +30,13 @@ public class EnergyCondenserContainer extends AlchemicalChestContainer {
 	@Override
 	public List<Integer> getTargetSlots(InventoryAction action, Slot slot, int i, EntityPlayer entityPlayer) {
 		if(slot instanceof CondenserFilterSlot) return null;
+
+		if (slot.id < inventory.getSizeInventory()) {
+			return getSlots(inventory.getSizeInventory() + 1, 36, true);
+		}
+
 		return super.getTargetSlots(action, slot, i, entityPlayer);
+
 	}
 
 	public EnergyCondenserTile getTile() {
