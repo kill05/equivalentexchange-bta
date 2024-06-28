@@ -85,11 +85,6 @@ public class TransmutationTableContainer extends EEContainer {
 
 
 	@Override
-	public void onCraftGuiClosed(EntityPlayer player) {
-		super.onCraftGuiClosed(player);
-	}
-
-	@Override
 	public ItemStack clickInventorySlot(InventoryAction action, int[] args, EntityPlayer player) {
 		if (args == null || args.length == 0 || !(this.getSlot(args[0]) instanceof TransmuteSlot slot))
 			return super.clickInventorySlot(action, args, player);

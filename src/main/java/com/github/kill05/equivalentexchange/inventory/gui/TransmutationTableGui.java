@@ -10,6 +10,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.InventoryBasic;
 import turniplabs.halplibe.HalpLibe;
 
 public class TransmutationTableGui extends GuiContainer {
@@ -37,6 +39,17 @@ public class TransmutationTableGui extends GuiContainer {
 		button.xPosition = (width -  xSize) / 2 + button.xPosition;
 		button.yPosition = (height - ySize) / 2 + button.yPosition;
 		return super.add(button);
+	}
+
+	@Override
+	public void onClosed() {
+		TransmutationTableContainer container = getContainer();
+		InventoryBasic inventory = container.getInventory();
+
+		for(int i = 0; i < inventory.getSizeInventory(); i++) {
+			ItemStack itemStack = inventory.getStackInSlot(i);
+			container.storeOrDropItem(container.getPlayer(), itemStack);
+		}
 	}
 
 	@Override
