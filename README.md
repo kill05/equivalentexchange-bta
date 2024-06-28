@@ -13,7 +13,7 @@ A port of Equivalent Exchange 2/ProjectE for [**BTA**](https://www.betterthanadv
 - [Catalyst Core](https://github.com/MartinSVK12/catalyst/releases)
 
 ## Installation
-1) Download the latest 7.2-pre1 [Babric BTA instance](https://github.com/Turnip-Labs/babric-instance-repo/releases)
+1) Download the latest 7.2-pre2 [Babric BTA instance](https://github.com/Turnip-Labs/babric-instance-repo/releases)
 2) Download all the required dependencies
 3) Download the latest [release](https://github.com/kill05/equivalentexchange-bta/releases).
 4) Put all the files in the mods folder and launch the game
