@@ -2,6 +2,8 @@ package com.github.kill05.equivalentexchange.blocks;
 
 import com.github.kill05.equivalentexchange.EEGuis;
 import com.github.kill05.equivalentexchange.tile.EnergyCollectorTile;
+import com.github.kill05.equivalentexchange.tile.InventoryTileEntity;
+import com.github.kill05.equivalentexchange.utils.InventoryUtils;
 import net.minecraft.core.block.BlockTileEntityRotatable;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
@@ -42,8 +44,12 @@ public class EnergyCollectorBlock extends BlockTileEntityRotatable {
 	}
 
 	@Override
-	public int getRenderBlockPass() {
-		return 1;
+	public void onBlockRemoved(World world, int x, int y, int z, int data) {
+		if(world.getBlockTileEntity(x, y, z) instanceof InventoryTileEntity tile) {
+			InventoryUtils.dropInventoryContents(tile, world, x, y, z);
+		}
+
+		super.onBlockRemoved(world, x, y, z, data);
 	}
 
 	public int getTier() {

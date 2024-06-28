@@ -78,7 +78,7 @@ public final class EEBlocks {
 		.setResistance(10f)
 		.setBlockSound(BlockSounds.STONE)
 		.setTags(BlockTags.MINEABLE_BY_PICKAXE)
-		.build(new AlchemicalChestBlock(EEConfig.BLOCK_ID++));
+		.build(new AlchemicalChestBlock("alchemical_chest", EEConfig.BLOCK_ID++));
 
 	public static final Block ENERGY_CONDENSER = new BlockBuilder(EquivalentExchange.MOD_ID)
 		.setTopTexture(EquivalentExchange.MOD_ID + ":block/condenser/top")
