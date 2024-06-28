@@ -12,7 +12,6 @@ import java.util.Objects;
 public record EmcKey(int itemId, int meta) {
 
 	public EmcKey {
-		if (meta < 0) throw new IllegalArgumentException("invalid meta: " + meta);
 		if (itemId < 0 || itemId >= Item.itemsList.length || Item.itemsList[itemId] == null)
 			throw new IllegalArgumentException("Invalid id: " + itemId);
 	}
@@ -48,7 +47,7 @@ public record EmcKey(int itemId, int meta) {
 
 	public boolean matches(@Nullable ItemStack itemStack) {
 		if(itemStack == null) return false;
-		return itemStack.itemID == itemId && itemStack.getMetadata() == meta;
+		return itemStack.itemID == itemId && (meta < 0 || itemStack.getMetadata() == meta);
 	}
 
 

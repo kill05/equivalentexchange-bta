@@ -134,8 +134,12 @@ public class EmcRegistry {
 			registeredInIteration = 0;
 
 			for (RecipeEntryBase<?, ?, ?> recipe : registry.getAllRecipes()) {
-				if (!computeRecipeCostAndRegister(recipe, originalValues)) continue;
-				registeredInIteration++;
+				try {
+					if (!computeRecipeCostAndRegister(recipe, originalValues)) continue;
+					registeredInIteration++;
+				} catch (Throwable e) {
+					LOGGER.warn(String.format("Failed to compute value for recipe %s.", recipe), e);
+				}
 			}
 
 			amount += registeredInIteration;
