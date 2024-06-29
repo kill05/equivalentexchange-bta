@@ -13,6 +13,7 @@ import net.minecraft.client.gui.options.components.OptionsCategory;
 import net.minecraft.client.gui.options.data.OptionsPages;
 import net.minecraft.client.input.InputDevice;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.ItemStack;
@@ -67,7 +68,15 @@ public final class EquivalentExchange implements ModInitializer, GameStartEntryp
 
 		NetworkHelper.register(PacketPlayerEmcInfo.class, false, true);
 
-        LOGGER.info("Equivalent Exchange (BTA!) initialized.");
+		LookupFuelFurnace instance = LookupFuelFurnace.instance;
+		instance.addFuelEntry(EEItems.ALCHEMICAL_COAL.id, 1600 * 4);
+		instance.addFuelEntry(EEItems.MOBIUS_FUEL.id, 1600 * 16);
+		instance.addFuelEntry(EEItems.AETERNALIS_FUEL.id, 1600 * 64);
+		instance.addFuelEntry(EEBlocks.ALCHEMICAL_COAL_BLOCK.id, 1600 * 4 * 9);
+		instance.addFuelEntry(EEBlocks.MOBIUS_FUEL_BLOCK.id, 1600 * 16 * 9);
+		instance.addFuelEntry(EEBlocks.AETERNALIS_FUEL_BLOCK.id, 1600 * 64 * 9);
+
+		LOGGER.info("Equivalent Exchange (BTA!) initialized.");
     }
 
 	@Override
