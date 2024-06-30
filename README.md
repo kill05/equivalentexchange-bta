@@ -6,7 +6,7 @@ A port of Equivalent Exchange 2/ProjectE for [**BTA**](https://www.betterthanadv
 - This mod is in **alpha**.
   This means it's extremely **unstable** and only meant to be used for **testing** purposes.
   Breaking changes are likely to happen, so beware of that.
-- **Currently**, this mod does **NOT** support multiplayer
+- **Currently**, this mod supports multiplayer, but keep in mind that multiplayer is more unstable than singleplayer
 
 ## Dependencies
 - [Halplibe](https://github.com/Turnip-Labs/bta-halplibe/releases)
