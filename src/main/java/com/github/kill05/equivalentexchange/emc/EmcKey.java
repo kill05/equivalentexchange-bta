@@ -21,7 +21,7 @@ public record EmcKey(int itemId, int meta) {
 	}
 
 	public EmcKey(@NotNull ItemStack item) {
-		this(item.itemID, item.getMetadata());
+		this(item.itemID, item.isItemStackDamageable() ? 0 : item.getMetadata());
 	}
 
 	public EmcKey(@NotNull IItemConvertible item, int meta) {
