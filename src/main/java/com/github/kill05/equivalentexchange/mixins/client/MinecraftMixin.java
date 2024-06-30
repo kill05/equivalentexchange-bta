@@ -1,6 +1,7 @@
 package com.github.kill05.equivalentexchange.mixins.client;
 
 import com.github.kill05.equivalentexchange.EquivalentExchange;
+import com.github.kill05.equivalentexchange.emc.holder.IPlayerEmcHolder;
 import com.github.kill05.equivalentexchange.items.IAbilityItem;
 import com.github.kill05.equivalentexchange.items.IChargeableItem;
 import com.github.kill05.equivalentexchange.items.tools.EEPickaxeItem;
@@ -9,14 +10,20 @@ import com.github.kill05.equivalentexchange.utils.KeyUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.input.InputDevice;
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
+import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.ChunkCoordinates;
+import net.minecraft.core.world.chunk.provider.IChunkProvider;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(
 	value = Minecraft.class,
@@ -65,5 +72,14 @@ public abstract class MinecraftMixin {
 			if(itemStack == null || !(itemStack.getItem() instanceof IAbilityItem item)) return;
 			item.onAbilityUse(thePlayer, itemStack);
 		}
+	}
+
+	@Inject(
+		method = "respawn",
+		at = @At("TAIL"),
+		locals = LocalCapture.CAPTURE_FAILHARD
+	)
+	public void injectRespawn(boolean flag, int i, CallbackInfo ci, EntityPlayer previousPlayer, ChunkCoordinates spawnCoordinates, ChunkCoordinates bedSpawnCoordinates, ChunkCoordinates lastDeathCoordinates, boolean canRespawnAtBed, IChunkProvider ichunkprovider, int j, Gamemode playerGamemode) {
+		((IPlayerEmcHolder) previousPlayer).transferDataToNewPlayer(thePlayer);
 	}
 }

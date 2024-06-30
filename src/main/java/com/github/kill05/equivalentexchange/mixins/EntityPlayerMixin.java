@@ -82,6 +82,11 @@ public abstract class EntityPlayerMixin implements IPlayerEmcHolder {
 	}
 
 	@Override
+	public List<EmcKey> getActualKnownItems() {
+		return knownItems;
+	}
+
+	@Override
 	public void learnItems(List<EmcKey> items) {
 		this.knownItems.addAll(items);
 		knownItems.sort(EmcRegistry.KEY_COMPARATOR);
