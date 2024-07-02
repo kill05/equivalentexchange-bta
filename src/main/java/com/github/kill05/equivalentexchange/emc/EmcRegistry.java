@@ -180,7 +180,7 @@ public class EmcRegistry {
 
 		Iterable<RecipeSymbol> symbolIterable;
 		ItemStack output;
-		boolean consumeContainer = false;
+		boolean consumeContainer = true;
 
 		if (recipe instanceof RecipeEntryCraftingShaped shaped) {
 			symbolIterable = Arrays.asList(shaped.getInput());
@@ -213,6 +213,7 @@ public class EmcRegistry {
 			for (ItemStack stack : symbol.resolve()) {
 				Long stackValue = getEmcValue(stack);
 				Item container = stack.getItem().getContainerItem();
+				if(stackValue == null) continue;
 
 				// reduce the cost if the item has a container that is not consumed
 				if(container != null && !consumeContainer) {
@@ -220,7 +221,7 @@ public class EmcRegistry {
 					stackValue = containerValue != null ? Math.max(0, stackValue - containerValue) : 0;
 				}
 
-				if (stackValue != null && (lowestSymbolCost == null || stackValue < lowestSymbolCost)) {
+				if (lowestSymbolCost == null || stackValue < lowestSymbolCost) {
 					lowestSymbolCost = stackValue;
 					if(lowestSymbolCost == 0) break; // Cost can't go any lower
 				}
