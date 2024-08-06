@@ -14,7 +14,6 @@ import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
@@ -67,13 +66,7 @@ public class EmcRegistry {
 		this.itemGroupEmcMap.clear();
 		this.sortedKeys.clear();
 
-		Toml toml;
-		try {
-			toml = (Toml) FieldUtils.readField(EEConfig.CONFIG, "config", true);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
-
+		Toml toml = EEConfig.CONFIG.getRawParsed();
 		Toml emcValues = toml.get("." + EEConfig.EMC_CONFIG_KEY, Toml.class);
 
 		int loaded = 0;
