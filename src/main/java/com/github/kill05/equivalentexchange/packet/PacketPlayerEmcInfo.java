@@ -41,13 +41,13 @@ public class PacketPlayerEmcInfo extends Packet {
 		hasTome = input.readBoolean();
 
 		int length = input.readInt();
-		if(length <= 0 || length > Item.itemsList.length) {
+		if (length < 0 || length > Item.itemsList.length) {
 			EquivalentExchange.LOGGER.warn("Received bad known items list size:" + length);
 			throw new IOException("Received bad EMC info packet.");
 		}
 
 		knownItems = new ArrayList<>();
-		for(int i = 0; i < length; i++) {
+		for (int i = 0; i < length; i++) {
 			int id = input.readInt();
 			int meta = input.readInt();
 
@@ -65,7 +65,7 @@ public class PacketPlayerEmcInfo extends Packet {
 		output.writeLong(emc);
 		output.writeBoolean(hasTome);
 
-		if(knownItems == null || knownItems.size() == 0) {
+		if (knownItems == null || knownItems.size() == 0) {
 			output.writeInt(0);
 			return;
 		}
@@ -82,7 +82,7 @@ public class PacketPlayerEmcInfo extends Packet {
 		IPlayerEmcHolder player = (IPlayerEmcHolder) Minecraft.getMinecraft(this).thePlayer;
 		player.setEmc(emc);
 		player.setTome(hasTome);
-		if(knownItems != null) player.learnItems(knownItems);
+		if (knownItems != null) player.learnItems(knownItems);
 	}
 
 	@Override
